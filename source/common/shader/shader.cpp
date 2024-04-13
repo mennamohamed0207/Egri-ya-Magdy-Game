@@ -5,11 +5,12 @@
 #include <fstream>
 #include <string>
 
-//Forward definition for error checking functions
+// Forward definition for error checking functions
 std::string checkForShaderCompilationErrors(GLuint shader);
 std::string checkForLinkingErrors(GLuint program);
 
-bool our::ShaderProgram::attach(const std::string &filename, GLenum type) const {
+bool our::ShaderProgram::attach(const std::string &filename, GLenum type) const
+{
     // Here, we open the file and read a string from it containing the GLSL code of our shader
     std::ifstream file(filename);
     if(!file){
@@ -20,13 +21,26 @@ bool our::ShaderProgram::attach(const std::string &filename, GLenum type) const 
     const char* sourceCStr = sourceString.c_str();
     file.close();
 
-    //TODO: Complete this function
+    // TODO: Complete this function
+
+    GLuint shader = glCreateShader(type);
+    glShaderSource(shader, 1, &sourceCStr, nullptr);
+    glCompileShader(shader);
+
+
     //Note: The function "checkForShaderCompilationErrors" checks if there is
     // an error in the given shader. You should use it to check if there is a
     // compilation error and print it so that you can know what is wrong with
     // the shader. The returned string will be empty if there is no errors.
-
+    std::string error = checkForShaderCompilationErrors(shader);
+    if (error != std::string())
+    {
+        std::cerr << error << std::endl;
+        return false;
+    }
     //We return true if the compilation succeeded
+    glAttachShader(program, shader);
+    glDeleteShader(shader);
     return true;
 }
 
@@ -34,11 +48,18 @@ bool our::ShaderProgram::attach(const std::string &filename, GLenum type) const 
 
 bool our::ShaderProgram::link() const {
     //TODO: Complete this function
+    glLinkProgram(program);
     //Note: The function "checkForLinkingErrors" checks if there is
     // an error in the given program. You should use it to check if there is a
     // linking error and print it so that you can know what is wrong with the
     // program. The returned string will be empty if there is no errors.
-
+    std::string error = checkForLinkingErrors(program);
+    if (error != std::string())
+    {
+        std::cerr << error << std::endl;
+        return false;
+    }
+    // We return true if the compilation succeeded
     return true;
 }
 
