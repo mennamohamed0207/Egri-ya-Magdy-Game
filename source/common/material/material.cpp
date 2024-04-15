@@ -55,16 +55,14 @@ namespace our
     {
         // TODO: (Req 7) Write this function
         //  Call the setup of its parent
-        Material::setup();
+        TintedMaterial::setup();
         // Set the "alphaThreshold" uniform
         shader->set("alphaThreshold", alphaThreshold);
         // Bind the texture and sampler to a texture unit
-
-        glActiveTexture(GL_TEXTURE0);
         texture->bind();            
         sampler->bind(0);
         // Send the unit number to the uniform variable "tex"
-        shader->set("tex", 0);
+        shader->set("tex",0);
     }
 
     // This function read the material data from a json object
