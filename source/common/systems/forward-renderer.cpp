@@ -26,10 +26,18 @@ namespace our
             //  Hints: the sky will be draw after the opaque objects so we would need depth testing but which depth funtion should we pick?
             
             //  We will draw the sphere from the inside, so what options should we pick for the face culling.
-            PipelineState skyPipelineState{
-                .depthTesting = {true, GL_LEQUAL},
-                .faceCulling = {true, GL_BACK, GL_CCW},//we need to cull the front face because we'll draw the sphere from inside
-            };
+            // PipelineState skyPipelineState{
+            //     .depthTesting = {true, GL_LEQUAL},
+            //     .faceCulling = {true, GL_BACK, GL_CCW},//we need to cull the front face because we'll draw the sphere from inside
+            // };
+            PipelineState skyPipelineState{};
+            skyPipelineState.depthTesting.enabled=true;
+            skyPipelineState.depthTesting.function=GL_LEQUAL;
+            skyPipelineState.faceCulling.enabled=true;
+            skyPipelineState.faceCulling.culledFace=GL_CCW;
+            skyPipelineState.setup();
+            // skyPipelineState.faceCulling.frontFace=GL_CCW;
+            
 
             // Load the sky texture (note that we don't need mipmaps since we want to avoid any unnecessary blurring while rendering the sky)
             std::string skyTextureFile = config.value<std::string>("sky", "");
@@ -154,7 +162,7 @@ namespace our
             return;
         // TODO: (Req 9) Modify the following line such that "cameraForward" contains a vector pointing the camera forward direction
         //  HINT: See how you wrote the CameraComponent::getViewMatrix, it should help you solve this one
-        CameraComponent::getViewMatrix;
+        // CameraComponent::getViewMatrix();
         glm::vec4 forward_camera = glm::vec4(0.0f, 0.0f, -1.0f, 0.0f); // Forward in camera space
         glm::vec3 cameraForward = glm::vec3(camera->getOwner()->getLocalToWorldMatrix() * forward_camera);
 
@@ -209,8 +217,8 @@ namespace our
             skyMaterial->setup();
 
             // TODO: (Req 10) Get the camera position
-            // glm::vec3 cameraPosition = camera->getOwner()->getLocalToWorldMatrix() * glm::vec4(0, 0, 0, 1);
-            glm::vec3 cameraPosition = glm::vec3(0.0f, 0.0f, 0.0f);
+            glm::vec3 cameraPosition = camera->getOwner()->getLocalToWorldMatrix() * glm::vec4(0, 0, 0, 1);
+            // glm::vec3 cameraPosition = glm::vec3(0.0f, 0.0f, 0.0f);
 
             // TODO: (Req 10) Create a model matrix for the sky such that it always follows the camera (sky sphere center = camera position)
             glm::mat4 skyModelMatrix =translate(glm::mat4(1.0f), cameraPosition); 
@@ -221,8 +229,8 @@ namespace our
             glm::mat4 alwaysBehindTransform = glm::mat4(
                 1.0f, 0.0f, 0.0f, 0.0f,
                 0.0f, 1.0f, 0.0f, 0.0f,
-                0.0f, 0.0f, 1.0f, 0.0f,
-                0.0f, 0.0f, 0.0f, 1.0f);
+                0.0f, 0.0f, 0.0f, 0.0f,
+                0.0f, 0.0f, 1.0f, 1.0f);
             // TODO: (Req 10) set the "transform" uniform
             skyMaterial->shader->set("transform", alwaysBehindTransform*VP*skyModelMatrix);
             //first multiply by M to be in World space
