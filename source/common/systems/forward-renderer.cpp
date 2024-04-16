@@ -24,8 +24,12 @@ namespace our
 
             // TODO: (Req 10) Pick the correct pipeline state to draw the sky
             //  Hints: the sky will be draw after the opaque objects so we would need depth testing but which depth funtion should we pick?
+            
             //  We will draw the sphere from the inside, so what options should we pick for the face culling.
-            PipelineState skyPipelineState{};
+            PipelineState skyPipelineState{
+                .depthTesting = {true, GL_LEQUAL},
+                .faceCulling = {true, GL_BACK, GL_CCW},//we need to cull the front face because we'll draw the sphere from inside
+            };
 
             // Load the sky texture (note that we don't need mipmaps since we want to avoid any unnecessary blurring while rendering the sky)
             std::string skyTextureFile = config.value<std::string>("sky", "");
@@ -122,6 +126,7 @@ namespace our
             // If we hadn't found a camera yet, we look for a camera in this entity
             if (!camera)
                 camera = entity->getComponent<CameraComponent>();
+            
             // If this entity has a mesh renderer component
             if (auto meshRenderer = entity->getComponent<MeshRendererComponent>(); meshRenderer)
             {
@@ -147,7 +152,6 @@ namespace our
         // If there is no camera, we return (we cannot render without a camera)
         if (camera == nullptr)
             return;
-
         // TODO: (Req 9) Modify the following line such that "cameraForward" contains a vector pointing the camera forward direction
         //  HINT: See how you wrote the CameraComponent::getViewMatrix, it should help you solve this one
         CameraComponent::getViewMatrix;
@@ -163,8 +167,7 @@ namespace our
             float dist2 = glm::dot(cameraForward, second.center - cameraForward);
 
             // Return true if 'first' is farther away than 'second'     
-            return dist1 > dist2;
-         });
+            return dist1 > dist2; });
 
         // TODO: (Req 9) Get the camera ViewProjection matrix and store it in VP
         glm::mat4 VP = camera->getProjectionMatrix(windowSize) * camera->getViewMatrix();
@@ -203,10 +206,15 @@ namespace our
         if (this->skyMaterial)
         {
             // TODO: (Req 10) setup the sky material
+            skyMaterial->setup();
 
             // TODO: (Req 10) Get the camera position
+            // glm::vec3 cameraPosition = camera->getOwner()->getLocalToWorldMatrix() * glm::vec4(0, 0, 0, 1);
+            glm::vec3 cameraPosition = glm::vec3(0.0f, 0.0f, 0.0f);
 
-            // TODO: (Req 10) Create a model matrix for the sy such that it always follows the camera (sky sphere center = camera position)
+            // TODO: (Req 10) Create a model matrix for the sky such that it always follows the camera (sky sphere center = camera position)
+            glm::mat4 skyModelMatrix =translate(glm::mat4(1.0f), cameraPosition); 
+            //M matrix is used to be in world space
 
             // TODO: (Req 10) We want the sky to be drawn behind everything (in NDC space, z=1)
             //  We can acheive the is by multiplying by an extra matrix after the projection but what values should we put in it?
@@ -216,8 +224,13 @@ namespace our
                 0.0f, 0.0f, 1.0f, 0.0f,
                 0.0f, 0.0f, 0.0f, 1.0f);
             // TODO: (Req 10) set the "transform" uniform
+            skyMaterial->shader->set("transform", alwaysBehindTransform*VP*skyModelMatrix);
+            //first multiply by M to be in World space
+            //multiply by V to be in View space
+            //multiply by P to be in HomogenusClip space (used by shaders to draw)
 
             // TODO: (Req 10) draw the sky sphere
+            skySphere->draw();
         }
         // TODO: (Req 9) Draw all the transparent commands
         //  Don't forget to set the "transform" uniform to be equal the model-view-projection matrix for each render command
