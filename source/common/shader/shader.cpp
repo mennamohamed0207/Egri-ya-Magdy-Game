@@ -36,6 +36,7 @@ bool our::ShaderProgram::attach(const std::string &filename, GLenum type) const
     if (error != std::string())
     {
         std::cerr << error << std::endl;
+        glDeleteShader(shader);
         return false;
     }
     //We return true if the compilation succeeded
