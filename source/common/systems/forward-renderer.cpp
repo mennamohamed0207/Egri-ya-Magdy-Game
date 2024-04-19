@@ -34,7 +34,7 @@ namespace our
             skyPipelineState.depthTesting.enabled=true;
             skyPipelineState.depthTesting.function=GL_LEQUAL;
             skyPipelineState.faceCulling.enabled=true;
-            skyPipelineState.faceCulling.culledFace=GL_CCW;
+            skyPipelineState.faceCulling.culledFace=GL_FRONT;
             skyPipelineState.setup();
             // skyPipelineState.faceCulling.frontFace=GL_CCW;
             
