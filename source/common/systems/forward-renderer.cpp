@@ -65,24 +65,24 @@ namespace our
         {
             // TODO: (Req 11) Create a framebuffer
             glGenFramebuffers(1, &postprocessFrameBuffer); //generate framebuffer called postprocessFrameBuffer
-            glBindFramebuffer(GL_FRAMEBUFFER,postprocessFrameBuffer);  //bind the postprocessFrameBuffer to the GL_FRAMEBUFFER
+            glBindFramebuffer(GL_DRAW_FRAMEBUFFER,postprocessFrameBuffer);  //bind the postprocessFrameBuffer to the GL_FRAMEBUFFER
             // TODO: (Req 11) Create a color and a depth texture and attach them to the framebuffer
             //  Hints: The color format can be (Red, Green, Blue and Alpha components with 8 bits for each channel).
             //  The depth format can be (Depth component with 24 bits).
 
-            colorTarget=texture_utils::empty(GL_RGBA,windowSize); //craeting color texture using the empty function we made in texture_utils
+            colorTarget=texture_utils::empty(GL_RGBA8,windowSize); //craeting color texture using the empty function we made in texture_utils
             //with format=GL_RGBA
             depthTarget=texture_utils::empty(GL_DEPTH_COMPONENT24,windowSize); //creating depth texture using the empty function we made in texture_utils
             //with format=GL_DEPTH_COMPONENT
             ///////Now we've created empty color and depth textures, we should then attach then to the framebuffer//////
-            glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_TEXTURE_2D,colorTarget->getOpenGLName(),0);
+            glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_TEXTURE_2D,colorTarget->getOpenGLName(),0);
             //passed parameters:
             //GL_FRAMEBUFFER--> target frame buffer
             //GL_COLOR_ATTACHMENT0--> the attachement point of the texture, GL_COLOR_ATTACHMENT0 is for color rendering
             //GL_TEXTURE_2D--> the texture target being attached
             //colorTarget->getOpenGLName() --> the ID (name) of the texture to attach
             //0--> mipmap level of the texture
-            glFramebufferTexture2D(GL_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_TEXTURE_2D,depthTarget->getOpenGLName(),0);
+            glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_TEXTURE_2D,depthTarget->getOpenGLName(),0);
              //passed parameters:
             //GL_FRAMEBUFFER--> target frame buffer
             //GL_DEPTH_ATTACHMENT--> the attachement point of the texture, GL_DEPTH_ATTACHMENT is for depth rendering
@@ -92,7 +92,7 @@ namespace our
 
 
             // TODO: (Req 11) Unbind the framebuffer just to be safe
-            glBindFramebuffer(GL_FRAMEBUFFER,0);
+            glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
             // Create a vertex array to use for drawing the texture
             glGenVertexArrays(1, &postProcessVertexArray);
 
@@ -216,7 +216,7 @@ namespace our
         if (postprocessMaterial)
         {
             // TODO: (Req 11) bind the framebuffer
-            glBindFramebuffer(GL_FRAMEBUFFER,postprocessFrameBuffer);
+            glBindFramebuffer(GL_DRAW_FRAMEBUFFER,postprocessFrameBuffer);
 
         }
 
@@ -275,7 +275,7 @@ namespace our
         if (postprocessMaterial)
         {
             // TODO: (Req 11) Return to the default framebuffer
-            glBindFramebuffer(GL_FRAMEBUFFER,0); //unbind our frame buffer to return to the default one
+            glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0); //unbind our frame buffer to return to the default one
             // TODO: (Req 11) Setup the postprocess material and draw the fullscreen triangle
             postprocessMaterial->setup();
             //to draw the triangle we need to: 
