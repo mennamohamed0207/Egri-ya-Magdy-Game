@@ -24,20 +24,19 @@ namespace our
 
             // TODO: (Req 10) Pick the correct pipeline state to draw the sky
             //  Hints: the sky will be draw after the opaque objects so we would need depth testing but which depth funtion should we pick?
-            
+
             //  We will draw the sphere from the inside, so what options should we pick for the face culling.
             // PipelineState skyPipelineState{
             //     .depthTesting = {true, GL_LEQUAL},
             //     .faceCulling = {true, GL_BACK, GL_CCW},//we need to cull the front face because we'll draw the sphere from inside
             // };
             PipelineState skyPipelineState{};
-            skyPipelineState.depthTesting.enabled=true;
-            skyPipelineState.depthTesting.function=GL_LEQUAL;
-            skyPipelineState.faceCulling.enabled=true;
-            skyPipelineState.faceCulling.culledFace=GL_FRONT;
+            skyPipelineState.depthTesting.enabled = true;
+            skyPipelineState.depthTesting.function = GL_LEQUAL;
+            skyPipelineState.faceCulling.enabled = true;
+            skyPipelineState.faceCulling.culledFace = GL_FRONT;
             skyPipelineState.setup();
             // skyPipelineState.faceCulling.frontFace=GL_CCW;
-            
 
             // Load the sky texture (note that we don't need mipmaps since we want to avoid any unnecessary blurring while rendering the sky)
             std::string skyTextureFile = config.value<std::string>("sky", "");
@@ -65,13 +64,35 @@ namespace our
         if (config.contains("postprocess"))
         {
             // TODO: (Req 11) Create a framebuffer
-
+            glGenFramebuffers(1, &postprocessFrameBuffer); //generate framebuffer called postprocessFrameBuffer
+            glBindFramebuffer(GL_FRAMEBUFFER,postprocessFrameBuffer);  //bind the postprocessFrameBuffer to the GL_FRAMEBUFFER
             // TODO: (Req 11) Create a color and a depth texture and attach them to the framebuffer
             //  Hints: The color format can be (Red, Green, Blue and Alpha components with 8 bits for each channel).
             //  The depth format can be (Depth component with 24 bits).
 
-            // TODO: (Req 11) Unbind the framebuffer just to be safe
+            colorTarget=texture_utils::empty(GL_RGBA,windowSize); //craeting color texture using the empty function we made in texture_utils
+            //with format=GL_RGBA
+            depthTarget=texture_utils::empty(GL_DEPTH_COMPONENT24,windowSize); //creating depth texture using the empty function we made in texture_utils
+            //with format=GL_DEPTH_COMPONENT
+            ///////Now we've created empty color and depth textures, we should then attach then to the framebuffer//////
+            glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_TEXTURE_2D,colorTarget->getOpenGLName(),0);
+            //passed parameters:
+            //GL_FRAMEBUFFER--> target frame buffer
+            //GL_COLOR_ATTACHMENT0--> the attachement point of the texture, GL_COLOR_ATTACHMENT0 is for color rendering
+            //GL_TEXTURE_2D--> the texture target being attached
+            //colorTarget->getOpenGLName() --> the ID (name) of the texture to attach
+            //0--> mipmap level of the texture
+            glFramebufferTexture2D(GL_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_TEXTURE_2D,depthTarget->getOpenGLName(),0);
+             //passed parameters:
+            //GL_FRAMEBUFFER--> target frame buffer
+            //GL_DEPTH_ATTACHMENT--> the attachement point of the texture, GL_DEPTH_ATTACHMENT is for depth rendering
+            //GL_TEXTURE_2D--> the texture target being attached
+            //depthTarget->getOpenGLName() --> the ID (name) of the texture to attach
+            //0--> mipmap level of the texture
 
+
+            // TODO: (Req 11) Unbind the framebuffer just to be safe
+            glBindFramebuffer(GL_FRAMEBUFFER,0);
             // Create a vertex array to use for drawing the texture
             glGenVertexArrays(1, &postProcessVertexArray);
 
@@ -134,7 +155,7 @@ namespace our
             // If we hadn't found a camera yet, we look for a camera in this entity
             if (!camera)
                 camera = entity->getComponent<CameraComponent>();
-            
+
             // If this entity has a mesh renderer component
             if (auto meshRenderer = entity->getComponent<MeshRendererComponent>(); meshRenderer)
             {
@@ -195,6 +216,8 @@ namespace our
         if (postprocessMaterial)
         {
             // TODO: (Req 11) bind the framebuffer
+            glBindFramebuffer(GL_FRAMEBUFFER,postprocessFrameBuffer);
+
         }
 
         // TODO: (Req 9) Clear the color and depth buffers
@@ -220,8 +243,8 @@ namespace our
             // glm::vec3 cameraPosition = glm::vec3(0.0f, 0.0f, 0.0f);
 
             // TODO: (Req 10) Create a model matrix for the sky such that it always follows the camera (sky sphere center = camera position)
-            glm::mat4 skyModelMatrix =translate(glm::mat4(1.0f), cameraPosition); 
-            //M matrix is used to be in world space
+            glm::mat4 skyModelMatrix = translate(glm::mat4(1.0f), cameraPosition);
+            // M matrix is used to be in world space
 
             // TODO: (Req 10) We want the sky to be drawn behind everything (in NDC space, z=1)
             //  We can acheive the is by multiplying by an extra matrix after the projection but what values should we put in it?
@@ -231,10 +254,10 @@ namespace our
                 0.0f, 0.0f, 0.0f, 0.0f,
                 0.0f, 0.0f, 1.0f, 1.0f);
             // TODO: (Req 10) set the "transform" uniform
-            skyMaterial->shader->set("transform", alwaysBehindTransform*VP*skyModelMatrix);
-            //first multiply by M to be in World space
-            //multiply by V to be in View space
-            //multiply by P to be in HomogenusClip space (used by shaders to draw)
+            skyMaterial->shader->set("transform", alwaysBehindTransform * VP * skyModelMatrix);
+            // first multiply by M to be in World space
+            // multiply by V to be in View space
+            // multiply by P to be in HomogenusClip space (used by shaders to draw)
 
             // TODO: (Req 10) draw the sky sphere
             skySphere->draw();
@@ -252,8 +275,19 @@ namespace our
         if (postprocessMaterial)
         {
             // TODO: (Req 11) Return to the default framebuffer
-
+            glBindFramebuffer(GL_FRAMEBUFFER,0); //unbind our frame buffer to return to the default one
             // TODO: (Req 11) Setup the postprocess material and draw the fullscreen triangle
+            postprocessMaterial->setup();
+            //to draw the triangle we need to: 
+            glBindVertexArray(postProcessVertexArray); //1-bind the vertex array object to the ID postProcessVertexArray
+            //It tells OpenGL how to interpret vertex data stored in vertex array objects during rendering
+            glDrawArrays(GL_TRIANGLES,0,3);
+            //This function call tells OpenGL to draw triangles using vertex data from currently bound vertex array object
+            //parameters:
+            //GL_TRIANGLES-->the primitive type to draw
+            //0-->the starting index of the vertex array
+            //3-->the number of vertices to render
+            
         }
     }
 
