@@ -286,8 +286,7 @@ namespace our
             //parameters:
             //GL_TRIANGLES-->the primitive type to draw
             //0-->the starting index of the vertex array
-            //3-->the number of vertices to render
-            
+            //3-->the number of vertices to render 
         }
     }
 
