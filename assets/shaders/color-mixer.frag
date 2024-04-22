@@ -26,8 +26,6 @@ uniform vec4 blue =vec4(0.0,0.0,1.0,0.0);
 
 void main(){
 
-    // frag_color = vec4(fs_in.color,1.0);
-
     frag_color.r = dot(vec4(fs_in.color, 1.0), red);
     frag_color.g = dot(vec4(fs_in.color, 1.0), green);
     frag_color.b = dot(vec4(fs_in.color, 1.0), blue);

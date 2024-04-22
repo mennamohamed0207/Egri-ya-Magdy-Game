@@ -33,6 +33,7 @@ void main(){
 
     // get the position based on the vertex id
     vec3 position = positions[gl_VertexID];
+    
     // Scale it
     position.xy *= scale;
 
@@ -49,5 +50,6 @@ void main(){
     vec3(0.0, 0.0, 1.0)
     );
 
+    // pass the colors to frag shader
     vs_out.color = colors[gl_VertexID];
 }
