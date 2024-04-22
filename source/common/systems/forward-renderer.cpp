@@ -62,15 +62,13 @@ namespace our
         {
             // TODO: (Req 11) Create a framebuffer
             glGenFramebuffers(1, &postprocessFrameBuffer); //generate framebuffer called postprocessFrameBuffer
-            glBindFramebuffer(GL_DRAW_FRAMEBUFFER,postprocessFrameBuffer);  //bind the postprocessFrameBuffer to the GL_FRAMEBUFFER
+            glBindFramebuffer(GL_DRAW_FRAMEBUFFER,postprocessFrameBuffer);  //bind the postprocessFrameBuffer to the GL_DRAW_FRAMEBUFFER
             // TODO: (Req 11) Create a color and a depth texture and attach them to the framebuffer
             //  Hints: The color format can be (Red, Green, Blue and Alpha components with 8 bits for each channel).
             //  The depth format can be (Depth component with 24 bits).
 
-            colorTarget=texture_utils::empty(GL_RGBA8,windowSize); //craeting color texture using the empty function we made in texture_utils
-            //with format=GL_RGBA
-            depthTarget=texture_utils::empty(GL_DEPTH_COMPONENT24,windowSize); //creating depth texture using the empty function we made in texture_utils
-            //with format=GL_DEPTH_COMPONENT
+            colorTarget=texture_utils::empty(GL_RGBA8,windowSize); //creating color texture using the empty function we made in texture_utils with format=GL_RGBA
+            depthTarget=texture_utils::empty(GL_DEPTH_COMPONENT24,windowSize); //creating depth texture using the empty function we made in texture_utils with format=GL_DEPTH_COMPONENT
             ///////Now we've created empty color and depth textures, we should then attach then to the framebuffer//////
             glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_TEXTURE_2D,colorTarget->getOpenGLName(),0);
             //passed parameters:

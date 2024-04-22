@@ -10,7 +10,7 @@ our::Texture2D *our::texture_utils::empty(GLenum format, glm::ivec2 size)
     our::Texture2D *texture = new our::Texture2D();
     // TODO: (Req 11) Finish this function to create an empty texture with the given size and format
     texture->bind();    // binding the newly created texture using bind() funtion created in req5
-    glTexStorage2D(GL_TEXTURE_2D, 1, format, size.x, size.y); // Allocate texture storag without initializing its contents
+    glTexStorage2D(GL_TEXTURE_2D, 1, format, size.x, size.y); // Allocate texture storage without initializing its contents
     // parametes:
     //  GL_TEXTURE_2D: Target texture
     //  1: Number of mipmap levels
@@ -44,13 +44,18 @@ our::Texture2D *our::texture_utils::loadImage(const std::string &filename, bool 
     // Create a texture
     our::Texture2D *texture = new our::Texture2D();
     // Bind the texture such that we upload the image data to its storage
-    // TODO: (Req 5) Finish this function to fill the texture with the data found in "pixels"
     texture->bind();
+    // TODO: (Req 5) Finish this function to fill the texture with the data found in "pixels"
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, size.x, size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, (void *)pixels);
     // here we have the texture data in RAM in CPU, this line sends this data to GPU
-    // we set the target texture to GL_TEXTURE_2D
-    // and width,height to be the width and height of the image
-    // and the data is found in "pixels"
+    // GL_TEXTURE_2D -->the texture being modified is a 2D texture.
+    // 0--> mimap level
+    // GL_RGBA8--> Each texel is composed of four components (red, green, blue, alpha) and each component is stored as an 8-bit unsigned integer.
+    // size.x and size.y-->width and height of the texture
+    // 0--> the border width of the texture (must be 0)
+    // GL_RGBA-->the format of the pixel data
+    // GL_UNSIGNED_BYTE-->the data type of the pixel data
+    // (void *)pixel--> a pointer to the image data in memory. This is the actual pixel data of the texture.
     if (generate_mipmap)
         glGenerateMipmap(GL_TEXTURE_2D);
     // a mip level is a smaller version of the texture that's averaged in fewer pixels.
