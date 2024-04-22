@@ -26,17 +26,14 @@ namespace our
             //  Hints: the sky will be draw after the opaque objects so we would need depth testing but which depth funtion should we pick?
 
             //  We will draw the sphere from the inside, so what options should we pick for the face culling.
-            // PipelineState skyPipelineState{
-            //     .depthTesting = {true, GL_LEQUAL},
-            //     .faceCulling = {true, GL_BACK, GL_CCW},//we need to cull the front face because we'll draw the sphere from inside
-            // };
+            //we need to cull the front face because we'll draw the sphere from inside
             PipelineState skyPipelineState{};
             skyPipelineState.depthTesting.enabled = true;
             skyPipelineState.depthTesting.function = GL_LEQUAL;
             skyPipelineState.faceCulling.enabled = true;
             skyPipelineState.faceCulling.culledFace = GL_FRONT;
             skyPipelineState.setup();
-            // skyPipelineState.faceCulling.frontFace=GL_CCW;
+
 
             // Load the sky texture (note that we don't need mipmaps since we want to avoid any unnecessary blurring while rendering the sky)
             std::string skyTextureFile = config.value<std::string>("sky", "");
@@ -253,11 +250,18 @@ namespace our
                 0.0f, 1.0f, 0.0f, 0.0f,
                 0.0f, 0.0f, 0.0f, 0.0f,
                 0.0f, 0.0f, 1.0f, 1.0f);
+            // first set z to be 0   ,  then translate it to 1 while keeping the x, y unchanged
+            // 1.0f, 0.0f, 0.0f, 0.0f   1.0f, 0.0f, 0.0f, 0.0f  
+            // 0.0f, 1.0f, 0.0f, 0.0f x 0.0f, 1.0f, 0.0f, 0.0f  
+            // 0.0f, 0.0f, 0.0f, 1.0f   0.0f, 0.0f, 0.0f, 0.0f  
+            // 0.0f, 0.0f, 0.0f, 1.0f   0.0f, 0.0f, 0.0f, 1.0f 
+
             // TODO: (Req 10) set the "transform" uniform
             skyMaterial->shader->set("transform", alwaysBehindTransform * VP * skyModelMatrix);
             // first multiply by M to be in World space
             // multiply by V to be in View space
             // multiply by P to be in HomogenusClip space (used by shaders to draw)
+            // transform the sky to the back
 
             // TODO: (Req 10) draw the sky sphere
             skySphere->draw();
