@@ -43,9 +43,9 @@ namespace our
         //  - the up direction which is the vector (0,1,0) but after being transformed by M
         //  then you can use glm::lookAt
         //  Calculate eye, center, and up vectors in world space
-        glm::vec4 eye_camera(0.0f, 0.0f, 0.0f, 1.0f);     // Eye in camera space
-        glm::vec4 center_camera(0.0f, 0.0f, -1.0f, 1.0f); // Center in camera space
-        glm::vec4 up_camera(0.0f, 1.0f, 0.0f, 0.0f);      // Up in camera space
+        glm::vec4 eye_camera(0.0f, 0.0f, 0.0f, 1.0f);     // Eye in camera space--> position
+        glm::vec4 center_camera(0.0f, 0.0f, -1.0f, 1.0f); // Center in camera space --> position
+        glm::vec4 up_camera(0.0f, 1.0f, 0.0f, 0.0f);      // Up in camera space --> up vector
 
         glm::vec4 eye_world = M * eye_camera;       // Transform eye to world space
         glm::vec4 center_world = M * center_camera; // Transform center to world space

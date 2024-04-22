@@ -14,7 +14,9 @@ namespace our {
         //TODO: (Req 8) Write this function
         glm::mat4 result = localTransform.toMat4();
         const Entity* parent = this->parent;
+        //to get the root of the tree
         while(parent != nullptr){
+            //to get the transformation matrix from this entity to its parent
             result = parent->localTransform.toMat4() * result;
             parent = parent->parent;
         }

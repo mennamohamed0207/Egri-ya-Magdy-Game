@@ -37,33 +37,30 @@ namespace our {
             glGenBuffers(1, &VBO);
             glBindBuffer(GL_ARRAY_BUFFER, VBO);
             glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex),vertices.data(), GL_STATIC_DRAW);
+
             //Element Buffer
             glGenBuffers(1, &EBO);
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
             glBufferData(GL_ELEMENT_ARRAY_BUFFER, elements.size() * sizeof(unsigned int), elements.data(), GL_STATIC_DRAW);
+
             //vertex array
             glGenVertexArrays(1, &VAO);
             glBindVertexArray(VAO);
             glBindBuffer(GL_ARRAY_BUFFER, VBO);
             
-
-            
-
             //Define vertex attributes
+
             //Position attribute
             glEnableVertexAttribArray(ATTRIB_LOC_POSITION);
             glVertexAttribPointer(ATTRIB_LOC_POSITION, 3, GL_FLOAT, false, sizeof(Vertex), (void*)offsetof(Vertex, position));
-
 
             //Color attribute
             glEnableVertexAttribArray(ATTRIB_LOC_COLOR);
             glVertexAttribPointer(ATTRIB_LOC_COLOR, 4, GL_UNSIGNED_BYTE, true, sizeof(Vertex), (void*)offsetof(Vertex, color));
 
-
             //TexCoord attribute
-             glEnableVertexAttribArray(ATTRIB_LOC_TEXCOORD);
+            glEnableVertexAttribArray(ATTRIB_LOC_TEXCOORD);
             glVertexAttribPointer(ATTRIB_LOC_TEXCOORD, 2, GL_FLOAT, false, sizeof(Vertex), (void*)offsetof(Vertex, tex_coord));
-
 
             //Normal attribute
             glEnableVertexAttribArray(ATTRIB_LOC_NORMAL);
@@ -74,6 +71,7 @@ namespace our {
             //Unbind vertex array object
             glBindVertexArray(0);
 
+            //remember the number of elements
             elementCount = elements.size();
 
         }
@@ -82,9 +80,9 @@ namespace our {
         void draw() 
         {
             //TODO: (Req 2) Write this function
+            //bind to vertex array to draw elements
             glBindVertexArray(VAO);
             glDrawElements(GL_TRIANGLES, elementCount, GL_UNSIGNED_INT, 0);
-            // glBindVertexArray(0);
         }
 
         // this function should delete the vertex & element buffers and the vertex array object
