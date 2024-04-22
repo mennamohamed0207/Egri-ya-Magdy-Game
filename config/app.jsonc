@@ -2,10 +2,10 @@
     "start-scene": "menu",
     "window":
     {
-        "title":"Default Game Window",
+        "title":"Egri ya Magdy Game",
         "size":{
-            "width":1280,
-            "height":720
+            "width":1000,
+            "height":562
         },
         "fullscreen": false
     },

@@ -59,6 +59,7 @@ namespace our
         // Set the "alphaThreshold" uniform
         shader->set("alphaThreshold", alphaThreshold);
         // Bind the texture and sampler to a texture unit
+        glActiveTexture(GL_TEXTURE0);
         texture->bind();    
         if(sampler)        
         sampler->bind(0);
