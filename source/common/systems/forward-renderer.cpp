@@ -189,6 +189,8 @@ namespace our
                   {
             //TODO: (Req 9) Finish this function
             // HINT: the following return should return true "first" should be drawn before "second". 
+            // the dot product between first's center or second's center and "cameraForward" represent the distance between them.
+            // The larger the distance, the closer they are drawn.
             float dist1 = glm::dot(cameraForward, first.center);
             float dist2 = glm::dot(cameraForward, second.center);
 
