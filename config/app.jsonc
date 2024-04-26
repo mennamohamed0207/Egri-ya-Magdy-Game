@@ -10,7 +10,7 @@
   },
   "scene": {
     "renderer": {
-      "sky": "assets/textures/sky.jpg",
+      "sky": "assets/textures/sky_ground.jpeg",
       "postprocess": "assets/shaders/postprocess/vignette.frag"
     },
     "assets": {
@@ -31,7 +31,7 @@
         "glass": "assets/textures/glass-panels.png",
         "monkey": "assets/textures/monkey.png",
         "metro": "assets/textures/metro.png",
-        "mike": "assets/textures/mike.png",
+        "magdy": "assets/textures/magdy.png",
         "walls": "assets/textures/walls.jpeg",
         "trainRail": "assets/textures/iron.jpg"
       },
@@ -39,7 +39,7 @@
         "cube": "assets/models/cube.obj",
         "monkey": "assets/models/monkey.obj",
         "metro": "assets/models/metro.obj",
-        "mike": "assets/models/mike.obj",
+        "magdy": "assets/models/magdy.obj",
         "walls": "assets/models/walls.obj",
         "trainRail": "assets/models/trainRail.obj",
         "plane": "assets/models/plane.obj",
@@ -118,7 +118,7 @@
           "texture": "monkey",
           "sampler": "default"
         },
-        "mike": {
+        "magdy": {
           "type": "textured",
           "shader": "textured",
           "pipelineState": {
@@ -130,7 +130,7 @@
             }
           },
           "tint": [1, 1, 1, 1],
-          "texture": "mike",
+          "texture": "magdy",
           "sampler": "default"
         },
         "trainRail": {
@@ -151,7 +151,7 @@
         "walls": {
           "type": "textured",
           "shader": "textured",
-          
+
           "pipelineState": {
             "faceCulling": {
               "enabled": false
@@ -198,41 +198,41 @@
       }
     },
     "world": [
-      {
-        "position": [-3, 0, 0],
-        "rotation": [0, 100, 0],
-        "scale": [10, 1, 1],
+      // {
+      //   "position": [-3, 0, 0],
+      //   "rotation": [0, 100, 0],
+      //   "scale": [10, 1, 1],
 
-        "components": [
-          {
-            "type": "Mesh Renderer",
-            "mesh": "walls",
-            "material": "walls"
-          },
-          {
-            "type": "Movement",
-            "linearVelocity": [0, 0, 0],
-            "angularVelocity": [0, 0, 0]
-          }
-        ]
-      },
-      {
-        "position": [3, 0, 0],
-        "rotation": [0, 80, 0],
-        "scale":[10,1,1],
-        "components": [
-          {
-            "type": "Mesh Renderer",
-            "mesh": "walls",
-            "material": "walls"
-          },
-          {
-            "type": "Movement",
-            "linearVelocity": [0, 0, 0],
-            "angularVelocity": [0, 0, 0]
-          }
-        ]
-      },
+      //   "components": [
+      //     {
+      //       "type": "Mesh Renderer",
+      //       "mesh": "walls",
+      //       "material": "walls"
+      //     },
+      //     {
+      //       "type": "Movement",
+      //       "linearVelocity": [0, 0, 0],
+      //       "angularVelocity": [0, 0, 0]
+      //     }
+      //   ]
+      // },
+      // {
+      //   "position": [3, 0, 0],
+      //   "rotation": [0, 80, 0],
+      //   "scale":[10,1,1],
+      //   "components": [
+      //     {
+      //       "type": "Mesh Renderer",
+      //       "mesh": "walls",
+      //       "material": "walls"
+      //     },
+      //     {
+      //       "type": "Movement",
+      //       "linearVelocity": [0, 0, 0],
+      //       "angularVelocity": [0, 0, 0]
+      //     }
+      //   ]
+      // },
       {
         "position": [0, 0, 0],
         "rotation": [0, 0, 0],
@@ -294,14 +294,14 @@
         ]
       },
       {
-        "position": [0, 0.5, 0],
-        "rotation": [180, 0, 0],
-        "scale": [0.2, 0.2, 0.2],
+        "position": [0, 0.8, 0],
+        "rotation": [0, 180, 0],
+        "scale": [0.05, 0.05, 0.05],
         "components": [
           {
             "type": "Mesh Renderer",
-            "mesh": "mike",
-            "material": "mike"
+            "mesh": "magdy",
+            "material": "magdy"
           },
           {
             "type": "Movement",
