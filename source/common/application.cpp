@@ -9,7 +9,8 @@
 #include <queue>
 #include <tuple>
 #include <filesystem>
-
+#define MINIAUDIO_IMPLEMENTATION
+#include<miniaudio.h>
 #include <flags/flags.h>
 
 // Include the Dear ImGui implementation headers
@@ -21,7 +22,6 @@
 // If NDEBUG (no debug) is not defined, enable OpenGL debug messages
 #define ENABLE_OPENGL_DEBUG_MESSAGES
 #endif
-
 #include "texture/screenshot.hpp"
 
 std::string default_screenshot_filepath() {
@@ -238,7 +238,6 @@ int our::Application::run(int run_for_frames) {
     // The time at which the last frame started. But there was no frames yet, so we'll just pick the current time.
     double last_frame_time = glfwGetTime();
     int current_frame = 0;
-
     //Game loop
     while(!glfwWindowShouldClose(window)){
         if(run_for_frames != 0 && current_frame >= run_for_frames) break;

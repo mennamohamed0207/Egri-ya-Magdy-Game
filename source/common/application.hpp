@@ -13,6 +13,8 @@
 #include "input/keyboard.hpp"
 #include "input/mouse.hpp"
 
+// #define MINIAUDIO_IMPLEMENTATION
+#include<miniaudio.h>
 namespace our {
 
     // This struct handles window attributes: (title, size, isFullscreen).
@@ -98,6 +100,17 @@ namespace our {
         // Tells the application to change its current state
         // The change will not be applied until the current frame ends
         void changeState(std::string name){
+            if(name=="play")
+            {
+                ma_result result;
+    ma_engine* pEngine = new ma_engine();
+
+    result = ma_engine_init(NULL, pEngine);
+    if (result != MA_SUCCESS) {
+        return ;  // Failed to initialize the engine.
+    }
+    ma_engine_play_sound(pEngine, "audio/x.mp3",NULL);
+            }
             auto it = states.find(name);
             if(it != states.end()){
                 nextState = it->second;
