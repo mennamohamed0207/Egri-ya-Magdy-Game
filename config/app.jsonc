@@ -312,23 +312,6 @@
           }
         ]
       },
-      // {
-      //   "position": [0, 0.8, 0],
-      //   "rotation": [0, 180, 0],
-      //   "scale": [0.05, 0.05, 0.05],
-      //   "components": [
-      //     {
-      //       "type": "Mesh Renderer",
-      //       "mesh": "magdy",
-      //       "material": "magdy"
-      //     },
-      //     {
-      //       "type": "Movement",
-      //       "linearVelocity": [0, 0, 0],
-      //       "angularVelocity": [0, 0, 0]
-      //     }
-      //   ]
-      // },
       {
         "position": [0, -1, 0],
         "rotation": [-90, 0, 0],
