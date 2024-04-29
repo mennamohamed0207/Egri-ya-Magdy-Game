@@ -5,6 +5,7 @@
 #include <ecs/world.hpp>
 #include <systems/forward-renderer.hpp>
 #include <systems/free-camera-controller.hpp>
+#include <systems/free-player-controller.hpp>
 #include <systems/movement.hpp>
 #include <asset-loader.hpp>
 
@@ -14,6 +15,7 @@ class Playstate: public our::State {
     our::World world;
     our::ForwardRenderer renderer;
     our::FreeCameraControllerSystem cameraController;
+    our::FreePLayerControllerSystem playerController;
     our::MovementSystem movementSystem;
 
     void onInitialize() override {
@@ -29,6 +31,7 @@ class Playstate: public our::State {
         }
         // We initialize the camera controller system since it needs a pointer to the app
         cameraController.enter(getApp());
+        playerController.enter(getApp());
         // Then we initialize the renderer
         auto size = getApp()->getFrameBufferSize();
         renderer.initialize(size, config["renderer"]);
@@ -38,6 +41,8 @@ class Playstate: public our::State {
         // Here, we just run a bunch of systems to control the world logic
         movementSystem.update(&world, (float)deltaTime);
         cameraController.update(&world, (float)deltaTime);
+        playerController.update(&world, (float)deltaTime);
+
         // And finally we use the renderer system to draw the scene
         renderer.render(&world);
 

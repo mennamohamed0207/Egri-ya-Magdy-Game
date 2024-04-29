@@ -198,6 +198,23 @@
       }
     },
     "world": [
+      {
+        "position": [0, 0.8, 0],
+        "rotation": [0, 180, 0],
+        "scale": [0.05, 0.05, 0.05],
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "magdy",
+            "material": "magdy"
+          },
+          {
+            "type": "Free Player Controller",
+            "linearVelocity": [0, 0, 0],
+            "angularVelocity": [0, 0, 0]
+          }
+        ]
+      },
       // {
       //   "position": [-3, 0, 0],
       //   "rotation": [0, 100, 0],
@@ -290,25 +307,6 @@
           },
           {
             "type": "Free Camera Controller"
-          }
-        ],
-        "children": [
-          {
-            "position": [0, -0.3, -0.3],
-            "rotation": [0, 180, 0],
-            "scale": [0.02, 0.02, 0.02],
-            "components": [
-              {
-                "type": "Mesh Renderer",
-                "mesh": "magdy",
-                "material": "magdy"
-              },
-              {
-                "type": "Movement",
-                "linearVelocity": [0, 0, 0],
-                "angularVelocity": [0, 0, 0]
-              }
-            ]
           }
         ]
       },
