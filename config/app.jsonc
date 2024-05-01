@@ -34,7 +34,7 @@
         "magdy": "assets/textures/magdy.png",
         "walls": "assets/textures/walls.jpeg",
         "trainRail": "assets/textures/iron.jpg",
-        "railway":"assets/textures/Untitleddesign.png"
+        "railway":"assets/textures/floor3.png"
       },
       "meshes": {
         "cube": "assets/models/cube.obj",
