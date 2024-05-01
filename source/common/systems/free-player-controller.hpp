@@ -94,45 +94,56 @@ namespace our
 
             glm::vec3 current_sensitivity = controller->positionSensitivity;
 
-            // Check for jump input and if the player is not already jumping
-            if (app->getKeyboard().isPressed(GLFW_KEY_SPACE) && !controller->isJumping)
+            if (app->getKeyboard().isPressed(GLFW_KEY_SPACE) && app->getKeyboard().isPressed(GLFW_KEY_RIGHT) && !controller->isJumping)
             {
-                controller->isJumping = true; // The player starts jumping
-                controller->currentVerticalVelocity = controller->jumpVelocity;
+                controller->isJumping = true;                                       // The player starts jumping
+                controller->currentVelocity.y = controller->jumpVelocity;           // Apply vertical jump velocity
+                controller->currentVelocity.x = controller->horizontalJumpVelocity; // Apply horizontal jump velocity to the right
+            }else if (app->getKeyboard().isPressed(GLFW_KEY_SPACE) && app->getKeyboard().isPressed(GLFW_KEY_LEFT) && !controller->isJumping)
+            {
+                controller->isJumping = true;                                       // The player starts jumping
+                controller->currentVelocity.y = controller->jumpVelocity;           // Apply vertical jump velocity
+                controller->currentVelocity.x = -controller->horizontalJumpVelocity; // Apply horizontal jump velocity to the right
+            }
+            else if (app->getKeyboard().isPressed(GLFW_KEY_SPACE) && !controller->isJumping)
+            {
+                controller->isJumping = true;                             // The player starts jumping
+                controller->currentVelocity.y = controller->jumpVelocity; // Apply vertical jump velocity
             }
 
-            // Apply gravity if jumping
+            // Apply gravity and update position if jumping
             if (controller->isJumping)
             {
-                position.y += controller->currentVerticalVelocity * deltaTime;
-                controller->currentVerticalVelocity -= controller->gravity * deltaTime; // Gravity reduces the vertical velocity
+                position += controller->currentVelocity * deltaTime;              // Update position based on current velocity
+                controller->currentVelocity.y -= controller->gravity * deltaTime; // Apply gravity to vertical velocity
 
-                // Assume ground level is y = 0 for simplicity, check if player has landed
+                // Check if player has landed
                 if (position.y <= 0.8)
                 {
-                    position.y = 0.8;                          // Reset to ground level
-                    controller->isJumping = false;           // Stop jumping
-                    controller->currentVerticalVelocity = 0; // Reset vertical velocity
+                    position.y = 0.8;                    // Reset to ground level
+                    controller->isJumping = false;     // Stop jumping
+                    controller->currentVelocity.y = 0; // Reset vertical velocity
+                    controller->currentVelocity.x = 0; // Reset horizontal velocity
                 }
             }
             // If the LEFT SHIFT key is pressed, we multiply the position sensitivity by the speed up factor
             if (app->getKeyboard().isPressed(GLFW_KEY_LEFT_SHIFT))
                 current_sensitivity *= controller->speedupFactor;
 
-            if (app->getKeyboard().isPressed(GLFW_KEY_W))
-                position += front * (deltaTime * current_sensitivity.z);
-            if (app->getKeyboard().isPressed(GLFW_KEY_S))
-                position -= front * (deltaTime * current_sensitivity.z);
-            // Q & E moves the player up and down
-            if (app->getKeyboard().isPressed(GLFW_KEY_UP))
-                position += up * (deltaTime * current_sensitivity.y);
-            if (app->getKeyboard().isPressed(GLFW_KEY_DOWN))
-                position -= up * (deltaTime * current_sensitivity.y);
-            // A & D moves the player left or right
-            if (app->getKeyboard().isPressed(GLFW_KEY_RIGHT))
-                position += right * (deltaTime * current_sensitivity.x);
-            if (app->getKeyboard().isPressed(GLFW_KEY_LEFT))
-                position -= right * (deltaTime * current_sensitivity.x);
+            // if (app->getKeyboard().isPressed(GLFW_KEY_W))
+            //     position += front * (deltaTime * current_sensitivity.z);
+            // if (app->getKeyboard().isPressed(GLFW_KEY_S))
+            //     position -= front * (deltaTime * current_sensitivity.z);
+            // // Q & E moves the player up and down
+            // if (app->getKeyboard().isPressed(GLFW_KEY_UP))
+            //     position += up * (deltaTime * current_sensitivity.y);
+            // if (app->getKeyboard().isPressed(GLFW_KEY_DOWN))
+            //     position -= up * (deltaTime * current_sensitivity.y);
+            // // A & D moves the player left or right
+            // if (app->getKeyboard().isPressed(GLFW_KEY_RIGHT))
+            //     position += right * (deltaTime * current_sensitivity.x);
+            // if (app->getKeyboard().isPressed(GLFW_KEY_LEFT))
+                // position -= right * (deltaTime * current_sensitivity.x);
         }
         // When the state exits, it should call this function to ensure the mouse is unlocked
         void exit()
