@@ -77,6 +77,8 @@ set(COMMON_SOURCES
         source/common/components/free-camera-controller.cpp
         source/common/components/free-player-controller.hpp
         source/common/components/free-player-controller.cpp
+        source/common/components/free-train-controller.hpp
+        source/common/components/free-train-controller.cpp
         source/common/components/movement.hpp
         source/common/components/movement.cpp
         source/common/components/component-deserializer.hpp
@@ -85,6 +87,7 @@ set(COMMON_SOURCES
         source/common/systems/forward-renderer.cpp
         source/common/systems/free-camera-controller.hpp
         source/common/systems/free-player-controller.hpp
+        source/common/systems/free-train-controller.hpp
         source/common/systems/movement.hpp
 )
 

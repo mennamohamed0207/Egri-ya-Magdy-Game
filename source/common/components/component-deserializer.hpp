@@ -5,6 +5,7 @@
 #include "mesh-renderer.hpp"
 #include "free-camera-controller.hpp"
 #include "free-player-controller.hpp"
+#include "free-train-controller.hpp"
 #include "movement.hpp"
 
 namespace our {
@@ -27,6 +28,10 @@ namespace our {
         else if (type == FreePlayerControllerComponent::getID())
         {
             component = entity->addComponent<FreePlayerControllerComponent>();
+        }
+        else if (type == FreeTrainControllerComponent::getID())
+        {
+            component = entity->addComponent<FreeTrainControllerComponent>();
         }
         if(component) component->deserialize(data);
     }

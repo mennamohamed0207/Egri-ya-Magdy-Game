@@ -241,7 +241,7 @@
             "material": "metro"
           },
           {
-            "type": "Movement",
+            "type": "Free Train Controller",
             "linearVelocity": [0, 0, 0],
             "angularVelocity": [0, 0, 0]
           }
@@ -257,7 +257,7 @@
             "material": "metro"
           },
           {
-            "type": "Movement",
+            "type": "Free Train Controller",
             "linearVelocity": [0, 0, 0],
             "angularVelocity": [0, 0, 0]
           }
@@ -273,12 +273,60 @@
             "material": "metro"
           },
           {
-            "type": "Movement",
+            "type": "Free Train Controller",
             "linearVelocity": [0, 0, 0],
             "angularVelocity": [0, 0, 0]
           }
         ]
       },
+      // {
+      //   "position": [0, 0, -2],
+      //   "rotation": [0, 0, 0],
+      //   "components": [
+      //     {
+      //       "type": "Mesh Renderer",
+      //       "mesh": "metro",
+      //       "material": "metro"
+      //     },
+      //     {
+      //       "type": "Free Train Controller",
+      //       "linearVelocity": [0, 0, 0],
+      //       "angularVelocity": [0, 0, 0]
+      //     }
+      //   ]
+      // },
+      // {
+      //   "position": [-2, 0, -2],
+      //   "rotation": [0, 0, 0],
+      //   "components": [
+      //     {
+      //       "type": "Mesh Renderer",
+      //       "mesh": "metro",
+      //       "material": "metro"
+      //     },
+      //     {
+      //       "type": "Free Train Controller",
+      //       "linearVelocity": [0, 0, 0],
+      //       "angularVelocity": [0, 0, 0]
+      //     }
+      //   ]
+      // },
+      // {
+      //   "position": [2, 0, -2],
+      //   "rotation": [0, 0, 0],
+      //   "components": [
+      //     {
+      //       "type": "Mesh Renderer",
+      //       "mesh": "metro",
+      //       "material": "metro"
+      //     },
+      //     {
+      //       "type": "Free Train Controller",
+      //       "linearVelocity": [0, 0, 0],
+      //       "angularVelocity": [0, 0, 0]
+      //     }
+      //   ]
+      // },
       {
         "position": [0, 1.4, 1.0],
         "rotation": [0, 0, 0],
