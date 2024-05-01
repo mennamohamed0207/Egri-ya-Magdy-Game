@@ -10,6 +10,8 @@
 #include <glm/gtc/constants.hpp>
 #include <glm/trigonometric.hpp>
 #include <glm/gtx/fast_trigonometry.hpp>
+#include <iostream>
+
 namespace our
 {
 
@@ -22,6 +24,10 @@ namespace our
         bool mouse_locked = false;  // Is the mouse locked
         float jumpStrength = 10.0f; // Strength of the jump impulse
         bool isOnGround = true;     // This should be updated based on collision detection with the ground
+        bool isMostLeft = false;
+        bool isMostRight = false;
+        bool isRightKeyPressed = false;
+        bool isLeftKeyPressed = false;
 
     public:
         // When a state enters, it should call this function and give it the pointer to the application
@@ -49,31 +55,9 @@ namespace our
             // Get the entity that we found via getOwner of camera (we could use controller->getOwner())
             Entity *entity = controller->getOwner();
 
-            // // If the left mouse button is pressed, we lock and hide the mouse. This common in First Person Games.
-            // if (app->getMouse().isPressed(GLFW_MOUSE_BUTTON_1) && !mouse_locked)
-            // {
-            //     app->getMouse().lockMouse(app->getWindow());
-            //     mouse_locked = true;
-            //     // If the left mouse button is released, we unlock and unhide the mouse.
-            // }
-            // else if (!app->getMouse().isPressed(GLFW_MOUSE_BUTTON_1) && mouse_locked)
-            // {
-            //     app->getMouse().unlockMouse(app->getWindow());
-            //     mouse_locked = false;
-            // }
-
             // We get a reference to the entity's position and rotation
             glm::vec3 &position = entity->localTransform.position;
             glm::vec3 &rotation = entity->localTransform.rotation;
-
-            // If the left mouse button is pressed, we get the change in the mouse location
-            // and use it to update the camera rotation
-            // if (app->getMouse().isPressed(GLFW_MOUSE_BUTTON_1))
-            // {
-            //     glm::vec2 delta = app->getMouse().getMouseDelta();
-            //     rotation.x -= delta.y * controller->rotationSensitivity; // The y-axis controls the pitch
-            //     rotation.y -= delta.x * controller->rotationSensitivity; // The x-axis controls the yaw
-            // }
 
             // We prevent the pitch from exceeding a certain angle from the XZ plane to prevent gimbal locks
             if (rotation.x < -glm::half_pi<float>() * 0.99f)
@@ -92,20 +76,8 @@ namespace our
                       right = glm::vec3(matrix * glm::vec4(1, 0, 0, 0));
 
             glm::vec3 current_sensitivity = controller->positionSensitivity;
-            
-            position -= front * (deltaTime * current_sensitivity.z);
 
-            // if (app->getKeyboard().isPressed(GLFW_KEY_SPACE) && app->getKeyboard().isPressed(GLFW_KEY_RIGHT) && !controller->isJumping)
-            // {
-            //     controller->isJumping = true;                                       // The player starts jumping
-            //     controller->currentVelocity.y = controller->jumpVelocity;           // Apply vertical jump velocity
-            //     controller->currentVelocity.x = controller->horizontalJumpVelocity; // Apply horizontal jump velocity to the right
-            // }else if (app->getKeyboard().isPressed(GLFW_KEY_SPACE) && app->getKeyboard().isPressed(GLFW_KEY_LEFT) && !controller->isJumping)
-            // {
-            //     controller->isJumping = true;                                       // The player starts jumping
-            //     controller->currentVelocity.y = controller->jumpVelocity;           // Apply vertical jump velocity
-            //     controller->currentVelocity.x = -controller->horizontalJumpVelocity; // Apply horizontal jump velocity to the right
-            // } else
+            position -= front * (deltaTime * current_sensitivity.z);
             if (app->getKeyboard().isPressed(GLFW_KEY_SPACE) && !controller->isJumping)
             {
                 controller->isJumping = true;                             // The player starts jumping
@@ -121,7 +93,7 @@ namespace our
                 // Check if player has landed
                 if (position.y <= 0.8)
                 {
-                    position.y = 0.8;                    // Reset to ground level
+                    position.y = 0.8;                  // Reset to ground level
                     controller->isJumping = false;     // Stop jumping
                     controller->currentVelocity.y = 0; // Reset vertical velocity
                     controller->currentVelocity.x = 0; // Reset horizontal velocity
@@ -131,23 +103,60 @@ namespace our
             if (app->getKeyboard().isPressed(GLFW_KEY_LEFT_SHIFT))
                 current_sensitivity *= controller->speedupFactor;
 
-            // if (app->getKeyboard().isPressed(GLFW_KEY_W))
-            //     position += front * (deltaTime * current_sensitivity.z);
-            // if (app->getKeyboard().isPressed(GLFW_KEY_S))
-            //     position -= front * (deltaTime * current_sensitivity.z);
-            // // Q & E moves the player up and down
-            // if (app->getKeyboard().isPressed(GLFW_KEY_UP))
-            //     position += up * (deltaTime * current_sensitivity.y);
-            // if (app->getKeyboard().isPressed(GLFW_KEY_DOWN))
-            //     position -= up * (deltaTime * current_sensitivity.y);
-            // // A & D moves the player left or right
-            // if (app->getKeyboard().isPressed(GLFW_KEY_RIGHT))
-            //     position += right * (deltaTime * current_sensitivity.x);
-            // if (app->getKeyboard().isPressed(GLFW_KEY_LEFT))
-                // position -= right * (deltaTime * current_sensitivity.x);
+            // this is for checking for the key press of left and right, but making the key press registered only once
+            if (app->getKeyboard().isPressed(GLFW_KEY_RIGHT) && !isMostRight)
+            {
+                if (!isRightKeyPressed)
+                {
+                    position -= right * glm::vec3(20, 20, 20);
+                    isRightKeyPressed = true;
+                    std::cout<<" ymeenn  "<<position.x<<std::endl;
+                }
+            }
+            else
+            {
+                isRightKeyPressed = false;
+            }
+
+            // Check for left key press
+            if (app->getKeyboard().isPressed(GLFW_KEY_LEFT)&& !isMostLeft)
+            {
+                if (!isLeftKeyPressed)
+                {
+                    position += right * glm::vec3(20, 20, 20);
+                    isLeftKeyPressed = true;
+
+                    std::cout<<" shmal  "<<position.x<<std::endl;
+
+                }
+            }
+            else
+            {
+                isLeftKeyPressed = false;
+            }
+
+            // check if it's on the left lane, then he can't go left
+            if (position.x <= -1)
+            {
+                isMostLeft = true;
+            }
+            else
+            {
+                isMostLeft = false;
+            }
+            // check if it's on the right lane, then he can't go right
+            if (position.x>=1)
+            {
+                isMostRight = true;
+            }
+            else
+            {
+                isMostRight = false;
+            }
         }
         // When the state exits, it should call this function to ensure the mouse is unlocked
-        void exit()
+        void
+        exit()
         {
             if (mouse_locked)
             {
