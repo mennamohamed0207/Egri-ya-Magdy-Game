@@ -1,5 +1,5 @@
 {
-  "start-scene": "play",
+  "start-scene": "menu",
   "window": {
     "title": "Egri ya Magdy Game",
     "size": {
@@ -10,7 +10,8 @@
   },
   "scene": {
     "renderer": {
-      "sky": "assets/textures/bg1.jpg",
+      // "sky": "assets/textures/sky_ground.jpeg",
+      "sky": "sky_model",
       "postprocess": "assets/shaders/postprocess/vignette.frag"
     },
     "assets": {
@@ -34,7 +35,16 @@
         "magdy": "assets/textures/magdy.png",
         "walls": "assets/textures/walls.jpeg",
         "trainRail": "assets/textures/iron.jpg",
-        "railway":"assets/textures/Untitleddesign.png"
+        "sky_texture1": "assets/textures/bg/avisos_tren2.jpg",
+        "sky_texture2": "assets/textures/bg/doritos_final_3.png",
+        "sky_texture3": "assets/textures/bg/lamparitas.png",
+        "sky_texture4": "assets/textures/bg/piso_final_2.png",
+        "sky_texture5": "assets/textures/bg/play_final.png",
+        "sky_texture6": "assets/textures/bg/riel_final.png",
+        "sky_texture7": "assets/textures/bg/sillas_2_final.png",
+        "sky_texture8": "assets/textures/bg/SPEDMAX_FINAL.png",
+        "sky_texture9": "assets/textures/bg/tunel_final_3.png",
+        "sky_texture10": "assets/textures/bg/xiaomi_final.png"
       },
       "meshes": {
         "cube": "assets/models/cube.obj",
@@ -44,7 +54,8 @@
         "walls": "assets/models/walls.obj",
         "trainRail": "assets/models/trainRail.obj",
         "plane": "assets/models/plane.obj",
-        "sphere": "assets/models/sphere.obj"
+        "sphere": "assets/models/sphere.obj",
+        "sky_model": "assets/models/tren.obj"
       },
       "samplers": {
         "default": {},
@@ -53,6 +64,30 @@
         }
       },
       "materials": {
+        "sky_material": {
+          "type": "textured",
+          "shader": "sky_shader",
+          "pipelineState": {
+              "faceCulling": {
+                  "enabled": false
+              },
+              "depthTesting": {
+                  "enabled": true
+              }
+          },
+          "textures": [
+            "sky_texture1",
+            "sky_texture2",
+            "sky_texture3",
+            "sky_texture4",
+            "sky_texture5",
+            "sky_texture6",
+            "sky_texture7",
+            "sky_texture8",
+            "sky_texture9",
+            "sky_texture10"
+        ]
+      },
         "metal": {
           "type": "tinted",
           "shader": "tinted",
@@ -180,21 +215,6 @@
           "texture": "metro",
           "sampler": "default"
         },
-        "railway": {
-          "type": "textured",
-          "shader": "textured",
-          "pipelineState": {
-            "faceCulling": {
-              "enabled": false
-            },
-            "depthTesting": {
-              "enabled": true
-            }
-          },
-          "tint": [1, 1, 1, 1],
-          "texture": "railway",
-          "sampler": "default"
-        },
 
         "moon": {
           "type": "textured",
@@ -231,6 +251,41 @@
           }
         ]
       },
+      // {
+      //   "position": [-3, 0, 0],
+      //   "rotation": [0, 100, 0],
+      //   "scale": [10, 1, 1],
+
+      //   "components": [
+      //     {
+      //       "type": "Mesh Renderer",
+      //       "mesh": "walls",
+      //       "material": "walls"
+      //     },
+      //     {
+      //       "type": "Movement",
+      //       "linearVelocity": [0, 0, 0],
+      //       "angularVelocity": [0, 0, 0]
+      //     }
+      //   ]
+      // },
+      // {
+      //   "position": [3, 0, 0],
+      //   "rotation": [0, 80, 0],
+      //   "scale":[10,1,1],
+      //   "components": [
+      //     {
+      //       "type": "Mesh Renderer",
+      //       "mesh": "walls",
+      //       "material": "walls"
+      //     },
+      //     {
+      //       "type": "Movement",
+      //       "linearVelocity": [0, 0, 0],
+      //       "angularVelocity": [0, 0, 0]
+      //     }
+      //   ]
+      // },
       {
         "position": [0, 0, 0],
         "rotation": [0, 0, 0],
@@ -299,7 +354,7 @@
           {
             "type": "Mesh Renderer",
             "mesh": "plane",
-            "material": "railway"
+            "material": "grass"
           }
         ]
       },

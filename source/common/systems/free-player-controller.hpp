@@ -24,8 +24,6 @@ namespace our
         bool mouse_locked = false;  // Is the mouse locked
         float jumpStrength = 10.0f; // Strength of the jump impulse
         bool isOnGround = true;     // This should be updated based on collision detection with the ground
-        bool isMostLeft = false;
-        bool isMostRight = false;
         bool isRightKeyPressed = false;
         bool isLeftKeyPressed = false;
 
@@ -104,13 +102,17 @@ namespace our
                 current_sensitivity *= controller->speedupFactor;
 
             // this is for checking for the key press of left and right, but making the key press registered only once
-            if (app->getKeyboard().isPressed(GLFW_KEY_RIGHT) && !isMostRight)
+            if (app->getKeyboard().isPressed(GLFW_KEY_RIGHT))
             {
                 if (!isRightKeyPressed)
                 {
+                    if (position.x >= 0.9)
+                    {
+                        position.x=1;
+                    }
+                    else
                     position -= right * glm::vec3(20, 20, 20);
                     isRightKeyPressed = true;
-                    std::cout<<" ymeenn  "<<position.x<<std::endl;
                 }
             }
             else
@@ -119,39 +121,22 @@ namespace our
             }
 
             // Check for left key press
-            if (app->getKeyboard().isPressed(GLFW_KEY_LEFT)&& !isMostLeft)
+            if (app->getKeyboard().isPressed(GLFW_KEY_LEFT) )
             {
                 if (!isLeftKeyPressed)
                 {
+                    if (position.x <= -1)
+                    {
+                        position.x=-1;
+                    }
+                    else
                     position += right * glm::vec3(20, 20, 20);
                     isLeftKeyPressed = true;
-
-                    std::cout<<" shmal  "<<position.x<<std::endl;
-
                 }
             }
             else
             {
                 isLeftKeyPressed = false;
-            }
-
-            // check if it's on the left lane, then he can't go left
-            if (position.x <= -1)
-            {
-                isMostLeft = true;
-            }
-            else
-            {
-                isMostLeft = false;
-            }
-            // check if it's on the right lane, then he can't go right
-            if (position.x>=1)
-            {
-                isMostRight = true;
-            }
-            else
-            {
-                isMostRight = false;
             }
         }
         // When the state exits, it should call this function to ensure the mouse is unlocked
