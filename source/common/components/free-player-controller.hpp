@@ -9,8 +9,13 @@ namespace our {
 
     class FreePlayerControllerComponent : public Component {
     public:
-        // The senstivity paramter defined sensitive the camera rotation & fov is to the mouse moves and wheel scrolling
-        float rotationSensitivity = 0.01f; // The angle change per pixel of mouse movement
+        float jumpVelocity = 5.0f; // Initial velocity of the jump
+        float gravity = 9.81f;     // Gravity pulling the player down
+        bool isJumping = false;    // Track whether the player is currently jumping
+        float currentVerticalVelocity = 0.0f;
+        
+            // The senstivity paramter defined sensitive the camera rotation & fov is to the mouse moves and wheel scrolling
+            float rotationSensitivity = 0.01f; // The angle change per pixel of mouse movement
         float fovSensitivity = 0.3f; // The fov angle change per unit of mouse wheel scrolling
         glm::vec3 positionSensitivity = {3.0f, 3.0f, 3.0f}; // The unity per second of camera movement if WASD is pressed
         float speedupFactor = 5.0f; // A multiplier for the positionSensitivity if "Left Shift" is held.
@@ -20,6 +25,7 @@ namespace our {
 
         // Reads sensitivities & speedupFactor from the given json object
         void deserialize(const nlohmann::json& data) override;
+
     };
 
 }

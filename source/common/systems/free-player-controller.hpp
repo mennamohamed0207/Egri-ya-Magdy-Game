@@ -24,7 +24,6 @@ namespace our
         float jumpStrength = 10.0f; // Strength of the jump impulse
         bool isOnGround = true;     // This should be updated based on collision detection with the ground
 
-
     public:
         // When a state enters, it should call this function and give it the pointer to the application
         void enter(Application *app)
@@ -94,29 +93,55 @@ namespace our
                       right = glm::vec3(matrix * glm::vec4(1, 0, 0, 0));
 
             glm::vec3 current_sensitivity = controller->positionSensitivity;
+
+            // Check for jump input and if the player is not already jumping
+            if (app->getKeyboard().isPressed(GLFW_KEY_SPACE) && !controller->isJumping)
+            {
+                controller->isJumping = true; // The player starts jumping
+                controller->currentVerticalVelocity = controller->jumpVelocity;
+            }
+
+            // Apply gravity if jumping
+            if (controller->isJumping)
+            {
+                position.y += controller->currentVerticalVelocity * deltaTime;
+                controller->currentVerticalVelocity -= controller->gravity * deltaTime; // Gravity reduces the vertical velocity
+
+                // Assume ground level is y = 0 for simplicity, check if player has landed
+                if (position.y <= 0.8)
+                {
+                    position.y = 0.8;                          // Reset to ground level
+                    controller->isJumping = false;           // Stop jumping
+                    controller->currentVerticalVelocity = 0; // Reset vertical velocity
+                }
+            }
             // If the LEFT SHIFT key is pressed, we multiply the position sensitivity by the speed up factor
             if (app->getKeyboard().isPressed(GLFW_KEY_LEFT_SHIFT))
                 current_sensitivity *= controller->speedupFactor;
 
-            if (app->getKeyboard().isPressed(GLFW_KEY_W)) position += front * (deltaTime * current_sensitivity.z);
+            if (app->getKeyboard().isPressed(GLFW_KEY_W))
+                position += front * (deltaTime * current_sensitivity.z);
             if (app->getKeyboard().isPressed(GLFW_KEY_S))
                 position -= front * (deltaTime * current_sensitivity.z);
             // Q & E moves the player up and down
-            if(app->getKeyboard().isPressed(GLFW_KEY_UP)) position += up * (deltaTime * current_sensitivity.y);
-            if(app->getKeyboard().isPressed(GLFW_KEY_DOWN)) position -= up * (deltaTime * current_sensitivity.y);
+            if (app->getKeyboard().isPressed(GLFW_KEY_UP))
+                position += up * (deltaTime * current_sensitivity.y);
+            if (app->getKeyboard().isPressed(GLFW_KEY_DOWN))
+                position -= up * (deltaTime * current_sensitivity.y);
             // A & D moves the player left or right
-            if(app->getKeyboard().isPressed(GLFW_KEY_RIGHT)) position += right * (deltaTime * current_sensitivity.x);
-            if(app->getKeyboard().isPressed(GLFW_KEY_LEFT)) position -= right * (deltaTime * current_sensitivity.x);
-        
+            if (app->getKeyboard().isPressed(GLFW_KEY_RIGHT))
+                position += right * (deltaTime * current_sensitivity.x);
+            if (app->getKeyboard().isPressed(GLFW_KEY_LEFT))
+                position -= right * (deltaTime * current_sensitivity.x);
         }
-            // When the state exits, it should call this function to ensure the mouse is unlocked
-            void exit()
+        // When the state exits, it should call this function to ensure the mouse is unlocked
+        void exit()
+        {
+            if (mouse_locked)
             {
-                if (mouse_locked)
-                {
-                    mouse_locked = false;
-                    app->getMouse().unlockMouse(app->getWindow());
-                }
+                mouse_locked = false;
+                app->getMouse().unlockMouse(app->getWindow());
             }
-        };
-    }
+        }
+    };
+}
