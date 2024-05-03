@@ -45,7 +45,9 @@ class Playstate: public our::State {
         movementSystem.update(&world, (float)deltaTime);
         cameraController.update(&world, (float)deltaTime);
         playerController.update(&world, (float)deltaTime);
-        trainController.update(&world, (float)deltaTime);
+
+        // get current time
+        trainController.update(&world);
 
         // And finally we use the renderer system to draw the scene
         renderer.render(&world);

@@ -15,5 +15,5 @@ void main(){
     //TODO: (Req 7) Change the next line to apply the transformation matrix
     gl_Position = transform * vec4(position, 1.0);
     vs_out.color = color;
-    vs_out.tex_coord = tex_coord*vec2(1,100);
+    vs_out.tex_coord = tex_coord*vec2(1,10);
 }

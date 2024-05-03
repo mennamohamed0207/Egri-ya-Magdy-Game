@@ -346,7 +346,7 @@
       {
         "position": [0, -1, 0],
         "rotation": [-90, 0, 0],
-        "scale": [10, 1000, 1],
+        "scale": [10, 100, 1],
         "components": [
           {
             "type": "Mesh Renderer",
