@@ -86,7 +86,7 @@ namespace our
 
             glm::vec3 current_sensitivity = controller->positionSensitivity;
             
-            position += front * (deltaTime * current_sensitivity.z);
+            // position += front * (deltaTime * current_sensitivity.z);
             
             // If the LEFT SHIFT key is pressed, we multiply the position sensitivity by the speed up factor
             if(app->getKeyboard().isPressed(GLFW_KEY_LEFT_SHIFT)) current_sensitivity *= controller->speedupFactor;

@@ -38,6 +38,7 @@
         "magdy": "assets/textures/magdy.png",
         "walls": "assets/textures/walls.jpeg",
         "trainRail": "assets/textures/blue.png",
+        "coin": "assets/textures/coin.jpg",
         "railway": "assets/textures/fflor.png"
       },
       "meshes": {
@@ -45,6 +46,7 @@
         "monkey": "assets/models/monkey.obj",
         "metro": "assets/models/train.obj",
         "magdy": "assets/models/magdy.obj",
+        "coin": "assets/models/coin.obj",
         "walls": "assets/models/walls.obj",
         "trainRail": "assets/models/trainRail.obj",
         "plane": "assets/models/plane.obj",
@@ -136,6 +138,21 @@
           },
           "tint": [1, 1, 1, 1],
           "texture": "magdy",
+          "sampler": "default"
+        },
+        "coin": {
+          "type": "textured",
+          "shader": "textured",
+          "pipelineState": {
+            "faceCulling": {
+              "enabled": false
+            },
+            "depthTesting": {
+              "enabled": true
+            }
+          },
+          "tint": [1, 1, 1, 1],
+          "texture": "coin",
           "sampler": "default"
         },
         "trainRail": {
@@ -235,7 +252,43 @@
           }
         ]
       },
-
+      ////////////////////////// coin component ////////////////////////
+      {
+        "position": [0, 2.4, 0],
+        "rotation": [0, 0, 0],
+        "scale": [0.05, 0.05, 0.05],
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "coin",
+            "material": "coin"
+          }
+        ]
+      },
+      {
+        "position": [0, 2.4, -0.1],
+        "rotation": [0, 0, 0],
+        "scale": [0.05, 0.05, 0.05],
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "coin",
+            "material": "coin"
+          }
+        ]
+      },
+      {
+        "position": [0, 2.4, -0.2],
+        "rotation": [0, 0, 0],
+        "scale": [0.05, 0.05, 0.05],
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "coin",
+            "material": "coin"
+          }
+        ]
+      },
       /////////////////////////// Metro Components ////////////////////////
       {
         "position": [2, 0, 0],
@@ -368,7 +421,7 @@
       //////////////////////////// Camera Component ////////////////////////////
       {
         "position": [0, 3, 1.0],
-        "rotation": [0, 0, 0],
+        "rotation": [-20, 0, 0],
         "components": [
           {
             "type": "Camera"
