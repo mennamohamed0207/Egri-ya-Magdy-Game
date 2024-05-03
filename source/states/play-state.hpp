@@ -9,6 +9,7 @@
 #include <systems/repeat-controller.hpp>
 #include <systems/movement.hpp>
 #include <asset-loader.hpp>
+#include<systems/collision.hpp>
 
 // This state shows how to use the ECS framework and deserialization.
 class Playstate: public our::State {
@@ -18,6 +19,7 @@ class Playstate: public our::State {
     our::FreeCameraControllerSystem cameraController;
     our::FreePLayerControllerSystem playerController;
     our::RepeatControllerSystem repeatController;
+    our::CollisionSystem collisionController;
     our::MovementSystem movementSystem;
 
     void onInitialize() override {
@@ -36,6 +38,7 @@ class Playstate: public our::State {
         playerController.enter(getApp());
         repeatController.enter(getApp());
         // Then we initialize the renderer
+        collisionController.setPlayer(world.getPlayer());
         auto size = getApp()->getFrameBufferSize();
         renderer.initialize(size, config["renderer"]);
     }
@@ -45,6 +48,7 @@ class Playstate: public our::State {
         movementSystem.update(&world, (float)deltaTime);
         cameraController.update(&world, (float)deltaTime);
         playerController.update(&world, (float)deltaTime);
+        collisionController.update(&world, (float)deltaTime);
 
         // get current time
         repeatController.update(&world);
@@ -66,6 +70,8 @@ class Playstate: public our::State {
         renderer.destroy();
         // On exit, we call exit for the camera controller system to make sure that the mouse is unlocked
         cameraController.exit();
+        playerController.exit();
+        repeatController.exit();
         // Clear the world
         world.clear();
         // and we delete all the loaded assets to free memory on the RAM and the VRAM

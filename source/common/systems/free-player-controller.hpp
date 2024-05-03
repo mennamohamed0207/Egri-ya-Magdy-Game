@@ -97,6 +97,10 @@ namespace our
                     controller->currentVelocity.x = 0; // Reset horizontal velocity
                 }
             }
+            //set the level of the player
+            if(position.y>=1.5) controller->level='t';
+            else controller->level='f';
+
             // If the LEFT SHIFT key is pressed, we multiply the position sensitivity by the speed up factor
             if (app->getKeyboard().isPressed(GLFW_KEY_LEFT_SHIFT))
                 current_sensitivity *= controller->speedupFactor;
