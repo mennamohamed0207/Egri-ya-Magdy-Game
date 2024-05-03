@@ -11,7 +11,7 @@ namespace our {
     public:
 
         // The senstivity paramter defined sensitive the camera rotation & fov is to the mouse moves and wheel scrolling
-        float speedupFactor = 1.0f; // A multiplier for the positionSensitivity if "Left Shift" is held.
+        float speedupFactor = 0.01f; // A multiplier for the positionSensitivity if "Left Shift" is held.
         float currentTime = 0.0f;
         std::string repeatedObject = "train";
         float initialpos = 0;

@@ -81,7 +81,7 @@ namespace our
                     if (controller->repeatedObject == "train")
                     {
                         // std::cout<<"z"<<std::endl;
-                        position -= front * abs(static_cast<float>(cos(2 * glm::pi<float>() * controller->currentTime * controller->speedupFactor)));
+                        position -= front * abs(static_cast<float>(cos(2 * glm::pi<float>() * controller->currentTime * controller->speedupFactor)))*controller->speedupFactor;
                         controller->currentTime += 0.001f;
                         // std::cout << position.z << " " << controller->currentTime << std::endl;
                         if (position.z > 4.0f)
