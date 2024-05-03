@@ -37,8 +37,8 @@
         "metro": "assets/textures/metro.png",
         "magdy": "assets/textures/magdy.png",
         "walls": "assets/textures/walls.jpeg",
-        "trainRail": "assets/textures/iron.jpg",
-        "railway":"assets/textures/fflor.png"
+        "trainRail": "assets/textures/blue.png",
+        "railway": "assets/textures/fflor.png"
       },
       "meshes": {
         "cube": "assets/models/cube.obj",
@@ -140,7 +140,7 @@
         },
         "trainRail": {
           "type": "textured",
-          "shader": "textured",
+          "shader": "floor",
           "pipelineState": {
             "faceCulling": {
               "enabled": false
@@ -235,38 +235,8 @@
           }
         ]
       },
-      {
-        "position": [0, 0, 0],
-        "rotation": [0, 0, 0],
-        "components": [
-          {
-            "type": "Mesh Renderer",
-            "mesh": "metro",
-            "material": "metro"
-          },
-          {
-            "type": "Repeat Controller",
-            "linearVelocity": [0, 0, 0],
-            "angularVelocity": [0, 0, 0]
-          }
-        ]
-      },
-      {
-        "position": [-2, 0, 0],
-        "rotation": [0, 0, 0],
-        "components": [
-          {
-            "type": "Mesh Renderer",
-            "mesh": "metro",
-            "material": "metro"
-          },
-          {
-            "type": "Repeat Controller",
-            "linearVelocity": [0, 0, 0],
-            "angularVelocity": [0, 0, 0]
-          }
-        ]
-      },
+
+      /////////////////////////// Metro Components ////////////////////////
       {
         "position": [2, 0, 0],
         "rotation": [0, 0, 0],
@@ -283,54 +253,119 @@
           }
         ]
       },
-      // {
-      //   "position": [0, 0, -2],
-      //   "rotation": [0, 0, 0],
-      //   "components": [
-      //     {
-      //       "type": "Mesh Renderer",
-      //       "mesh": "metro",
-      //       "material": "metro"
-      //     },
-      //     {
-      //       "type": "Free Train Controller",
-      //       "linearVelocity": [0, 0, 0],
-      //       "angularVelocity": [0, 0, 0]
-      //     }
-      //   ]
-      // },
-      // {
-      //   "position": [-2, 0, -2],
-      //   "rotation": [0, 0, 0],
-      //   "components": [
-      //     {
-      //       "type": "Mesh Renderer",
-      //       "mesh": "metro",
-      //       "material": "metro"
-      //     },
-      //     {
-      //       "type": "Free Train Controller",
-      //       "linearVelocity": [0, 0, 0],
-      //       "angularVelocity": [0, 0, 0]
-      //     }
-      //   ]
-      // },
-      // {
-      //   "position": [2, 0, -2],
-      //   "rotation": [0, 0, 0],
-      //   "components": [
-      //     {
-      //       "type": "Mesh Renderer",
-      //       "mesh": "metro",
-      //       "material": "metro"
-      //     },
-      //     {
-      //       "type": "Free Train Controller",
-      //       "linearVelocity": [0, 0, 0],
-      //       "angularVelocity": [0, 0, 0]
-      //     }
-      //   ]
-      // },
+      {
+        "position": [-2, 0, -1],
+        "rotation": [0, 0, 0],
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "metro",
+            "material": "metro"
+          },
+          {
+            "type": "Repeat Controller",
+            "linearVelocity": [0, 0, 0],
+            "angularVelocity": [0, 0, 0]
+          }
+        ]
+      },
+      {
+        "position": [0, 0, -10],
+        "rotation": [0, 0, 0],
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "metro",
+            "material": "metro"
+          },
+          {
+            "type": "Repeat Controller",
+            "linearVelocity": [0, 0, 0],
+            "angularVelocity": [0, 0, 0]
+          }
+        ]
+      },
+      {
+        "position": [-2, 0, -20],
+        "rotation": [0, 0, 0],
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "metro",
+            "material": "metro"
+          },
+          {
+            "type": "Repeat Controller",
+            "linearVelocity": [0, 0, 0],
+            "angularVelocity": [0, 0, 0]
+          }
+        ]
+      },
+      {
+        "position": [2, 0, 25],
+        "rotation": [0, 0, 0],
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "metro",
+            "material": "metro"
+          },
+          {
+            "type": "Repeat Controller",
+            "linearVelocity": [0, 0, 0],
+            "angularVelocity": [0, 0, 0]
+          }
+        ]
+      },
+      {
+        "position": [0, 0, -30],
+        "rotation": [0, 0, 0],
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "metro",
+            "material": "metro"
+          },
+          {
+            "type": "Repeat Controller",
+            "linearVelocity": [0, 0, 0],
+            "angularVelocity": [0, 0, 0]
+          }
+        ]
+      },
+      {
+        "position": [-2, 0, -35],
+        "rotation": [0, 0, 0],
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "metro",
+            "material": "metro"
+          },
+          {
+            "type": "Repeat Controller",
+            "linearVelocity": [0, 0, 0],
+            "angularVelocity": [0, 0, 0]
+          }
+        ]
+      },
+      {
+        "position": [2, 0, -40],
+        "rotation": [0, 0, 0],
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "metro",
+            "material": "metro"
+          },
+          {
+            "type": "Repeat Controller",
+            "linearVelocity": [0, 0, 0],
+            "angularVelocity": [0, 0, 0]
+          }
+        ]
+      },
+      //////////////////////////// Camera Component ////////////////////////////
       {
         "position": [0, 1.4, 1.0],
         "rotation": [0, 0, 0],
@@ -343,48 +378,398 @@
           }
         ]
       },
+      //////////////////////////////  Floor  Components /////////////////////////////
       {
         "position": [0, -1, 0],
         "rotation": [-90, 0, 0],
-        "scale": [10, 100, 1],
+        "scale": [5, 100, 1],
         "components": [
           {
             "type": "Mesh Renderer",
             "mesh": "plane",
             "material": "railway"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "floor",
+            "initialpos": 0
           }
         ]
       },
       {
         "position": [0, -0.5, 0],
         "rotation": [0, 0, 0],
+        "scale": [1, 1, 2],
+
         "components": [
           {
             "type": "Mesh Renderer",
             "mesh": "trainRail",
             "material": "trainRail"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "floor",
+            "initialpos": -4
           }
         ]
       },
       {
         "position": [-2, -0.5, 0],
         "rotation": [0, 0, 0],
+        "scale": [1, 1, 2],
+
         "components": [
           {
             "type": "Mesh Renderer",
             "mesh": "trainRail",
             "material": "trainRail"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "floor",
+            "initialpos": -4
           }
         ]
       },
       {
         "position": [2, -0.5, 0],
         "rotation": [0, 0, 0],
+        "scale": [1, 1, 2],
         "components": [
           {
             "type": "Mesh Renderer",
             "mesh": "trainRail",
             "material": "trainRail"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "floor",
+            "initialpos": -4
+          }
+        ]
+      },
+      {
+        "position": [0, -0.5, 0],
+        "rotation": [0, 0, 0],
+        "scale": [1, 1, 2],
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "trainRail",
+            "material": "trainRail"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "floor",
+            "initialpos": -8
+          }
+        ]
+      },
+      {
+        "position": [-2, -0.5, 0],
+        "rotation": [0, 0, 0],
+        "scale": [1, 1, 2],
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "trainRail",
+            "material": "trainRail"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "floor",
+            "initialpos": -8
+          }
+        ]
+      },
+      {
+        "position": [2, -0.5, 0],
+        "rotation": [0, 0, 0],
+        "scale": [1, 1, 2],
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "trainRail",
+            "material": "trainRail"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "floor",
+            "initialpos": -8
+          }
+        ]
+      },
+      {
+        "position": [0, -0.5, 0],
+        "rotation": [0, 0, 0],
+        "scale": [1, 1, 2],
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "trainRail",
+            "material": "trainRail"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "floor",
+            "initialpos": -12
+          }
+        ]
+      },
+      {
+        "position": [-2, -0.5, 0],
+        "rotation": [0, 0, 0],
+        "scale": [1, 1, 2],
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "trainRail",
+            "material": "trainRail"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "floor",
+            "initialpos": -12
+          }
+        ]
+      },
+      {
+        "position": [2, -0.5, 0],
+        "rotation": [0, 0, 0],
+        "scale": [1, 1, 2],
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "trainRail",
+            "material": "trainRail"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "floor",
+            "initialpos": -12
+          }
+        ]
+      },
+      {
+        "position": [0, -0.5, 0],
+        "rotation": [0, 0, 0],
+        "scale": [1, 1, 2],
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "trainRail",
+            "material": "trainRail"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "floor",
+            "initialpos": -16
+          }
+        ]
+      },
+      {
+        "position": [-2, -0.5, 0],
+        "rotation": [0, 0, 0],
+        "scale": [1, 1, 2],
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "trainRail",
+            "material": "trainRail"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "floor",
+            "initialpos": -16
+          }
+        ]
+      },
+      {
+        "position": [2, -0.5, 0],
+        "rotation": [0, 0, 0],
+        "scale": [1, 1, 2],
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "trainRail",
+            "material": "trainRail"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "floor",
+            "initialpos": -16
+          }
+        ]
+      },
+      {
+        "position": [0, -0.5, 0],
+        "rotation": [0, 0, 0],
+        "scale": [1, 1, 2],
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "trainRail",
+            "material": "trainRail"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "floor",
+            "initialpos": -20
+          }
+        ]
+      },
+      {
+        "position": [-2, -0.5, 0],
+        "rotation": [0, 0, 0],
+        "scale": [1, 1, 2],
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "trainRail",
+            "material": "trainRail"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "floor",
+            "initialpos": -20
+          }
+        ]
+      },
+      {
+        "position": [2, -0.5, 0],
+        "rotation": [0, 0, 0],
+        "scale": [1, 1, 2],
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "trainRail",
+            "material": "trainRail"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "floor",
+            "initialpos": -20
+          }
+        ]
+      },
+      {
+        "position": [0, -0.5, 0],
+        "rotation": [0, 0, 0],
+        "scale": [1, 1, 2],
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "trainRail",
+            "material": "trainRail"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "floor",
+            "initialpos": -24
+          }
+        ]
+      },
+      {
+        "position": [-2, -0.5, 0],
+        "rotation": [0, 0, 0],
+        "scale": [1, 1, 2],
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "trainRail",
+            "material": "trainRail"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "floor",
+            "initialpos": -24
+          }
+        ]
+      },
+      {
+        "position": [2, -0.5, 0],
+        "rotation": [0, 0, 0],
+        "scale": [1, 1, 2],
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "trainRail",
+            "material": "trainRail"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "floor",
+            "initialpos": -24
+          }
+        ]
+      },
+      {
+        "position": [0, -0.5, 0],
+        "rotation": [0, 0, 0],
+        "scale": [1, 1, 2],
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "trainRail",
+            "material": "trainRail"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "floor",
+            "initialpos": -28
+          }
+        ]
+      },
+      {
+        "position": [-2, -0.5, 0],
+        "rotation": [0, 0, 0],
+        "scale": [1, 1, 2],
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "trainRail",
+            "material": "trainRail"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "floor",
+            "initialpos": -28
+          }
+        ]
+      },
+      {
+        "position": [2, -0.5, 0],
+        "rotation": [0, 0, 0],
+        "scale": [1, 1, 2],
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "trainRail",
+            "material": "trainRail"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "floor",
+            "initialpos": -28
           }
         ]
       }

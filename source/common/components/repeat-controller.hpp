@@ -4,8 +4,8 @@
 
 #include <glm/glm.hpp> 
 
-namespace our {
 
+namespace our {
 
     class RepeatControllerComponent : public Component {
     public:
@@ -13,7 +13,8 @@ namespace our {
         // The senstivity paramter defined sensitive the camera rotation & fov is to the mouse moves and wheel scrolling
         float speedupFactor = 1.0f; // A multiplier for the positionSensitivity if "Left Shift" is held.
         float currentTime = 0.0f;
-
+        std::string repeatedObject = "train";
+        float initialpos = 0;
         // The ID of this component type is "Free Camera Controller"
         static std::string getID() { return "Repeat Controller"; }
 

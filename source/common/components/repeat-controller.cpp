@@ -8,5 +8,7 @@ namespace our {
     {
         if(!data.is_object()) return;
         speedupFactor = data.value("speedupFactor", speedupFactor);
+        repeatedObject = data.value("repeatedObject", repeatedObject);
+        initialpos = data.value("initialpos", initialpos);
     }
 }

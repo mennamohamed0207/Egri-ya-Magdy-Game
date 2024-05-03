@@ -21,9 +21,8 @@ namespace our
     // For more information, see "common/components/free-camera-controller.hpp"
     class RepeatControllerSystem
     {
-        Application *app;           // The application in which the state runs
-        bool mouse_locked = false;  // Is the mouse locked
-
+        Application *app;          // The application in which the state runs
+        bool mouse_locked = false; // Is the mouse locked
 
     public:
         // When a state enters, it should call this function and give it the pointer to the application
@@ -46,7 +45,7 @@ namespace our
                 if (camera)
                     break;
             }
-            if(!camera)
+            if (!camera)
                 return;
             Entity *camEntity = camera->getOwner();
             glm::vec3 &cam_position = camEntity->localTransform.position;
@@ -79,22 +78,32 @@ namespace our
                               up = glm::vec3(matrix * glm::vec4(0, 1, 0, 0)),
                               right = glm::vec3(matrix * glm::vec4(1, 0, 0, 0));
 
-                    position -= front * abs(static_cast<float>(cos(2 * glm::pi<float>() * controller->currentTime * controller->speedupFactor)));
-                    controller->currentTime += 0.001f;
-                    // std::cout << position.z << " " << controller->currentTime << std::endl;
-                    if (position.z > 4.0f)
+                    if (controller->repeatedObject == "train")
                     {
-                        position.z = -60.0f + cam_position.z;
-                        controller->currentTime = 0.0f;
-                        // std::cout << front.z << std::endl;
-                            
+                        // std::cout<<"z"<<std::endl;
+                        position -= front * abs(static_cast<float>(cos(2 * glm::pi<float>() * controller->currentTime * controller->speedupFactor)));
+                        controller->currentTime += 0.001f;
+                        // std::cout << position.z << " " << controller->currentTime << std::endl;
+                        if (position.z > 4.0f)
+                        {
+                            position.z = -60.0f + cam_position.z;
+                            controller->currentTime = 0.0f;
+                            // std::cout << front.z << std::endl;
                         }
                     }
+                    else if (controller->repeatedObject == "floor")
+                    {
+
+                        // std::cout << position.z << " " << cam_position.z<< std::endl;
+                        position.z = controller->initialpos+cam_position.z;
+
+                    }
+                }
             }
             if (!(controller))
                 return;
             // Get the entity that we found via getOwner of camera (we could use controller->getOwner())
-            }
+        }
         // When the state exits, it should call this function to ensure the mouse is unlocked
         void
         exit()
@@ -107,4 +116,3 @@ namespace our
         }
     };
 }
-
