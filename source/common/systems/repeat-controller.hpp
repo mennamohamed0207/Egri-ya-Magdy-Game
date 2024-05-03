@@ -78,7 +78,7 @@ namespace our
                               up = glm::vec3(matrix * glm::vec4(0, 1, 0, 0)),
                               right = glm::vec3(matrix * glm::vec4(1, 0, 0, 0));
 
-                    if (controller->repeatedObject == "train"||controller->repeatedObject=="icon")
+                    if (controller->repeatedObject == "train"||controller->repeatedObject=="coin")
                     {
                         // std::cout<<"z"<<std::endl;
                         position -= front * abs(static_cast<float>(cos(2 * glm::pi<float>() * controller->currentTime * controller->speedupFactor)))*controller->speedupFactor;
