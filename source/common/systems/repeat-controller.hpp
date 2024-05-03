@@ -2,8 +2,8 @@
 
 #include "../ecs/world.hpp"
 #include "../components/camera.hpp"
-#include "../components/free-train-controller.hpp"
-#include "../components/free-camera-controller.hpp"
+#include "../components/repeat-controller.hpp"
+#include "../components/repeat-controller.hpp"
 
 #include "../application.hpp"
 
@@ -19,7 +19,7 @@ namespace our
     // The free camera controller system is responsible for moving every entity which contains a FreeCameraControllerComponent.
     // This system is added as a slightly complex example for how use the ECS framework to implement logic.
     // For more information, see "common/components/free-camera-controller.hpp"
-    class FreeTrainControllerSystem
+    class RepeatControllerSystem
     {
         Application *app;           // The application in which the state runs
         bool mouse_locked = false;  // Is the mouse locked
@@ -39,7 +39,7 @@ namespace our
             // As soon as we find one, we break
             CameraComponent *camera = nullptr;
 
-            FreeTrainControllerComponent *controller = nullptr;
+            RepeatControllerComponent *controller = nullptr;
             for (auto entity : world->getEntities())
             {
                 camera = entity->getComponent<CameraComponent>();
@@ -53,7 +53,7 @@ namespace our
 
             for (auto entity : world->getEntities())
             {
-                controller = entity->getComponent<FreeTrainControllerComponent>();
+                controller = entity->getComponent<RepeatControllerComponent>();
 
                 if (controller)
                 {
@@ -86,7 +86,7 @@ namespace our
                     {
                         position.z = -60.0f + cam_position.z;
                         controller->currentTime = 0.0f;
-                        std::cout << front.z << std::endl;
+                        // std::cout << front.z << std::endl;
                             
                         }
                     }

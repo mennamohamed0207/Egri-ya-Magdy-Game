@@ -7,7 +7,7 @@
 namespace our {
 
 
-    class FreeTrainControllerComponent : public Component {
+    class RepeatControllerComponent : public Component {
     public:
 
         // The senstivity paramter defined sensitive the camera rotation & fov is to the mouse moves and wheel scrolling
@@ -15,7 +15,7 @@ namespace our {
         float currentTime = 0.0f;
 
         // The ID of this component type is "Free Camera Controller"
-        static std::string getID() { return "Free Train Controller"; }
+        static std::string getID() { return "Repeat Controller"; }
 
         // Reads sensitivities & speedupFactor from the given json object
         void deserialize(const nlohmann::json& data) override;

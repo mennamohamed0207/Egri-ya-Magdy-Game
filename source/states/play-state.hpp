@@ -6,7 +6,7 @@
 #include <systems/forward-renderer.hpp>
 #include <systems/free-camera-controller.hpp>
 #include <systems/free-player-controller.hpp>
-#include <systems/free-train-controller.hpp>
+#include <systems/repeat-controller.hpp>
 #include <systems/movement.hpp>
 #include <asset-loader.hpp>
 
@@ -17,7 +17,7 @@ class Playstate: public our::State {
     our::ForwardRenderer renderer;
     our::FreeCameraControllerSystem cameraController;
     our::FreePLayerControllerSystem playerController;
-    our::FreeTrainControllerSystem trainController;
+    our::RepeatControllerSystem repeatController;
     our::MovementSystem movementSystem;
 
     void onInitialize() override {
@@ -34,7 +34,7 @@ class Playstate: public our::State {
         // We initialize the camera controller system since it needs a pointer to the app
         cameraController.enter(getApp());
         playerController.enter(getApp());
-        trainController.enter(getApp());
+        repeatController.enter(getApp());
         // Then we initialize the renderer
         auto size = getApp()->getFrameBufferSize();
         renderer.initialize(size, config["renderer"]);
@@ -47,7 +47,7 @@ class Playstate: public our::State {
         playerController.update(&world, (float)deltaTime);
 
         // get current time
-        trainController.update(&world);
+        repeatController.update(&world);
 
         // And finally we use the renderer system to draw the scene
         renderer.render(&world);

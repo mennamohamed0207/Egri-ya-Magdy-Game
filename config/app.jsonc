@@ -245,7 +245,7 @@
             "material": "metro"
           },
           {
-            "type": "Free Train Controller",
+            "type": "Repeat Controller",
             "linearVelocity": [0, 0, 0],
             "angularVelocity": [0, 0, 0]
           }
@@ -261,7 +261,7 @@
             "material": "metro"
           },
           {
-            "type": "Free Train Controller",
+            "type": "Repeat Controller",
             "linearVelocity": [0, 0, 0],
             "angularVelocity": [0, 0, 0]
           }
@@ -277,7 +277,7 @@
             "material": "metro"
           },
           {
-            "type": "Free Train Controller",
+            "type": "Repeat Controller",
             "linearVelocity": [0, 0, 0],
             "angularVelocity": [0, 0, 0]
           }
