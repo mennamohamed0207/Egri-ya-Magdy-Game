@@ -22,6 +22,10 @@
         "textured": {
           "vs": "assets/shaders/textured.vert",
           "fs": "assets/shaders/textured.frag"
+        },
+        "floor": {
+          "vs": "assets/shaders/floor-texture.vert",
+          "fs": "assets/shaders/floor-texture.frag"
         }
       },
       "textures": {
@@ -182,7 +186,7 @@
         },
         "railway": {
           "type": "textured",
-          "shader": "textured",
+          "shader": "floor",
           "pipelineState": {
             "faceCulling": {
               "enabled": false
@@ -342,7 +346,7 @@
       {
         "position": [0, -1, 0],
         "rotation": [-90, 0, 0],
-        "scale": [10, 10, 1],
+        "scale": [10, 1000, 1],
         "components": [
           {
             "type": "Mesh Renderer",
