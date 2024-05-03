@@ -21,8 +21,7 @@ namespace our
         /*
         #define DIRECTIONAL 0
         #define POINT       1
-        #define SPOT        2
-        */
+        #define SPOT        2*/
 
         // The ID of this component type is "Lighting"
         static std::string getID() { return "Lighting"; }

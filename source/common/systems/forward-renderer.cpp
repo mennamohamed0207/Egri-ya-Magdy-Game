@@ -171,6 +171,11 @@ namespace our
                     opaqueCommands.push_back(command);
                 }
             }
+            // get the light component from all entities
+            if(auto light=entity->getComponent<LightComponent>();light)
+            {
+                lights.push_back(light);
+            }
         }
 
         // If there is no camera, we return (we cannot render without a camera)

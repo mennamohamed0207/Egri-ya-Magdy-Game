@@ -1,5 +1,8 @@
 #include "light.hpp"
 #include "../ecs/entity.hpp"
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <asset-loader.hpp>
 #include "../deserialize-utils.hpp"
 
 namespace our
@@ -11,5 +14,6 @@ namespace our
             return;
 
         // TODO:Read the data of light form the json file 
+        
     }
 }
