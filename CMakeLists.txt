@@ -79,6 +79,8 @@ set(COMMON_SOURCES
         source/common/components/free-player-controller.cpp
         source/common/components/repeat-controller.hpp
         source/common/components/repeat-controller.cpp
+        source/common/components/collider.hpp
+        source/common/components/collider.cpp
         source/common/components/movement.hpp
         source/common/components/movement.cpp
         source/common/components/component-deserializer.hpp
@@ -89,6 +91,7 @@ set(COMMON_SOURCES
         source/common/systems/free-player-controller.hpp
         source/common/systems/repeat-controller.hpp
         source/common/systems/movement.hpp
+        source/common/systems/collision.hpp
 )
 
 # Define the directories in which to search for the included headers

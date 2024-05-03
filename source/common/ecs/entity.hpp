@@ -22,8 +22,9 @@ namespace our {
         Entity* parent;   // The parent of the entity. The transform of the entity is relative to its parent.
                           // If parent is null, the entity is a root entity (has no parent).
         Transform localTransform; // The transform of this entity relative to its parent.
-        char lane;
-        World* getWorld() const { return world; } // Returns the world to which this entity belongs
+        bool hidden=false;
+        float size = 0 ;
+        World *getWorld() const { return world; } // Returns the world to which this entity belongs
 
         glm::mat4 getLocalToWorldMatrix() const; // Computes and returns the transformation from the entities local space to the world space
         void deserialize(const nlohmann::json&); // Deserializes the entity data and components from a json object

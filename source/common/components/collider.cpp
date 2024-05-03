@@ -1,4 +1,4 @@
-#include "collision.hpp"
+#include "collider.hpp"
 #include "../ecs/entity.hpp"
 
 namespace our {

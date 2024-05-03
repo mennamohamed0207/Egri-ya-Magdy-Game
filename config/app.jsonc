@@ -236,7 +236,7 @@
     },
     "world": [
       {
-        "position": [0, 1.5, 0],
+        "position": [0, 2, 0],
         "rotation": [0, 180, 0],
         "scale": [0.05, 0.05, 0.05],
         "name": "magdy",
@@ -253,43 +253,663 @@
           }
         ]
       },
-      ////////////////////////// coin component ////////////////////////
+      ////////////////////////// coin component col 1 ////////////////////////
       {
-        "position": [0, 2.4, 0],
+        "position": [0, 2, 0],
         "rotation": [0, 0, 0],
         "scale": [0.05, 0.05, 0.05],
-        "name":"coin",
+        "name": "coin",
+        "size": 3,
         "components": [
           {
             "type": "Mesh Renderer",
             "mesh": "coin",
             "material": "coin"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "coin"
+          },
+          {
+            "type": "Collision"
           }
         ]
       },
       {
-        "position": [0, 2.4, -0.1],
+        "position": [0, 2, -0.1],
         "rotation": [0, 0, 0],
         "scale": [0.05, 0.05, 0.05],
-        "name":"coin",
+        "name": "coin",
+        "size": 3,
+
         "components": [
           {
             "type": "Mesh Renderer",
             "mesh": "coin",
             "material": "coin"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "coin"
+          },
+          {
+            "type": "Collision"
           }
         ]
       },
       {
-        "position": [0, 2.4, -0.2],
+        "position": [0, 2, -0.2],
         "rotation": [0, 0, 0],
         "scale": [0.05, 0.05, 0.05],
-        "name":"coin",
+        "name": "coin",
+        "size": 3,
+
         "components": [
           {
             "type": "Mesh Renderer",
             "mesh": "coin",
             "material": "coin"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "coin"
+          },
+          {
+            "type": "Collision"
+          }
+        ]
+      },
+      {
+        "position": [0, 2, -0.3],
+        "rotation": [0, 0, 0],
+        "scale": [0.05, 0.05, 0.05],
+        "name": "coin",
+        "size": 3,
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "coin",
+            "material": "coin"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "coin"
+          },
+          {
+            "type": "Collision"
+          }
+        ]
+      },
+      {
+        "position": [0, 2, -0.4],
+        "rotation": [0, 0, 0],
+        "scale": [0.05, 0.05, 0.05],
+        "name": "coin",
+        "size": 3,
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "coin",
+            "material": "coin"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "coin"
+          },
+          {
+            "type": "Collision"
+          }
+        ]
+      },
+      {
+        "position": [0, 2, -0.5],
+        "rotation": [0, 0, 0],
+        "scale": [0.05, 0.05, 0.05],
+        "name": "coin",
+        "size": 3,
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "coin",
+            "material": "coin"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "coin"
+          },
+          {
+            "type": "Collision"
+          }
+        ]
+      },
+      {
+        "position": [0, 2, -0.6],
+        "rotation": [0, 0, 0],
+        "scale": [0.05, 0.05, 0.05],
+        "name": "coin",
+        "size": 3,
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "coin",
+            "material": "coin"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "coin"
+          },
+          {
+            "type": "Collision"
+          }
+        ]
+      },
+      {
+        "position": [0, 2, -0.7],
+        "rotation": [0, 0, 0],
+        "scale": [0.05, 0.05, 0.05],
+        "name": "coin",
+        "size": 3,
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "coin",
+            "material": "coin"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "coin"
+          },
+          {
+            "type": "Collision"
+          }
+        ]
+      },
+      {
+        "position": [0, 2, -0.8],
+        "rotation": [0, 0, 0],
+        "scale": [0.05, 0.05, 0.05],
+        "name": "coin",
+        "size": 3,
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "coin",
+            "material": "coin"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "coin"
+          },
+          {
+            "type": "Collision"
+          }
+        ]
+      },
+      {
+        "position": [0, 2, -0.9],
+        "rotation": [0, 0, 0],
+        "scale": [0.05, 0.05, 0.05],
+        "name": "coin",
+        "size": 3,
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "coin",
+            "material": "coin"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "coin"
+          },
+          {
+            "type": "Collision"
+          }
+        ]
+      },
+      /////////////////////////// Coin Components Col 2 ////////////////////////
+      {
+        "position": [1.5, 2, 0],
+        "rotation": [0, 0, 0],
+        "scale": [0.05, 0.05, 0.05],
+        "name": "coin",
+        "size": 3,
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "coin",
+            "material": "coin"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "coin"
+          },
+          {
+            "type": "Collision"
+          }
+        ]
+      },
+      {
+        "position": [1.5, 2, -0.1],
+        "rotation": [0, 0, 0],
+        "scale": [0.05, 0.05, 0.05],
+        "name": "coin",
+        "size": 3,
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "coin",
+            "material": "coin"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "coin"
+          },
+          {
+            "type": "Collision"
+          }
+        ]
+      },
+      {
+        "position": [1.5, 2, -0.2],
+        "rotation": [0, 0, 0],
+        "scale": [0.05, 0.05, 0.05],
+        "name": "coin",
+        "size": 3,
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "coin",
+            "material": "coin"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "coin"
+          },
+          {
+            "type": "Collision"
+          }
+        ]
+      },
+      {
+        "position": [1.5, 2, -0.3],
+        "rotation": [0, 0, 0],
+        "scale": [0.05, 0.05, 0.05],
+        "name": "coin",
+        "size": 3,
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "coin",
+            "material": "coin"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "coin"
+          },
+          {
+            "type": "Collision"
+          }
+        ]
+      },
+      {
+        "position": [1.5, 2, -0.4],
+        "rotation": [0, 0, 0],
+        "scale": [0.05, 0.05, 0.05],
+        "name": "coin",
+        "size": 3,
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "coin",
+            "material": "coin"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "coin"
+          },
+          {
+            "type": "Collision"
+          }
+        ]
+      },
+      {
+        "position": [1.5, 2, -0.5],
+        "rotation": [0, 0, 0],
+        "scale": [0.05, 0.05, 0.05],
+        "name": "coin",
+        "size": 3,
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "coin",
+            "material": "coin"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "coin"
+          },
+          {
+            "type": "Collision"
+          }
+        ]
+      },
+      {
+        "position": [1.5, 2, -0.6],
+        "rotation": [0, 0, 0],
+        "scale": [0.05, 0.05, 0.05],
+        "name": "coin",
+        "size": 3,
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "coin",
+            "material": "coin"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "coin"
+          },
+          {
+            "type": "Collision"
+          }
+        ]
+      },
+      {
+        "position": [1.5, 2, -0.7],
+        "rotation": [0, 0, 0],
+        "scale": [0.05, 0.05, 0.05],
+        "name": "coin",
+        "size": 3,
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "coin",
+            "material": "coin"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "coin"
+          },
+          {
+            "type": "Collision"
+          }
+        ]
+      },
+      {
+        "position": [1.5, 2, -0.8],
+        "rotation": [0, 0, 0],
+        "scale": [0.05, 0.05, 0.05],
+        "name": "coin",
+        "size": 3,
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "coin",
+            "material": "coin"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "coin"
+          },
+          {
+            "type": "Collision"
+          }
+        ]
+      },
+      {
+        "position": [1.5, 2, -0.9],
+        "rotation": [0, 0, 0],
+        "scale": [0.05, 0.05, 0.05],
+        "name": "coin",
+        "size": 3,
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "coin",
+            "material": "coin"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "coin"
+          },
+          {
+            "type": "Collision"
+          }
+        ]
+      },
+      /////////////////////////// Coin Components Col 3 ////////////////////////
+      {
+            "position": [-1.5,   2, 0],
+        "rotation": [0, 0, 0],
+        "scale": [0.05, 0.05, 0.05],
+        "name": "coin",
+        "size": 3,
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "coin",
+            "material": "coin"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "coin"
+          },
+          {
+            "type": "Collision"
+          }
+        ]
+      },
+      {
+            "position": [-1.5,   2, -0.1],
+        "rotation": [0, 0, 0],
+        "scale": [0.05, 0.05, 0.05],
+        "name": "coin",
+        "size": 3,
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "coin",
+            "material": "coin"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "coin"
+          },
+          {
+            "type": "Collision"
+          }
+        ]
+      },
+      {
+            "position": [-1.5,   2, -0.2],
+        "rotation": [0, 0, 0],
+        "scale": [0.05, 0.05, 0.05],
+        "name": "coin",
+        "size": 3,
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "coin",
+            "material": "coin"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "coin"
+          },
+          {
+            "type": "Collision"
+          }
+        ]
+      },
+      {
+            "position": [-1.5,   2, -0.3],
+        "rotation": [0, 0, 0],
+        "scale": [0.05, 0.05, 0.05],
+        "name": "coin",
+        "size": 3,
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "coin",
+            "material": "coin"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "coin"
+          },
+          {
+            "type": "Collision"
+          }
+        ]
+      },
+      {
+            "position": [-1.5,   2, -0.4],
+        "rotation": [0, 0, 0],
+        "scale": [0.05, 0.05, 0.05],
+        "name": "coin",
+        "size": 3,
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "coin",
+            "material": "coin"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "coin"
+          },
+          {
+            "type": "Collision"
+          }
+        ]
+      },
+      {
+            "position": [-1.5,   2, -0.5],
+        "rotation": [0, 0, 0],
+        "scale": [0.05, 0.05, 0.05],
+        "name": "coin",
+        "size": 3,
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "coin",
+            "material": "coin"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "coin"
+          },
+          {
+            "type": "Collision"
+          }
+        ]
+      },
+      {
+            "position": [-1.5,   2, -0.6],
+        "rotation": [0, 0, 0],
+        "scale": [0.05, 0.05, 0.05],
+        "name": "coin",
+        "size": 3,
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "coin",
+            "material": "coin"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "coin"
+          },
+          {
+            "type": "Collision"
+          }
+        ]
+      },
+      {
+            "position": [-1.5,   2, -0.7],
+        "rotation": [0, 0, 0],
+        "scale": [0.05, 0.05, 0.05],
+        "name": "coin",
+        "size": 3,
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "coin",
+            "material": "coin"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "coin"
+          },
+          {
+            "type": "Collision"
+          }
+        ]
+      },
+      {
+            "position": [-1.5,   2, -0.8],
+        "rotation": [0, 0, 0],
+        "scale": [0.05, 0.05, 0.05],
+        "name": "coin",
+        "size": 3,
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "coin",
+            "material": "coin"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "coin"
+          },
+          {
+            "type": "Collision"
+          }
+        ]
+      },
+      {
+            "position": [-1.5,   2, -0.9],
+        "rotation": [0, 0, 0],
+        "scale": [0.05, 0.05, 0.05],
+        "name": "coin",
+        "size": 3,
+
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "coin",
+            "material": "coin"
+          },
+          {
+            "type": "Repeat Controller",
+            "repeatedObject": "coin"
+          },
+          {
+            "type": "Collision"
           }
         ]
       },
@@ -297,7 +917,8 @@
       {
         "position": [1.5, 0, 0],
         "rotation": [0, 0, 0],
-        "name":"train",
+        "name": "train",
+        "size": 8,
         "components": [
           {
             "type": "Mesh Renderer",
@@ -308,13 +929,18 @@
             "type": "Repeat Controller",
             "linearVelocity": [0, 0, 0],
             "angularVelocity": [0, 0, 0]
+          },
+          {
+            "type": "Collision"
           }
         ]
       },
       {
-         "position": [-1.5, 0, -1],
+        "position": [-1.5, 0, -1],
         "rotation": [0, 0, 0],
-        "name":"train",
+        "name": "train",
+        "size": 8,
+
         "components": [
           {
             "type": "Mesh Renderer",
@@ -325,13 +951,18 @@
             "type": "Repeat Controller",
             "linearVelocity": [0, 0, 0],
             "angularVelocity": [0, 0, 0]
+          },
+          {
+            "type": "Collision"
           }
         ]
       },
       {
         "position": [0, 0, -10],
         "rotation": [0, 0, 0],
-        "name":"train",
+        "name": "train",
+        "size": 8,
+
         "components": [
           {
             "type": "Mesh Renderer",
@@ -342,13 +973,18 @@
             "type": "Repeat Controller",
             "linearVelocity": [0, 0, 0],
             "angularVelocity": [0, 0, 0]
+          },
+          {
+            "type": "Collision"
           }
         ]
       },
       {
-         "position": [-1.5, 0, -20],
+        "position": [-1.5, 0, -20],
         "rotation": [0, 0, 0],
-        "name":"train",
+        "name": "train",
+        "size": 8,
+
         "components": [
           {
             "type": "Mesh Renderer",
@@ -359,13 +995,18 @@
             "type": "Repeat Controller",
             "linearVelocity": [0, 0, 0],
             "angularVelocity": [0, 0, 0]
+          },
+          {
+            "type": "Collision"
           }
         ]
       },
       {
         "position": [1.5, 0, 25],
         "rotation": [0, 0, 0],
-        "name":"train",
+        "name": "train",
+        "size": 8,
+
         "components": [
           {
             "type": "Mesh Renderer",
@@ -376,13 +1017,18 @@
             "type": "Repeat Controller",
             "linearVelocity": [0, 0, 0],
             "angularVelocity": [0, 0, 0]
+          },
+          {
+            "type": "Collision"
           }
         ]
       },
       {
         "position": [0, 0, -30],
         "rotation": [0, 0, 0],
-        "name":"train",
+        "name": "train",
+        "size": 8,
+
         "components": [
           {
             "type": "Mesh Renderer",
@@ -393,13 +1039,18 @@
             "type": "Repeat Controller",
             "linearVelocity": [0, 0, 0],
             "angularVelocity": [0, 0, 0]
+          },
+          {
+            "type": "Collision"
           }
         ]
       },
       {
-         "position": [-1.5, 0, -35],
+        "position": [-1.5, 0, -35],
         "rotation": [0, 0, 0],
-        "name":"train",
+        "name": "train",
+        "size": 8,
+
         "components": [
           {
             "type": "Mesh Renderer",
@@ -410,13 +1061,18 @@
             "type": "Repeat Controller",
             "linearVelocity": [0, 0, 0],
             "angularVelocity": [0, 0, 0]
+          },
+          {
+            "type": "Collision"
           }
         ]
       },
       {
         "position": [1.5, 0, -40],
         "rotation": [0, 0, 0],
-        "name":"train",
+        "name": "train",
+        "size": 8,
+
         "components": [
           {
             "type": "Mesh Renderer",
@@ -427,19 +1083,22 @@
             "type": "Repeat Controller",
             "linearVelocity": [0, 0, 0],
             "angularVelocity": [0, 0, 0]
+          },
+          {
+            "type": "Collision"
           }
         ]
       },
       //////////////////////////// Camera Component ////////////////////////////
       {
-        "position": [0, 2.2, 1.0],
-        "rotation": [0, 0, 0],
+        "position": [0, 2.4, 1.0],
+        "rotation": [-20, 0, 0],
         "components": [
           {
             "type": "Camera"
           },
           {
-            "type": "Free Camera Controller"
+            // "type": "Free Camera Controller"
           }
         ]
       },
@@ -480,7 +1139,7 @@
         ]
       },
       {
-          "position": [-2, -0.5, 0],
+        "position": [-2, -0.5, 0],
         "rotation": [0, 0, 0],
         "scale": [1, 1, 2],
 
@@ -533,7 +1192,7 @@
         ]
       },
       {
-          "position": [-2, -0.5, 0],
+        "position": [-2, -0.5, 0],
         "rotation": [0, 0, 0],
         "scale": [1, 1, 2],
 
@@ -587,7 +1246,7 @@
         ]
       },
       {
-          "position": [-2, -0.5, 0],
+        "position": [-2, -0.5, 0],
         "rotation": [0, 0, 0],
         "scale": [1, 1, 2],
 
@@ -641,7 +1300,7 @@
         ]
       },
       {
-          "position": [-2, -0.5, 0],
+        "position": [-2, -0.5, 0],
         "rotation": [0, 0, 0],
         "scale": [1, 1, 2],
 
@@ -695,7 +1354,7 @@
         ]
       },
       {
-          "position": [-2, -0.5, 0],
+        "position": [-2, -0.5, 0],
         "rotation": [0, 0, 0],
         "scale": [1, 1, 2],
 
@@ -749,7 +1408,7 @@
         ]
       },
       {
-          "position": [-2, -0.5, 0],
+        "position": [-2, -0.5, 0],
         "rotation": [0, 0, 0],
         "scale": [1, 1, 2],
 
@@ -803,7 +1462,7 @@
         ]
       },
       {
-          "position": [-2, -0.5, 0],
+        "position": [-2, -0.5, 0],
         "rotation": [0, 0, 0],
         "scale": [1, 1, 2],
 

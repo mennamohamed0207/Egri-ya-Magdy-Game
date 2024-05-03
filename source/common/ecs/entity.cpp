@@ -3,7 +3,6 @@
 #include "../components/component-deserializer.hpp"
 
 #include <glm/gtx/euler_angles.hpp>
-
 namespace our
 {
 
@@ -32,12 +31,9 @@ namespace our
         if (!data.is_object())
             return;
         name = data.value("name", name);
-        glm::vec3 position = data.value("position", glm::vec3(0, 0, 0));
-        if (position.x >= -0.5 && position.x <= 0.5)
-            lane = 'm';
-        else if(position.x < -0.5) lane='l';
-        else if(position.x > 0.5) lane='r';
+        size = data.value("size", size);
         localTransform.deserialize(data);
+
         if (data.contains("components"))
         {
             if (const auto &components = data["components"]; components.is_array())

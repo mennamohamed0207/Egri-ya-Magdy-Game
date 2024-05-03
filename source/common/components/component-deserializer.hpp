@@ -6,6 +6,7 @@
 #include "free-camera-controller.hpp"
 #include "free-player-controller.hpp"
 #include "repeat-controller.hpp"
+#include "collider.hpp"
 #include "movement.hpp"
 
 namespace our {
@@ -32,6 +33,8 @@ namespace our {
         else if (type == RepeatControllerComponent::getID())
         {
             component = entity->addComponent<RepeatControllerComponent>();
+        }else if(type == CollisionComponent::getID()){
+            component = entity->addComponent<CollisionComponent>();
         }
         if(component) component->deserialize(data);
     }

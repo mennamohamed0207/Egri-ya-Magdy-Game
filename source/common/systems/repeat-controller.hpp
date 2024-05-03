@@ -78,7 +78,7 @@ namespace our
                               up = glm::vec3(matrix * glm::vec4(0, 1, 0, 0)),
                               right = glm::vec3(matrix * glm::vec4(1, 0, 0, 0));
 
-                    if (controller->repeatedObject == "train")
+                    if (controller->repeatedObject == "train"||controller->repeatedObject=="icon")
                     {
                         // std::cout<<"z"<<std::endl;
                         position -= front * abs(static_cast<float>(cos(2 * glm::pi<float>() * controller->currentTime * controller->speedupFactor)))*controller->speedupFactor;
@@ -88,6 +88,7 @@ namespace our
                         {
                             position.z = -60.0f + cam_position.z;
                             controller->currentTime = 0.0f;
+                            entity->hidden = false;
                             // std::cout << front.z << std::endl;
                         }
                     }
