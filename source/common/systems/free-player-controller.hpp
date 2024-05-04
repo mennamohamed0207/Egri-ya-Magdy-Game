@@ -110,12 +110,12 @@ namespace our
             {
                 if (!isRightKeyPressed)
                 {
-                    if (position.x >= 0.9)
+                    if (position.x >= 1.4)
                     {
-                        position.x=1;
+                        position.x=1.5;
                     }
                     else
-                    position -= right * glm::vec3(20, 20, 20);
+                    position -= right * glm::vec3(30, 30, 30);
                     isRightKeyPressed = true;
                 }
             }
@@ -129,12 +129,12 @@ namespace our
             {
                 if (!isLeftKeyPressed)
                 {
-                    if (position.x <= -1)
+                    if (position.x <= -1.5)
                     {
-                        position.x=-1;
+                        position.x=-1.5;
                     }
                     else
-                    position += right * glm::vec3(20, 20, 20);
+                    position += right * glm::vec3(30, 30, 30);
                     isLeftKeyPressed = true;
                 }
             }
