@@ -2,7 +2,6 @@
 
 #include "../ecs/component.hpp"
 
-#include <glm/gtx/euler_angles.hpp>
 #include <glm/glm.hpp>
 
 namespace our
@@ -12,12 +11,13 @@ namespace our
     {
     public:
         // TODO: Add more members if needed
-        glm::vec3 ambient;
-        glm::vec3 diffuse;
-        glm::vec3 specular;
-        glm::vec3 position;
-        glm::vec3 direction;
-        int lightType;
+        int lightType;         // Type of the light: 0 for directional, 1 for point, 2 for spot
+        glm::vec3 direction;   // Direction of the light (for directional light)
+        glm::vec3 position;    // Position of the light (for point light)
+        glm::vec3 color;       // Ambient and specular color of the light
+        glm::vec3 attenuation; // Attenuation factors for the light (controls falloff)
+        glm::vec2 cone_angles; // Cone angles for spot lighting (inner and outer angles)
+
         /*
         #define DIRECTIONAL 0
         #define POINT       1

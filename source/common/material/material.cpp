@@ -81,34 +81,45 @@ namespace our
     {
         Material::setup();
         //albedo
+        if(albedo!=nullptr)
+        {
         glActiveTexture(GL_TEXTURE0);
         albedo->bind();
         sampler->bind(0);
         shader->set("material.albedo", 0);
-
+        }
         //specular
+        if(specular!=nullptr)
+        {
         glActiveTexture(GL_TEXTURE1);
         specular->bind();
         sampler->bind(1);
         shader->set("material.specular", 1);
-
+        }
+        if(emissive!=nullptr)
+        {
         //emissive
         glActiveTexture(GL_TEXTURE2);
         emissive->bind();
         sampler->bind(2);
         shader->set("material.emissive", 2);
-
+        }
+        if(roughness!=nullptr)
+        {
         //roughness
         glActiveTexture(GL_TEXTURE3);
         roughness->bind();
         sampler->bind(3);
         shader->set("material.roughness", 3);
-
+        }
+        if(ambient_occlusion!=nullptr)
+        {
         //ambient_occlusion
         glActiveTexture(GL_TEXTURE4);
         ambient_occlusion->bind();
         sampler->bind(4);
         shader->set("material.ambient_occlusion", 4);
+        }
 
     }
     void LightingMaterial::deserialize(const nlohmann::json &data)

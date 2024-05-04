@@ -1,7 +1,7 @@
 #include "forward-renderer.hpp"
 #include "../mesh/mesh-utils.hpp"
 #include "../texture/texture-utils.hpp"
-
+#include <iostream>
 namespace our
 {
 
@@ -230,6 +230,40 @@ namespace our
         for (auto &command : opaqueCommands)
         {
             command.material->setup();
+            //check if this has light material or not 
+            if(auto material_light=dynamic_cast<LightingMaterial*>(command.material);material_light)
+            {
+
+
+                //send the data to fragment shader 
+                material_light->shader->set("sky.top", glm::vec3    (0.0f, 0.1f, 0.5f));
+                material_light->shader->set("sky.horizon", glm::vec3(0.3f, 0.3f, 0.3f));
+                material_light->shader->set("sky.bottom", glm::vec3 (0.1f, 0.1f, 0.1f));
+
+                material_light->shader->set("light_count", int(lights.size()));
+                std::cout<<"before setup "<<std::endl;
+
+                material_light->shader->set("VP", VP);
+                material_light->shader->set("M_IT",glm::transpose(glm::inverse(command.localToWorld)));
+                glm::vec3 cameraPosition = camera->getOwner()->getLocalToWorldMatrix() * glm::vec4(0, 0, 0, 1);
+
+                std::cout<<"before setup "<<std::endl;
+                material_light->shader->set("camera_position",cameraPosition);
+                material_light->shader->set("M", command.localToWorld);
+                std::cout<<"after setup "<<std::endl;
+                
+                for(int i=0;i<lights.size();i++)
+                {
+                    material_light->shader->set("lights["+std::to_string(i)+"].position",lights[i]->position);
+                    // std::cout<<"lights[i]->position ( "<<lights[i]->position.r<<" ,"<<lights[i]->position.g<<" ,"<<lights[i]->position.b<<" )"<<std::endl;
+                    material_light->shader->set("lights["+std::to_string(i)+"].type",lights[i]->lightType);
+                    material_light->shader->set("lights["+std::to_string(i)+"].direction",lights[i]->direction);
+                    material_light->shader->set("lights["+std::to_string(i)+"].color",lights[i]->color);
+                    material_light->shader->set("lights["+std::to_string(i)+"].attenuation",lights[i]->attenuation);
+                    // if(lights[i]->lightType==2)
+                    material_light->shader->set("lights["+std::to_string(i)+"].cone_angles",lights[i]->cone_angles);
+                }
+            }
             command.material->shader->set("transform", VP * command.localToWorld);
             command.mesh->draw();
         }
