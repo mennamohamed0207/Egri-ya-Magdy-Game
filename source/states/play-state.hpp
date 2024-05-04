@@ -98,7 +98,7 @@ class Playstate: public our::State {
                 world.getEntityByName("heart1")->hidden = true;
                 world.getEntityByName("heart2")->hidden = true;
                 world.getEntityByName("heart3")->hidden = true;
-                getApp()->changeState("menu");
+                getApp()->changeState("GameOver");
             }else
             if(hearts==1){
                 world.getEntityByName("heart2")->hidden = true;
@@ -124,7 +124,7 @@ class Playstate: public our::State {
             // Get a reference to the keyboard object
             auto &keyboard = getApp()->getKeyboard();
 
-        if(keyboard.justPressed(GLFW_KEY_ESCAPE) || collisionController.update(&world,(float)deltaTime)==-1){
+        if(keyboard.justPressed(GLFW_KEY_ESCAPE) ){
             // If the escape  key is pressed in this frame, go to the play state
             getApp()->changeState("menu");
         }
