@@ -241,16 +241,13 @@ namespace our
                 material_light->shader->set("sky.bottom", glm::vec3 (0.1f, 0.1f, 0.1f));
 
                 material_light->shader->set("light_count", int(lights.size()));
-                std::cout<<"before setup "<<std::endl;
 
                 material_light->shader->set("VP", VP);
                 material_light->shader->set("M_IT",glm::transpose(glm::inverse(command.localToWorld)));
                 glm::vec3 cameraPosition = camera->getOwner()->getLocalToWorldMatrix() * glm::vec4(0, 0, 0, 1);
 
-                std::cout<<"before setup "<<std::endl;
                 material_light->shader->set("camera_position",cameraPosition);
                 material_light->shader->set("M", command.localToWorld);
-                std::cout<<"after setup "<<std::endl;
                 
                 for(int i=0;i<lights.size();i++)
                 {
