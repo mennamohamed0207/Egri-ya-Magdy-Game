@@ -63,17 +63,6 @@ namespace our
             glm::vec3 frontFace = objectPosition + objectComponent->size / 2;
             glm::vec3 backFace = objectPosition - objectComponent->size / 2;
 
-            if (objectComponent->name == "coin")
-            {
-                std::cout << playerPosition.z << " " << objectPosition.z << std::endl;
-                if (playerPosition.z <= (objectPosition.z + 0.05) && playerPosition.z >= objectPosition.z - 0.05)
-                {
-                    return true;
-                }
-                else
-                    return false;
-            }
-
             if (playerPosition.z <= frontFace.z && playerPosition.z >= backFace.z)
                 return true;
             else
