@@ -78,11 +78,26 @@ namespace our
                               up = glm::vec3(matrix * glm::vec4(0, 1, 0, 0)),
                               right = glm::vec3(matrix * glm::vec4(1, 0, 0, 0));
 
-                    if (controller->repeatedObject == "train"||controller->repeatedObject=="coin")
+                    if (controller->repeatedObject == "train")
                     {
                         // std::cout<<"z"<<std::endl;
                         position -= front * abs(static_cast<float>(cos(2 * glm::pi<float>() * controller->currentTime * controller->speedupFactor)))*controller->speedupFactor;
                         controller->currentTime += 0.001f;
+                        // std::cout << position.z << " " << controller->currentTime << std::endl;
+                        if (position.z > 4.0f)
+                        {
+                            position.z = -60.0f + cam_position.z;
+                            controller->currentTime = 0.0f;
+                            entity->hidden = false;
+                            // std::cout << front.z << std::endl;
+                        }
+                    }
+                    else if(controller->repeatedObject == "coin")
+                    {
+                        controller->speedupFactor=3;
+                        // std::cout<<"z"<<std::endl;
+                        position -= front * abs(static_cast<float>(cos(2 * glm::pi<float>() * controller->currentTime * controller->speedupFactor)))*controller->speedupFactor;
+                        // controller->currentTime += 0.001f;
                         // std::cout << position.z << " " << controller->currentTime << std::endl;
                         if (position.z > 4.0f)
                         {

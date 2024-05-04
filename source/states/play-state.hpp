@@ -59,10 +59,10 @@ class Playstate: public our::State {
         // Get a reference to the keyboard object
         auto& keyboard = getApp()->getKeyboard();
 
-        if(keyboard.justPressed(GLFW_KEY_ESCAPE) || collisionController.update(&world,(float)deltaTime)==-1){
-            // If the escape  key is pressed in this frame, go to the play state
-            getApp()->changeState("menu");
-        }
+        // if(keyboard.justPressed(GLFW_KEY_ESCAPE) || collisionController.update(&world,(float)deltaTime)==-1){
+        //     // If the escape  key is pressed in this frame, go to the play state
+        //     getApp()->changeState("menu");
+        // }
     }
 
     void onDestroy() override {

@@ -42,7 +42,7 @@ int main(int argc, char** argv) {
     our::Application app(app_config);
     
     // Register all the states of the project in the application
-    app.registerState<Menustate>("menu");
+    // app.registerState<Menustate>("menu");
     app.registerState<Playstate>("play");
     app.registerState<ShaderTestState>("shader-test");
     app.registerState<MeshTestState>("mesh-test");
