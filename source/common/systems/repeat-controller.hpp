@@ -81,27 +81,26 @@ namespace our
                     if (controller->repeatedObject == "train")
                     {
                         // std::cout<<"z"<<std::endl;
-                        position -= front * abs(static_cast<float>(cos(2 * glm::pi<float>() * controller->currentTime * controller->speedupFactor)))*controller->speedupFactor;
-                        controller->currentTime += 0.001f;
+                        position -= front * abs(static_cast<float>(cos(2 * glm::pi<float>() * controller->currentTime * controller->speedupFactor))) * controller->speedupFactor;
                         // std::cout << position.z << " " << controller->currentTime << std::endl;
-                        if (position.z > 4.0f)
+                        if (position.z > (4.0f + cam_position.z))
                         {
+                            controller->currentTime += 0.001f;
                             position.z = -60.0f + cam_position.z;
                             controller->currentTime = 0.0f;
                             entity->hidden = false;
                             // std::cout << front.z << std::endl;
                         }
                     }
-                    else if(controller->repeatedObject == "coin")
+                    else if (controller->repeatedObject == "coin")
                     {
-                        controller->speedupFactor=3;
                         // std::cout<<"z"<<std::endl;
-                        position -= front * abs(static_cast<float>(cos(2 * glm::pi<float>() * controller->currentTime * controller->speedupFactor)))*controller->speedupFactor;
-                        // controller->currentTime += 0.001f;
+                        position -= front * abs(static_cast<float>(cos(2 * glm::pi<float>() * controller->currentTime * controller->speedupFactor))) * controller->speedupFactor;
+                        controller->currentTime += 0.001f;
                         // std::cout << position.z << " " << controller->currentTime << std::endl;
-                        if (position.z > 4.0f)
+                        if (position.z > (4.0f + cam_position.z))
                         {
-                            position.z = -40.0f + cam_position.z;
+                            position.z = -10.0f + cam_position.z;
                             controller->currentTime = 0.0f;
                             entity->hidden = false;
                             // std::cout << front.z << std::endl;
@@ -111,8 +110,7 @@ namespace our
                     {
 
                         // std::cout << position.z << " " << cam_position.z<< std::endl;
-                        position.z = controller->initialpos+cam_position.z;
-
+                        position.z = controller->initialpos + cam_position.z;
                     }
                 }
             }

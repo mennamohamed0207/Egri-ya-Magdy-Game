@@ -33,39 +33,52 @@ namespace our
                 return 'r';
             return 'm';
         }
-        bool checkCollision(Entity *objectComponent, Entity *playerComponent){
+        char getlevel(glm::vec3 position)
+        {
+            // set the level of the player
+            if (position.y >= 1.5)
+                return 't';
+            else
+                return 'f';
+            return 'f';
+        }
+        bool checkCollision(Entity *objectComponent, Entity *playerComponent)
+        {
             glm::vec3 playerPosition = playerComponent->localTransform.position;
             glm::vec3 objectPosition = objectComponent->localTransform.position;
-            RepeatControllerComponent *collidedObject = objectComponent->getComponent<RepeatControllerComponent>();
 
-            //case1: not on the same lane-->return false
-            if (getlane(playerPosition) != getlane(objectPosition)) 
+            // std::cout << getlane(playerPosition) << " " << getlane(objectPosition) << std::endl;
+            if (getlane(playerPosition) != getlane(objectPosition))
                 return false;
-
-            //case2: magdy is on the train and collided with a train-->return false
+            if (getlevel(playerPosition) != getlevel(objectPosition))
+                return false;
             FreePlayerControllerComponent *player = playerComponent->getComponent<FreePlayerControllerComponent>();
-            if (player && player->level == 't' &&collidedObject && collidedObject->repeatedObject == "train")
-                return false;
-            //case3: magdy collided with a coin anywhere
-            std::cout<<collidedObject->repeatedObject<<" "<<player->level<<" "<< objectPosition.y<<" "<<playerPosition.z<<" "<<objectPosition.z<<std::endl;
-            if(collidedObject && collidedObject->repeatedObject == "coin"
-            &&((player->level=='t' && objectPosition.y==1.7)||(player->level=='f' && objectPosition.y==0.7))
-            && playerPosition.z==objectPosition.z)
+            if (player && player->level == 't')
             {
-            std::cout<<"ana akalt coin"<<std::endl;
-            return true;
+                RepeatControllerComponent *obj = objectComponent->getComponent<RepeatControllerComponent>();
+                if (obj && obj->repeatedObject == "train")
+                    return false;
             }
 
-            
-            glm::vec3 frontFace =  objectPosition + objectComponent->size/2;
-            glm::vec3 backFace  = objectPosition - objectComponent->size/2;
-            //case4: magdy is on the floor and collided with a train-->return true
+            glm::vec3 frontFace = objectPosition + objectComponent->size / 2;
+            glm::vec3 backFace = objectPosition - objectComponent->size / 2;
+
+            if (objectComponent->name == "coin")
+            {
+                std::cout << playerPosition.z << " " << objectPosition.z << std::endl;
+                if (playerPosition.z <= (objectPosition.z + 0.05) && playerPosition.z >= objectPosition.z - 0.05)
+                {
+                    return true;
+                }
+                else
+                    return false;
+            }
+
             if (playerPosition.z <= frontFace.z && playerPosition.z >= backFace.z)
                 return true;
             else
                 return false;
         }
-
         int update(World *world, float deltaTime)
         {
             // iterate over all entities in the world and check for collisions with the player
