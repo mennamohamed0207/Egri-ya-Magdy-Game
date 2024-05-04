@@ -95,7 +95,17 @@ class Playstate: public our::State {
         }else if(collider==-1){
             hearts = hearts-1;
             if(hearts==0){
+                world.getEntityByName("heart1")->hidden = true;
+                world.getEntityByName("heart2")->hidden = true;
+                world.getEntityByName("heart3")->hidden = true;
                 getApp()->changeState("menu");
+            }else
+            if(hearts==1){
+                world.getEntityByName("heart2")->hidden = true;
+                world.getEntityByName("heart3")->hidden = true;
+
+            }else if(hearts==2){
+                world.getEntityByName("heart3")->hidden = true;
             }
         }
         

@@ -2177,27 +2177,28 @@
       },
       //////////////////Heart Component//////////////////////
       {
-        "position": [-3, 4, -1],
-        "rotation": [0, 0, 0],
-        "scale": [2, 2, 2],
-
+        "position": [-4.2, 1.4, -2],
+        "rotation": [0, 20, 0],
+        "scale": [1.2, 1.2, 1.2],
+        "name" : "heart1",
         "components": [
           {
             "type": "Mesh Renderer",
             "mesh": "heart",
             "material": "heart"
-          },{
+          },
+          {
             "type": "Repeat Controller",
             "repeatedObject": "floor",
             "initialpos": -3
-
           }
         ]
       },
       {
-        "position": [-2, 4, -1],
-        "rotation": [0, 0, 0],
-        "scale": [2, 2, 2],
+        "position": [-3.7, 1.4, -2],
+        "rotation": [0, 20, 0],
+        "scale": [1.2, 1.2, 1.2],
+        "name": "heart2",
 
         "components": [
           {
@@ -2213,9 +2214,10 @@
         ]
       },
       {
-        "position": [-1, 4, -1],
-        "rotation": [0, 0, 0],
-        "scale": [2, 2, 2],
+        "position": [-3.2, 1.4, -2],
+        "rotation": [0, 20, 0],
+        "scale": [1.2, 1.2, 1.2],
+        "name": "heart3",
 
         "components": [
           {
