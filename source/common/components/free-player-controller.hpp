@@ -9,7 +9,7 @@ namespace our {
 
     class FreePlayerControllerComponent : public Component {
     public:
-        float jumpVelocity = 5.0f; // Initial velocity of the jump
+        float jumpVelocity = 4.4f; // Initial velocity of the jump
         float gravity = 9.81f;     // Gravity pulling the player down
         bool isJumping = false;    // Track whether the player is currently jumping
         glm::vec3 currentVelocity = glm::vec3(0); // Current velocity including horizontal component

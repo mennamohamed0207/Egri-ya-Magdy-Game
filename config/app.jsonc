@@ -1769,8 +1769,8 @@
       //////////////////////////// Camera Component ////////////////////////////
       {
         "name": "camera",
-        "position": [0, 2.4, 0.5],
-        "rotation": [-45, 0, 0],
+        "position": [0, 2.5, 0.5],
+        "rotation": [-43, 0, 0],
         "components": [
           {
             "type": "Camera"
