@@ -91,7 +91,7 @@ namespace our
                 // Check if player has landed
                 if (position.y <= 0.8)
                 {
-                    position.y = 0.8;                  // Reset to ground level
+                    position.y = 1;                  // Reset to ground level
                     controller->isJumping = false;     // Stop jumping
                     controller->currentVelocity.y = 0; // Reset vertical velocity
                     controller->currentVelocity.x = 0; // Reset horizontal velocity

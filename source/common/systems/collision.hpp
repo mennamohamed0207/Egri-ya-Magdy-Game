@@ -47,25 +47,9 @@ namespace our
                 if (obj && obj->repeatedObject == "train")
                     return false;
             }
-            // glm::vec4 objectCenter = objectComponent->getLocalToWorldMatrix() * glm::vec4(objectComponent->localTransform.position, 1.0);
-            // glm::vec4 objectFront = objectCenter + glm::vec4(objectComponent->localTransform.scale, 0.0);
-            // glm::vec4 objectBack = objectCenter - glm::vec4(objectComponent->localTransform.scale, 0.0);
-
-            // if (playerPosition.z <= front.z && playerPosition.z >= back.z)
-            //     return true;
-            // else
-            //     return false;
-
-            // glm::mat4 matrix = objectComponent->localTransform.toMat4();
-            // glm::vec3 front = glm::vec3(matrix * glm::vec4(0, 0, 1, 0));
-            // glm::vec3 back = glm::vec3(matrix * glm::vec4(0, 0, -1, 0));
 
             glm::vec3 frontFace =  objectPosition + objectComponent->size/2;
             glm::vec3 backFace  = objectPosition - objectComponent->size/2;
-
-            if(objectComponent->name == "coin")
-                std::cout << frontFace.z << " " << backFace.z << " " << playerPosition.z << std::endl;
-
             if (playerPosition.z <= frontFace.z && playerPosition.z >= backFace.z)
                 return true;
             else
