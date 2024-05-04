@@ -10,6 +10,7 @@
 #include <systems/movement.hpp>
 #include <asset-loader.hpp>
 #include<systems/collision.hpp>
+#include <imgui.h>
 
 // This state shows how to use the ECS framework and deserialization.
 class Playstate: public our::State {
@@ -21,6 +22,9 @@ class Playstate: public our::State {
     our::RepeatControllerSystem repeatController;
     our::CollisionSystem collisionController;
     our::MovementSystem movementSystem;
+    
+    int score = 0;
+    int hearts = 3;
 
     void onInitialize() override {
         // First of all, we get the scene configuration from the app config
@@ -46,21 +50,69 @@ class Playstate: public our::State {
         renderer.initialize(size, config["renderer"]);
     }
 
+    void onImmediateGui() override
+    {
+        auto size = getApp()->getFrameBufferSize();
+
+        ImVec2 ScorePos(15, 30);
+        ImGui::SetNextWindowPos(ScorePos);
+        ImGui::SetNextWindowSize({1000,1000});
+
+        // Set the window background alpha to 0 (fully transparent)
+        ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0);
+        ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
+        ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0);
+        ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0, 0, 0, 0));
+
+        ImGui::Begin("Score", NULL,
+                     ImGuiWindowFlags_NoTitleBar |
+                         ImGuiWindowFlags_NoResize |
+                         ImGuiWindowFlags_NoMove |
+                         ImGuiWindowFlags_NoScrollbar |
+                         ImGuiWindowFlags_NoSavedSettings |
+                         ImGuiWindowFlags_NoInputs |
+                         ImGuiWindowFlags_AlwaysAutoResize);
+
+        // Set the text color to fully transparent
+        ImVec4 transparentColor(1.0f, 0.0f, 1.0f, 1.0f);
+        ImGui::TextColored(transparentColor, "SCORE: %d ", score);
+        ImGui::SetWindowFontScale(4.0f);
+
+        ImGui::End();
+
+        ImGui::PopStyleVar(3);  // Pop the style variables
+        ImGui::PopStyleColor(); // Pop the style color
+    }
+
     void onDraw(double deltaTime) override {
         // Here, we just run a bunch of systems to control the world logic
         movementSystem.update(&world, (float)deltaTime);
         cameraController.update(&world, (float)deltaTime);
         playerController.update(&world, (float)deltaTime);
-        collisionController.update(&world, (float)deltaTime);
+        int collider = collisionController.update(&world, (float)deltaTime);
+        if(collider==1){
+            score= score+10;
+        }else if(collider==-1){
+            hearts = hearts-1;
+            if(hearts==0){
+                getApp()->changeState("menu");
+            }
+        }
+        
         collisionController.UpdatePlayerHight(&world);
         // get current time
         repeatController.update(&world);
 
+        // ImGui::TextColored(ImVec4(1, 1, 0, 1), "Score: %d", 8);
+
+       
+
+
         // And finally we use the renderer system to draw the scene
         renderer.render(&world);
 
-        // Get a reference to the keyboard object
-        auto& keyboard = getApp()->getKeyboard();
+            // Get a reference to the keyboard object
+            auto &keyboard = getApp()->getKeyboard();
 
         if(keyboard.justPressed(GLFW_KEY_ESCAPE) || collisionController.update(&world,(float)deltaTime)==-1){
             // If the escape  key is pressed in this frame, go to the play state

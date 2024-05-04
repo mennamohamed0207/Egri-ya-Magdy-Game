@@ -81,7 +81,7 @@ namespace our
             for (const auto &entity : world->getEntities())
             {
                 // std::cout << entity->name << std::endl;
-                if (entity->name != "magdy" && checkCollision(entity, player))
+                if (entity->hidden==false && entity->name != "magdy" && checkCollision(entity, player))
                 {
                     // std::cout << "collision happened" << std::endl;
                     if (entity->name == "coin")
