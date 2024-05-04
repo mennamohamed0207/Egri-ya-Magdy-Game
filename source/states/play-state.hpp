@@ -52,7 +52,7 @@ class Playstate: public our::State {
         cameraController.update(&world, (float)deltaTime);
         playerController.update(&world, (float)deltaTime);
         collisionController.update(&world, (float)deltaTime);
-
+        collisionController.UpdatePlayerHight(&world);
         // get current time
         repeatController.update(&world);
 

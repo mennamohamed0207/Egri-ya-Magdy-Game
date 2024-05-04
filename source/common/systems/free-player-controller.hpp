@@ -75,6 +75,8 @@ namespace our
             // This could prevent floating point error if the player rotates in single direction for an extremely long time.
             rotation.y = glm::wrapAngle(rotation.y);
 
+
+
             // We get the camera model matrix (relative to its parent) to compute the front, up and right directions
             glm::mat4 matrix = playerEntity->localTransform.toMat4();
 
@@ -85,7 +87,8 @@ namespace our
             glm::vec3 current_sensitivity = controller->positionSensitivity;
 
             position -= front * (deltaTime * current_sensitivity.z);
-            cam_position -= front * (deltaTime * current_sensitivity.z);
+
+                cam_position -= front * (deltaTime * current_sensitivity.z);
             
             if (app->getKeyboard().isPressed(GLFW_KEY_SPACE) && !controller->isJumping)
             {

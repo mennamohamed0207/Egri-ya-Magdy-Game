@@ -3,7 +3,7 @@
 #include "../components/movement.hpp"
 #include "../components/mesh-renderer.hpp"
 #include "../application.hpp"
-
+#include "repeat-controller.hpp"
 #include <glm/glm.hpp>
 #include <glm/gtc/constants.hpp>
 #include <glm/trigonometric.hpp>
@@ -24,7 +24,14 @@ namespace our
         {
             this->player = player;
         }
-        char getlane(glm::vec3 position){
+        void setPlayerHight(float hight)
+        {
+            glm::vec3 &position = player->localTransform.position;
+            position.y = hight;
+        }
+
+        char getlane(glm::vec3 position)
+        {
             if (position.x >= -0.1 && position.x <= 0.1)
                 return 'm';
             else if (position.x < -0.8)
@@ -84,6 +91,16 @@ namespace our
                     }
                     else if (entity->name == "train")
                     {
+
+                        if (player->getComponent<FreePlayerControllerComponent>()->isJumping == true)
+                        {
+                            // std::cout<<"jumping"<<std::endl;
+                            player->getComponent<FreePlayerControllerComponent>()->isJumping = false;
+                            player->getComponent<FreePlayerControllerComponent>()->currentVelocity.y = 0;
+                            player->getComponent<FreePlayerControllerComponent>()->currentVelocity.x = 0;
+                            setPlayerHight(1.5);
+                            return 0;
+                        }
                         entity->hidden = true;
                         return -1;
                     }
@@ -91,5 +108,36 @@ namespace our
             }
             return 0;
         }
+        void UpdatePlayerHight(World *world)
+        {
+            if(player->getComponent<FreePlayerControllerComponent>()->isJumping == true) return;
+            std::cout << "UpdatePlayerHight" << std::endl;
+            bool isFalling = true;
+            for (const auto &entity : world->getEntities())
+            {
+                if (entity->name == "train" && !entity->hidden)
+                {
+                    glm::vec3 playerPosition = player->localTransform.position;
+                    glm::vec3 objectPosition = entity->localTransform.position;
+
+                    // std::cout << getlane(playerPosition) << " " << getlane(objectPosition) << std::endl;
+                    if (getlane(playerPosition) != getlane(objectPosition))
+                        continue;
+
+                    glm::vec3 frontFace = objectPosition + entity->size / 2;
+                    glm::vec3 backFace = objectPosition - entity->size / 2;
+
+                    if (playerPosition.z <= frontFace.z && playerPosition.z >= backFace.z)
+                    {
+                        std::cout << "is falling = false" << std::endl;
+                        // setPlayerHight(1);
+                        isFalling = false;
+                    }
+                }
+            }
+            if (isFalling)
+                setPlayerHight(1);
+        }
     };
+
 }
