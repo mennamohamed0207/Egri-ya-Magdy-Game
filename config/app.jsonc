@@ -1768,15 +1768,16 @@
       },
       //////////////////////////// Camera Component ////////////////////////////
       {
-        "position": [0, 2.2, 1.0],
-        "rotation": [0, 0, 0],
+        "name": "camera",
+        "position": [0, 2.4, 0.5],
+        "rotation": [-45, 0, 0],
         "components": [
           {
             "type": "Camera"
-          },
-          {
-            "type": "Free Camera Controller"
           }
+          // {
+          //   "type": "Free Camera Controller"
+          // }
         ]
       },
       //////////////////////////////  Floor  Components /////////////////////////////

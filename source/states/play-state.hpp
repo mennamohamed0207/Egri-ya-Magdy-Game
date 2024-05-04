@@ -36,9 +36,12 @@ class Playstate: public our::State {
         // We initialize the camera controller system since it needs a pointer to the app
         cameraController.enter(getApp());
         playerController.enter(getApp());
+        playerController.setPlayer(world.getEntityByName("magdy"));
+        playerController.setCamera(world.getEntityByName("camera"));
+
         repeatController.enter(getApp());
         // Then we initialize the renderer
-        collisionController.setPlayer(world.getPlayer());
+        collisionController.setPlayer(world.getEntityByName("magdy"));
         auto size = getApp()->getFrameBufferSize();
         renderer.initialize(size, config["renderer"]);
     }

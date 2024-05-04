@@ -21,7 +21,11 @@ namespace our
     class FreePLayerControllerSystem
     {
         Application *app;           // The application in which the state runs
-        bool mouse_locked = false;  // Is the mouse locked
+        Entity *playerEntity;
+        Entity *cameraEntity;
+        CameraComponent *camera ;
+        FreePlayerControllerComponent *controller;
+        bool mouse_locked = false; // Is the mouse locked
         float jumpStrength = 10.0f; // Strength of the jump impulse
         bool isOnGround = true;     // This should be updated based on collision detection with the ground
         bool isRightKeyPressed = false;
@@ -32,6 +36,18 @@ namespace our
         void enter(Application *app)
         {
             this->app = app;
+
+        }
+        void setPlayer(Entity *player)
+        {
+            this->playerEntity = player;
+            this->controller = playerEntity->getComponent<FreePlayerControllerComponent>();
+        }
+
+        void setCamera(Entity *camera)
+        {
+            this->cameraEntity = camera;
+            this->cameraEntity->getComponent<CameraComponent>();
         }
 
         // This should be called every frame to update all entities containing a FreeCameraControllerComponent
@@ -39,23 +55,16 @@ namespace our
         {
             // First of all, we search for an entity containing both a CameraComponent and a FreeCameraControllerComponent
             // As soon as we find one, we break
-            CameraComponent *camera = nullptr;
-            FreePlayerControllerComponent *controller = nullptr;
-            for (auto entity : world->getEntities())
-            {
-                camera = entity->getComponent<CameraComponent>();
-                controller = entity->getComponent<FreePlayerControllerComponent>();
-                if (controller)
-                    break;
-            }
-            if (!(controller))
-                return;
+                    
+    
             // Get the entity that we found via getOwner of camera (we could use controller->getOwner())
-            Entity *entity = controller->getOwner();
-
+            controller = playerEntity->getComponent<FreePlayerControllerComponent>();
+        
             // We get a reference to the entity's position and rotation
-            glm::vec3 &position = entity->localTransform.position;
-            glm::vec3 &rotation = entity->localTransform.rotation;
+            glm::vec3 &position = playerEntity->localTransform.position;
+            glm::vec3 &rotation = playerEntity->localTransform.rotation;
+
+            glm::vec3 &cam_position = cameraEntity->localTransform.position;
 
             // We prevent the pitch from exceeding a certain angle from the XZ plane to prevent gimbal locks
             if (rotation.x < -glm::half_pi<float>() * 0.99f)
@@ -67,7 +76,7 @@ namespace our
             rotation.y = glm::wrapAngle(rotation.y);
 
             // We get the camera model matrix (relative to its parent) to compute the front, up and right directions
-            glm::mat4 matrix = entity->localTransform.toMat4();
+            glm::mat4 matrix = playerEntity->localTransform.toMat4();
 
             glm::vec3 front = glm::vec3(matrix * glm::vec4(0, 0, -1, 0)),
                       up = glm::vec3(matrix * glm::vec4(0, 1, 0, 0)),
@@ -76,6 +85,8 @@ namespace our
             glm::vec3 current_sensitivity = controller->positionSensitivity;
 
             position -= front * (deltaTime * current_sensitivity.z);
+            cam_position -= front * (deltaTime * current_sensitivity.z);
+            
             if (app->getKeyboard().isPressed(GLFW_KEY_SPACE) && !controller->isJumping)
             {
                 controller->isJumping = true;                             // The player starts jumping

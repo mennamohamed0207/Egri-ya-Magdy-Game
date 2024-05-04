@@ -2,15 +2,12 @@
 #include "../components/free-player-controller.hpp"
 namespace our
 {
-    Entity* World::getPlayer()
+    Entity *World::getEntityByName(std::string name)
     {
         Entity * player=nullptr;
          for (auto entity : getEntities())
             {
-                if(entity->name == "magdy") return entity;
-                // player = entity->getComponent<FreePlayerControllerComponent>();
-                // if (player)
-                //     break;
+                if(entity->name == name) return entity;
             }
             return nullptr;
     }
