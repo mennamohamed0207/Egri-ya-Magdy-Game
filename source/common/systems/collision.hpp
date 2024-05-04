@@ -36,20 +36,30 @@ namespace our
         bool checkCollision(Entity *objectComponent, Entity *playerComponent){
             glm::vec3 playerPosition = playerComponent->localTransform.position;
             glm::vec3 objectPosition = objectComponent->localTransform.position;
+            RepeatControllerComponent *collidedObject = objectComponent->getComponent<RepeatControllerComponent>();
 
-            // std::cout << getlane(playerPosition) << " " << getlane(objectPosition) << std::endl;
-            if (getlane(playerPosition) != getlane(objectPosition))
+            //case1: not on the same lane-->return false
+            if (getlane(playerPosition) != getlane(objectPosition)) 
                 return false;
+
+            //case2: magdy is on the train and collided with a train-->return false
             FreePlayerControllerComponent *player = playerComponent->getComponent<FreePlayerControllerComponent>();
-            if (player && player->level == 't')
+            if (player && player->level == 't' &&collidedObject && collidedObject->repeatedObject == "train")
+                return false;
+            //case3: magdy collided with a coin anywhere
+            std::cout<<collidedObject->repeatedObject<<" "<<player->level<<" "<< objectPosition.y<<" "<<playerPosition.z<<" "<<objectPosition.z<<std::endl;
+            if(collidedObject && collidedObject->repeatedObject == "coin"
+            &&((player->level=='t' && objectPosition.y==1.7)||(player->level=='f' && objectPosition.y==0.7))
+            && playerPosition.z==objectPosition.z)
             {
-                RepeatControllerComponent *obj = objectComponent->getComponent<RepeatControllerComponent>();
-                if (obj && obj->repeatedObject == "train")
-                    return false;
+            std::cout<<"ana akalt coin"<<std::endl;
+            return true;
             }
 
+            
             glm::vec3 frontFace =  objectPosition + objectComponent->size/2;
             glm::vec3 backFace  = objectPosition - objectComponent->size/2;
+            //case4: magdy is on the floor and collided with a train-->return true
             if (playerPosition.z <= frontFace.z && playerPosition.z >= backFace.z)
                 return true;
             else
@@ -64,7 +74,7 @@ namespace our
                 // std::cout << entity->name << std::endl;
                 if (entity->name != "magdy" && checkCollision(entity, player))
                 {
-                    std::cout << "collision happened" << std::endl;
+                    // std::cout << "collision happened" << std::endl;
                     if (entity->name == "coin")
                     {
                         entity->hidden = true;

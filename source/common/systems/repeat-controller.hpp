@@ -101,7 +101,7 @@ namespace our
                         // std::cout << position.z << " " << controller->currentTime << std::endl;
                         if (position.z > 4.0f)
                         {
-                            position.z = -60.0f + cam_position.z;
+                            position.z = -40.0f + cam_position.z;
                             controller->currentTime = 0.0f;
                             entity->hidden = false;
                             // std::cout << front.z << std::endl;
