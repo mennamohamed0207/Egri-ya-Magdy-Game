@@ -104,6 +104,11 @@ namespace our
                         entity->hidden = true;
                         return -1;
                     }
+                    else if (entity->name == "star"){
+                        
+                        entity->hidden = true;
+                        return 2;
+                    }
                 }
             }
             return 0;

@@ -25,6 +25,8 @@ class Playstate: public our::State {
     
     int score = 0;
     int hearts = 3;
+    bool increaseSpeedEffect = false;
+    double time = 0.0;
 
     void onInitialize() override {
         // First of all, we get the scene configuration from the app config
@@ -107,7 +109,11 @@ class Playstate: public our::State {
             }else if(hearts==2){
                 world.getEntityByName("heart3")->hidden = true;
             }
+        }else if(collider==2){
+           increaseSpeedEffect = true;
+           time = glfwGetTime();
         }
+
         
         collisionController.UpdatePlayerHight(&world);
         // get current time
@@ -115,14 +121,16 @@ class Playstate: public our::State {
 
         // ImGui::TextColored(ImVec4(1, 1, 0, 1), "Score: %d", 8);
 
-       
-
+        if(increaseSpeedEffect && glfwGetTime() - time > 2.0){
+            increaseSpeedEffect = false;
+            time = 0.0;
+        }
 
         // And finally we use the renderer system to draw the scene
-        renderer.render(&world);
+        renderer.render(&world, increaseSpeedEffect);
 
-            // Get a reference to the keyboard object
-            auto &keyboard = getApp()->getKeyboard();
+        // Get a reference to the keyboard object
+        auto &keyboard = getApp()->getKeyboard();
 
         if(keyboard.justPressed(GLFW_KEY_ESCAPE) ){
             // If the escape  key is pressed in this frame, go to the play state

@@ -139,10 +139,15 @@ namespace our
         }
     }
 
-    void ForwardRenderer::render(World *world)
+    void ForwardRenderer::render(World *world,bool increaseSpeedEffect)
     {
-        // First of all, we search for a camera and for all the mesh renderers
-        CameraComponent *camera = nullptr;
+
+        // if (increaseSpeedEffect)
+        //     postprocessShader->attach(config.value<std::string>("increaseSpeed", ""), GL_FRAGMENT_SHADER);
+        // else 
+        //     postprocessShader->attach(config.value<std::string>("postprocess", ""), GL_FRAGMENT_SHADER);
+            // First of all, we search for a camera and for all the mesh renderers
+            CameraComponent *camera = nullptr;
         opaqueCommands.clear();
         transparentCommands.clear();
         for (auto entity : world->getEntities())
@@ -216,6 +221,7 @@ namespace our
             // TODO: (Req 11) bind the framebuffer
             glBindFramebuffer(GL_DRAW_FRAMEBUFFER,postprocessFrameBuffer);
 
+
         }
 
         // TODO: (Req 9) Clear the color and depth buffers
@@ -280,6 +286,23 @@ namespace our
         if (postprocessMaterial)
         {
             // TODO: (Req 11) Return to the default framebuffer
+
+            ShaderProgram *postprocessShader = new ShaderProgram();
+            // attach the vertex shader
+            postprocessShader->attach("assets/shaders/fullscreen.vert", GL_VERTEX_SHADER);
+
+            // attach the fragment shader based on the effect type (fish eye or blur or power up or radial blur or vignette)
+            if (increaseSpeedEffect)
+                postprocessShader->attach("assets/shaders/postprocess/radial-blur.frag", GL_FRAGMENT_SHADER);
+                       else
+                postprocessShader->attach("assets/shaders/postprocess/vignette.frag", GL_FRAGMENT_SHADER);
+
+            // link the shader program
+            postprocessShader->link();
+
+            // create a postprocess material for the postprocess shader
+            postprocessMaterial->shader = postprocessShader;
+
             glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0); //unbind our frame buffer to return to the default one
             // TODO: (Req 11) Setup the postprocess material and draw the fullscreen triangle
             postprocessMaterial->setup();
