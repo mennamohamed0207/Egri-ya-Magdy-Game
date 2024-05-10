@@ -139,7 +139,7 @@ namespace our
         }
     }
 
-    void ForwardRenderer::render(World *world,bool increaseSpeedEffect)
+    void ForwardRenderer::render(World *world,bool increaseSpeedEffect,bool collisionEffect)
     {
 
             // First of all, we search for a camera and for all the mesh renderers
@@ -290,7 +290,9 @@ namespace our
             // attach the fragment shader based on the effect type (fish eye or blur or power up or radial blur or vignette)
             if (increaseSpeedEffect)
                 postprocessShader->attach("assets/shaders/postprocess/radial-blur.frag", GL_FRAGMENT_SHADER);
-                       else
+            else if (collisionEffect)
+                postprocessShader->attach("assets/shaders/postprocess/chromatic-aberration.frag", GL_FRAGMENT_SHADER);
+            else
                 postprocessShader->attach("assets/shaders/postprocess/vignette.frag", GL_FRAGMENT_SHADER);
 
             // link the shader program

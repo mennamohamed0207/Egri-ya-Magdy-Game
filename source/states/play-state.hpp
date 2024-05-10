@@ -26,6 +26,7 @@ class Playstate: public our::State {
     int score = 0;
     int hearts = 3;
     bool increaseSpeedEffect = false;
+    bool collisionEffect = false;
     double time = 0.0;
 
     void onInitialize() override {
@@ -95,6 +96,11 @@ class Playstate: public our::State {
         if(collider==1){
             score= score+10;
         }else if(collider==-1){
+            
+            // postprocessing effect
+            collisionEffect = true;
+            time = glfwGetTime();
+
             hearts = hearts-1;
             if(hearts==0){
                 world.getEntityByName("heart1")->hidden = true;
@@ -109,11 +115,11 @@ class Playstate: public our::State {
             }else if(hearts==2){
                 world.getEntityByName("heart3")->hidden = true;
             }
+            
         }else if(collider==2){
            increaseSpeedEffect = true;
            time = glfwGetTime();
             repeatController.setSpeedupFactor(1.0);
-
         }
 
         
@@ -121,7 +127,6 @@ class Playstate: public our::State {
         // get current time
         repeatController.update(&world);
 
-        // ImGui::TextColored(ImVec4(1, 1, 0, 1), "Score: %d", 8);
 
         if(increaseSpeedEffect && glfwGetTime() - time > 2.0){
             increaseSpeedEffect = false;
@@ -129,8 +134,16 @@ class Playstate: public our::State {
             repeatController.setSpeedupFactor(0.1);
         }
 
+        if (collisionEffect && glfwGetTime() - time > 0.1)
+        {
+            collisionEffect = false;
+            increaseSpeedEffect = false;
+            time = 0.0;
+            repeatController.setSpeedupFactor(0.1);
+        }
+
         // And finally we use the renderer system to draw the scene
-        renderer.render(&world, increaseSpeedEffect);
+        renderer.render(&world, increaseSpeedEffect, collisionEffect);
 
         // Get a reference to the keyboard object
         auto &keyboard = getApp()->getKeyboard();
