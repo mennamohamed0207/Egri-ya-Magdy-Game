@@ -139,10 +139,11 @@ namespace our
         }
     }
 
-    void ForwardRenderer::render(World *world)
+    void ForwardRenderer::render(World *world,bool increaseSpeedEffect,bool collisionEffect)
     {
-        // First of all, we search for a camera and for all the mesh renderers
-        CameraComponent *camera = nullptr;
+
+            // First of all, we search for a camera and for all the mesh renderers
+            CameraComponent *camera = nullptr;
         opaqueCommands.clear();
         transparentCommands.clear();
         for (auto entity : world->getEntities())
@@ -150,6 +151,7 @@ namespace our
             // If we hadn't found a camera yet, we look for a camera in this entity
             if (!camera)
                 camera = entity->getComponent<CameraComponent>();
+            if(entity->hidden) continue;
 
             // If this entity has a mesh renderer component
             if (auto meshRenderer = entity->getComponent<MeshRendererComponent>(); meshRenderer)
@@ -219,6 +221,7 @@ namespace our
         {
             // TODO: (Req 11) bind the framebuffer
             glBindFramebuffer(GL_DRAW_FRAMEBUFFER,postprocessFrameBuffer);
+
 
         }
 
@@ -315,6 +318,25 @@ namespace our
         if (postprocessMaterial)
         {
             // TODO: (Req 11) Return to the default framebuffer
+
+            ShaderProgram *postprocessShader = new ShaderProgram();
+            // attach the vertex shader
+            postprocessShader->attach("assets/shaders/fullscreen.vert", GL_VERTEX_SHADER);
+
+            // attach the fragment shader based on the effect type (fish eye or blur or power up or radial blur or vignette)
+            if (increaseSpeedEffect)
+                postprocessShader->attach("assets/shaders/postprocess/radial-blur.frag", GL_FRAGMENT_SHADER);
+            else if (collisionEffect)
+                postprocessShader->attach("assets/shaders/postprocess/chromatic-aberration.frag", GL_FRAGMENT_SHADER);
+            else
+                postprocessShader->attach("assets/shaders/postprocess/vignette.frag", GL_FRAGMENT_SHADER);
+
+            // link the shader program
+            postprocessShader->link();
+
+            // create a postprocess material for the postprocess shader
+            postprocessMaterial->shader = postprocessShader;
+
             glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0); //unbind our frame buffer to return to the default one
             // TODO: (Req 11) Setup the postprocess material and draw the fullscreen triangle
             postprocessMaterial->setup();
