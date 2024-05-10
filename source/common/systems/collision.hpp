@@ -105,9 +105,11 @@ namespace our
                         return -1;
                     }
                     else if (entity->name == "star"){
-                        
                         entity->hidden = true;
                         return 2;
+                    }else if (entity->name == "heart"){
+                        entity->hidden = true;
+                        return 3;
                     }
                 }
             }

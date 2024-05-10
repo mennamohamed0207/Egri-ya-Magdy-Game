@@ -30,6 +30,12 @@ class Playstate: public our::State {
     double time = 0.0;
 
     void onInitialize() override {
+        score = 0;
+        hearts = 3;
+        increaseSpeedEffect = false;
+        collisionEffect = false;
+        time = 0.0;
+        
         // First of all, we get the scene configuration from the app config
         auto& config = getApp()->getConfig()["scene"];
         // If we have assets in the scene config, we deserialize them
@@ -51,6 +57,7 @@ class Playstate: public our::State {
         collisionController.setPlayer(world.getEntityByName("magdy"));
         auto size = getApp()->getFrameBufferSize();
         renderer.initialize(size, config["renderer"]);
+
     }
 
     void onImmediateGui() override
@@ -87,6 +94,30 @@ class Playstate: public our::State {
         ImGui::PopStyleColor(); // Pop the style color
     }
 
+    void drawHearts(){
+        if(hearts==0){
+                world.getEntityByName("heart1")->hidden = true;
+                world.getEntityByName("heart2")->hidden = true;
+                world.getEntityByName("heart3")->hidden = true;
+                getApp()->changeState("GameOver");
+            }else
+            if(hearts==1){
+                world.getEntityByName("heart1")->hidden = false;
+                world.getEntityByName("heart2")->hidden = true;
+                world.getEntityByName("heart3")->hidden = true;
+            }else if(hearts==2){
+                world.getEntityByName("heart1")->hidden = false;
+                world.getEntityByName("heart2")->hidden = false;
+                world.getEntityByName("heart3")->hidden = true;
+            }
+            else if (hearts==3){
+                world.getEntityByName("heart1")->hidden = false;
+                world.getEntityByName("heart2")->hidden = false;
+                world.getEntityByName("heart3")->hidden = false;
+            }
+            
+
+    }
     void onDraw(double deltaTime) override {
         // Here, we just run a bunch of systems to control the world logic
         movementSystem.update(&world, (float)deltaTime);
@@ -101,25 +132,18 @@ class Playstate: public our::State {
             collisionEffect = true;
             time = glfwGetTime();
 
-            hearts = hearts-1;
-            if(hearts==0){
-                world.getEntityByName("heart1")->hidden = true;
-                world.getEntityByName("heart2")->hidden = true;
-                world.getEntityByName("heart3")->hidden = true;
-                getApp()->changeState("GameOver");
-            }else
-            if(hearts==1){
-                world.getEntityByName("heart2")->hidden = true;
-                world.getEntityByName("heart3")->hidden = true;
-
-            }else if(hearts==2){
-                world.getEntityByName("heart3")->hidden = true;
-            }
+            hearts--;
+            drawHearts();
             
         }else if(collider==2){
            increaseSpeedEffect = true;
            time = glfwGetTime();
             repeatController.setSpeedupFactor(1.0);
+        }else if(collider==3){
+            if (hearts < 3){
+                hearts++;
+                drawHearts();
+            }
         }
 
         

@@ -95,7 +95,7 @@ namespace our
                             // std::cout << front.z << std::endl;
                         }
                     }
-                    else if (controller->repeatedObject == "coin" || controller->repeatedObject == "star")
+                    else if (controller->repeatedObject == "coin" || controller->repeatedObject == "star" || controller->repeatedObject == "heart")
                     {
                         // std::cout<<"z"<<std::endl;
                         position -= front * abs(static_cast<float>(cos(2 * glm::pi<float>() * controller->currentTime * speedupFactor))) * speedupFactor;
