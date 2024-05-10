@@ -112,6 +112,8 @@ class Playstate: public our::State {
         }else if(collider==2){
            increaseSpeedEffect = true;
            time = glfwGetTime();
+            repeatController.setSpeedupFactor(1.0);
+
         }
 
         
@@ -124,6 +126,7 @@ class Playstate: public our::State {
         if(increaseSpeedEffect && glfwGetTime() - time > 2.0){
             increaseSpeedEffect = false;
             time = 0.0;
+            repeatController.setSpeedupFactor(0.1);
         }
 
         // And finally we use the renderer system to draw the scene

@@ -142,10 +142,6 @@ namespace our
     void ForwardRenderer::render(World *world,bool increaseSpeedEffect)
     {
 
-        // if (increaseSpeedEffect)
-        //     postprocessShader->attach(config.value<std::string>("increaseSpeed", ""), GL_FRAGMENT_SHADER);
-        // else 
-        //     postprocessShader->attach(config.value<std::string>("postprocess", ""), GL_FRAGMENT_SHADER);
             // First of all, we search for a camera and for all the mesh renderers
             CameraComponent *camera = nullptr;
         opaqueCommands.clear();

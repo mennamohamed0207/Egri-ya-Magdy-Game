@@ -23,7 +23,7 @@ namespace our
     {
         Application *app;          // The application in which the state runs
         bool mouse_locked = false; // Is the mouse locked
-
+        float speedupFactor = 0.1f;
     public:
         // When a state enters, it should call this function and give it the pointer to the application
         void enter(Application *app)
@@ -31,6 +31,9 @@ namespace our
             this->app = app;
         }
 
+        void setSpeedupFactor(float speedupFactor){
+            this->speedupFactor= speedupFactor;
+        }
         // This should be called every frame to update all entities containing a FreeCameraControllerComponent
         void update(World *world)
         {
@@ -81,7 +84,7 @@ namespace our
                     if (controller->repeatedObject == "train")
                     {
                         // std::cout<<"z"<<std::endl;
-                        position -= front * abs(static_cast<float>(cos(2 * glm::pi<float>() * controller->currentTime * controller->speedupFactor))) * controller->speedupFactor;
+                        position -= front * abs(static_cast<float>(cos(2 * glm::pi<float>() * controller->currentTime * speedupFactor))) * speedupFactor;
                         // std::cout << position.z << " " << controller->currentTime << std::endl;
                         if (position.z > (4.0f + cam_position.z))
                         {
@@ -95,7 +98,7 @@ namespace our
                     else if (controller->repeatedObject == "coin" || controller->repeatedObject == "star")
                     {
                         // std::cout<<"z"<<std::endl;
-                        position -= front * abs(static_cast<float>(cos(2 * glm::pi<float>() * controller->currentTime * controller->speedupFactor))) * controller->speedupFactor;
+                        position -= front * abs(static_cast<float>(cos(2 * glm::pi<float>() * controller->currentTime * speedupFactor))) * speedupFactor;
                         controller->currentTime += 0.001f;
                         // std::cout << position.z << " " << controller->currentTime << std::endl;
                         if (position.z > (4.0f + cam_position.z))

@@ -116,7 +116,7 @@ namespace our
         void UpdatePlayerHight(World *world)
         {
             if(player->getComponent<FreePlayerControllerComponent>()->isJumping == true) return;
-            std::cout << "UpdatePlayerHight" << std::endl;
+            // std::cout << "UpdatePlayerHight" << std::endl;
             bool isFalling = true;
             for (const auto &entity : world->getEntities())
             {
@@ -134,7 +134,7 @@ namespace our
 
                     if (playerPosition.z <= frontFace.z && playerPosition.z >= backFace.z)
                     {
-                        std::cout << "is falling = false" << std::endl;
+                        // std::cout << "is falling = false" << std::endl;
                         // setPlayerHight(1);
                         isFalling = false;
                     }
