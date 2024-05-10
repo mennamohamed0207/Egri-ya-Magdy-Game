@@ -1,6 +1,5 @@
 # Blender 4.1.1
 # www.blender.org
-mtllib train.mtl
 o Subway_Car
 v 0.512414 0.798309 2.693985
 v 0.512551 0.788087 3.049840
