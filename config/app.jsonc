@@ -277,8 +277,8 @@
           "ambient_occlusion": "metro"
         },
         "railway": {
-          "type": "textured",
-          "shader": "floor",
+          "type": "light",
+          "shader": "light",
           "pipelineState": {
             "faceCulling": {
               "enabled": false
@@ -289,7 +289,12 @@
           },
           "tint": [1, 1, 1, 1],
           "texture": "railway",
-          "sampler": "default"
+          "sampler": "default",
+          "albedo": "railway",
+          "specular": "white",
+          "roughness": "railway",
+          "emissive": "metro",
+          "ambient_occlusion": "railway"
         },
 
         "moon": {
@@ -334,11 +339,11 @@
          {
                 "type": "Lighting",
                 "lightType": 2,
-                "color": [0.0, 1.0, 0.0],
-                "attenuation": [0.95, 0.95, 0.95],
+                "color": [1.0, 1.0, 1.0],
+                "attenuation": [0.095, 0.095, 0.095],
                 "position": [0, 1.5, -0],
-                "direction": [1, 0.0, 0.0],
-                "cone_angles": [9, 10]
+                "direction": [0.0, 0.0, -1.0],
+                "cone_angles": [0.4, 0.9]
               }
         ]
         // "children": [
