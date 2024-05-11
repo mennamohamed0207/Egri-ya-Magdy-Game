@@ -23,7 +23,7 @@ namespace our
     {
         Application *app;          // The application in which the state runs
         bool mouse_locked = false; // Is the mouse locked
-        float speedupFactor = 0.1f;
+        float speedupFactor = 0.3f;
     public:
         // When a state enters, it should call this function and give it the pointer to the application
         void enter(Application *app)

@@ -160,6 +160,10 @@ namespace our
             {
                 isLeftKeyPressed = false;
             }
+            // Update position of inspector
+            glm::vec3 &ins_position = inspectorEntity->localTransform.position;
+            ins_position = position;
+            ins_position.z += 0.5;
         }
         // When the state exits, it should call this function to ensure the mouse is unlocked
         void
