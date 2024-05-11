@@ -343,7 +343,7 @@ namespace our
             if (increaseSpeedEffect)
                 postprocessShader->attach("assets/shaders/postprocess/radial-blur.frag", GL_FRAGMENT_SHADER);
             else if (collisionEffect)
-                postprocessShader->attach("assets/shaders/postprocess/chromatic-aberration.frag", GL_FRAGMENT_SHADER);
+                postprocessShader->attach("assets/shaders/postprocess/collision.frag", GL_FRAGMENT_SHADER);
             else
                 postprocessShader->attach("assets/shaders/postprocess/vignette.frag", GL_FRAGMENT_SHADER);
 
