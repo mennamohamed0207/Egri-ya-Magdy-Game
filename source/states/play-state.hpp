@@ -58,6 +58,8 @@ class Playstate: public our::State {
         inspector = world.getEntityByName("dog");
         camera = world.getEntityByName("camera");
 
+        inspector->hidden = true;
+
         cameraController.enter(getApp());
         playerController.enter(getApp());
         playerController.setPlayer(player, inspector);
