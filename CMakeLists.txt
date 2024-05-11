@@ -108,6 +108,7 @@ include_directories(
         vendor/imgui
         vendor/utils
         vendor/miniaudio
+        vendor/stb-master
 )
 
 

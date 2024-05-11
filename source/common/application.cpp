@@ -12,6 +12,7 @@
 #define MINIAUDIO_IMPLEMENTATION
 #include<miniaudio.h>
 #include <flags/flags.h>
+#include "stb_image.h"
 
 // Include the Dear ImGui implementation headers
 #define IMGUI_IMPL_OPENGL_LOADER_GLAD2
@@ -150,6 +151,27 @@ our::WindowConfiguration our::Application::getWindowConfiguration() {
 // This is the main class function that run the whole application (Initialize, Game loop, House cleaning).
 // run_for_frames decides how many frames should be run before the application automatically closes.
 // if run_for_frames == 0, the application runs indefinitely till manually closed.
+
+void setWindowIcon(GLFWwindow *window, const char *imagePath)
+{
+    int width, height, channels;
+    unsigned char *imageData = stbi_load(imagePath, &width, &height, &channels, 4); // Force RGBA format
+
+    if (imageData == NULL)
+    {
+        fprintf(stderr, "Failed to load image: %s\n", imagePath);
+        return;
+    }
+
+    GLFWimage icon;
+    icon.width = width;
+    icon.height = height;
+    icon.pixels = imageData; // Note: GLFW will use this data without copying it
+
+    glfwSetWindowIcon(window, 1, &icon);
+    stbi_image_free(imageData); // Free image data after setting the icon
+}
+
 int our::Application::run(int run_for_frames) {
 
     // Set the function to call when an error occurs.
@@ -175,7 +197,9 @@ int our::Application::run(int run_for_frames) {
         glfwTerminate();
         return -1;
     }
-    glfwMakeContextCurrent(window);         // Tell GLFW to make the context of our window the main context on the current thread.
+    // Set window icon
+    setWindowIcon(window, "assets/icons/Magdy.jpeg");
+    glfwMakeContextCurrent(window); // Tell GLFW to make the context of our window the main context on the current thread.
 
     gladLoadGL(glfwGetProcAddress);         // Load the OpenGL functions from the driver
 
