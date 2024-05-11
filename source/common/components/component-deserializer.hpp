@@ -5,6 +5,7 @@
 #include "mesh-renderer.hpp"
 #include "free-camera-controller.hpp"
 #include "free-player-controller.hpp"
+#include "free-inspector-controller.hpp"
 #include "repeat-controller.hpp"
 #include "collider.hpp"
 #include "movement.hpp"
@@ -39,6 +40,10 @@ namespace our {
             component = entity->addComponent<RepeatControllerComponent>();
         }else if(type == CollisionComponent::getID()){
             component = entity->addComponent<CollisionComponent>();
+        }
+        else if (type == FreeInspectorControllerComponent::getID())
+        {
+            component = entity->addComponent<FreeInspectorControllerComponent>();
         }
         if(component) component->deserialize(data);
     }

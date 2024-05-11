@@ -77,6 +77,8 @@ set(COMMON_SOURCES
         source/common/components/free-camera-controller.cpp
         source/common/components/free-player-controller.hpp
         source/common/components/free-player-controller.cpp
+        source/common/components/free-inspector-controller.hpp
+        source/common/components/free-inspector-controller.cpp
         source/common/components/repeat-controller.hpp
         source/common/components/repeat-controller.cpp
         source/common/components/collider.hpp

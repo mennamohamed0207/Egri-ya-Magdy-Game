@@ -49,6 +49,7 @@
         "metro": "assets/textures/train.png",
         "heart": "assets/textures/red.jpg",
         "magdy": "assets/textures/magdy.png",
+        "dog": "assets/textures/dog.png",
         "walls": "assets/textures/walls.jpeg",
         "trainRail": "assets/textures/blue.png",
         "coin": "assets/textures/coin.jpg",
@@ -59,6 +60,7 @@
         "monkey": "assets/models/monkey.obj",
         "metro": "assets/models/train.obj",
         "magdy": "assets/models/magdy.obj",
+        "dog": "assets/models/dog.obj",
         "heart": "assets/models/heart.obj",
         "coin": "assets/models/coin.obj",
         "walls": "assets/models/walls.obj",
@@ -179,6 +181,21 @@
           // "roughness": "roughness",
           // "emissive": "white",
           // "ambient_occlusion": "magdy"
+        },
+        "dog": {
+          "type": "textured",
+          "shader": "textured",
+          "pipelineState": {
+            "faceCulling": {
+              "enabled": false
+            },
+            "depthTesting": {
+              "enabled": true
+            }
+          },
+          "tint": [1, 1, 1, 1],
+          "texture": "dog",
+          "sampler": "default"
         },
         "heart": {
           "type": "textured",
@@ -336,32 +353,36 @@
             "linearVelocity": [0, 0, 0],
             "angularVelocity": [0, 0, 0]
           },
-         {
-                "type": "Lighting",
-                "lightType": 2,
-                "color": [1.0, 1.0, 1.0],
-                "attenuation": [0.095, 0.095, 0.095],
-                "position": [0, 1.5, -0],
-                "direction": [0.0, 0.0, -1.0],
-                "cone_angles": [0.4, 0.9]
-              }
+          {
+            "type": "Lighting",
+            "lightType": 2,
+            "color": [1.0, 1.0, 1.0],
+            "attenuation": [0.095, 0.095, 0.095],
+            "position": [0, 1.5, -0],
+            "direction": [0.0, 0.0, -1.0],
+            "cone_angles": [0.4, 0.9]
+          }
         ]
-        // "children": [
-        //   {
-        //     "components": [
-        //       {
-        //         "type": "Lighting",
-        //         "lightType": 2,
-        //         "color": [0.0, 1.0, 0.0],
-        //         "attenuation": [0.095, 0.095, 0.095],
-        //         "position": [0, 1.5, -0],
-        //         "direction": [0, 0.0, -1.0],
-        //         "cone_angles": [20, 50]
-        //       }
-        //     ]
-        //   }
-        // ]
       },
+  {
+        "position": [0, 1.5, 0],
+        "rotation": [0, 180, 0],
+        "scale": [0.05, 0.05, 0.05],
+        "name": "dog",
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "dog",
+            "material": "dog"
+          },
+          {
+            "type": "Free Inspector Controller",
+            "linearVelocity": [0, 0, 0],
+            "angularVelocity": [0, 0, 0]
+          }
+        ]
+      },
+  
       ////////////////////////// coin component col 1 on train////////////////////////
       {
         "position": [0, 1.7, 0],

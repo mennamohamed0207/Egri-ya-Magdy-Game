@@ -7,6 +7,7 @@
 #include <systems/free-camera-controller.hpp>
 #include <systems/free-player-controller.hpp>
 #include <systems/repeat-controller.hpp>
+#include <ecs/entity.hpp>
 #include <systems/movement.hpp>
 #include <asset-loader.hpp>
 #include<systems/collision.hpp>
@@ -22,12 +23,18 @@ class Playstate: public our::State {
     our::RepeatControllerSystem repeatController;
     our::CollisionSystem collisionController;
     our::MovementSystem movementSystem;
-    
+
+    our::Entity *player;
+    our::Entity *inspector;
+    our::Entity * camera;
+
     int score = 0;
     int hearts = 3;
     bool increaseSpeedEffect = false;
     bool collisionEffect = false;
     double time = 0.0;
+    bool inspectorActive = false;
+    double ins_time = 0.0;
 
     void onInitialize() override {
         score = 0;
@@ -47,16 +54,20 @@ class Playstate: public our::State {
             world.deserialize(config["world"]);
         }
         // We initialize the camera controller system since it needs a pointer to the app
+        player = world.getEntityByName("magdy");
+        inspector = world.getEntityByName("dog");
+        camera = world.getEntityByName("camera");
+
         cameraController.enter(getApp());
         playerController.enter(getApp());
-        playerController.setPlayer(world.getEntityByName("magdy"));
-        playerController.setCamera(world.getEntityByName("camera"));
+        playerController.setPlayer(player, inspector);
+        playerController.setCamera(camera);
 
         repeatController.enter(getApp());
         // Then we initialize the renderer
-        collisionController.setPlayer(world.getEntityByName("magdy"));
+        collisionController.setPlayer(player);
         auto size = getApp()->getFrameBufferSize();
-        renderer.initialize(size, config["renderer"], world.getEntityByName("magdy"));
+        renderer.initialize(size, config["renderer"],player);
     }
 
     void onImmediateGui() override
@@ -133,6 +144,10 @@ class Playstate: public our::State {
 
             hearts--;
             drawHearts();
+            // run the inspector behind Magdy
+            inspector->hidden = false;
+            inspectorActive = true;
+            ins_time = glfwGetTime();
             
         }else if(collider==2){
            increaseSpeedEffect = true;
@@ -163,6 +178,11 @@ class Playstate: public our::State {
             increaseSpeedEffect = false;
             time = 0.0;
             repeatController.setSpeedupFactor(0.1);
+        }
+
+        if(inspectorActive && glfwGetTime() - ins_time > 2.0){
+            inspector->hidden = true;
+            inspectorActive = false;
         }
 
         // And finally we use the renderer system to draw the scene

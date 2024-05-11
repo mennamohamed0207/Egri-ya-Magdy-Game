@@ -138,6 +138,7 @@ namespace our
             delete postprocessMaterial->shader;
             delete postprocessMaterial;
         }
+        lights = {};
     }
 
     void ForwardRenderer::render(World *world, bool increaseSpeedEffect , bool collisionEffect ){
@@ -356,6 +357,8 @@ namespace our
             //GL_TRIANGLES-->the primitive type to draw
             //0-->the starting index of the vertex array
             //3-->the number of vertices to render 
+
+            
         }
     }
 }

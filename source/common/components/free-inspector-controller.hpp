@@ -6,8 +6,8 @@
 
 namespace our {
 
-
-    class FreePlayerControllerComponent : public Component {
+    class FreeInspectorControllerComponent : public Component
+    {
     public:
         float jumpVelocity = 4.4f; // Initial velocity of the jump
         float gravity = 9.81f;     // Gravity pulling the player down
@@ -23,11 +23,9 @@ namespace our {
         char level='f'; //f-->floor, t-->train
 
         // The ID of this component type is "Free Camera Controller"
-        static std::string getID() { return "Free Player Controller"; }
+        static std::string getID() { return "Free Inspector Controller"; }
 
         // Reads sensitivities & speedupFactor from the given json object
-        void deserialize(const nlohmann::json& data) override;  
-
+        void deserialize(const nlohmann::json& data) override;
     };
-
 }
