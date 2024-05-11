@@ -1,15 +1,16 @@
 #include "forward-renderer.hpp"
 #include "../mesh/mesh-utils.hpp"
 #include "../texture/texture-utils.hpp"
+#include "free-player-controller.hpp"
 #include <iostream>
 namespace our
 {
 
-    void ForwardRenderer::initialize(glm::ivec2 windowSize, const nlohmann::json &config)
+    void ForwardRenderer::initialize(glm::ivec2 windowSize, const nlohmann::json &config,Entity *player)
     {
         // First, we store the window size for later use
         this->windowSize = windowSize;
-
+        this->player = player;
         // Then we check if there is a sky texture in the configuration
         if (config.contains("sky"))
         {
@@ -139,45 +140,48 @@ namespace our
         }
     }
 
-    void ForwardRenderer::render(World *world,bool increaseSpeedEffect,bool collisionEffect)
+    void ForwardRenderer::render(World *world, bool increaseSpeedEffect , bool collisionEffect ){
+
+        // First of all, we search for a camera and for all the mesh renderers
+        CameraComponent *camera = nullptr;
+    opaqueCommands.clear();
+    transparentCommands.clear();
+
+    glm::vec3 playerPosition = player->localTransform.position;
+    for (auto entity : world->getEntities())
     {
+        // If we hadn't found a camera yet, we look for a camera in this entity
+        if (!camera)
+            camera = entity->getComponent<CameraComponent>();
+        if (entity->hidden)
+            continue;
 
-            // First of all, we search for a camera and for all the mesh renderers
-            CameraComponent *camera = nullptr;
-        opaqueCommands.clear();
-        transparentCommands.clear();
-        for (auto entity : world->getEntities())
+        // If this entity has a mesh renderer component
+        if (auto meshRenderer = entity->getComponent<MeshRendererComponent>(); meshRenderer)
         {
-            // If we hadn't found a camera yet, we look for a camera in this entity
-            if (!camera)
-                camera = entity->getComponent<CameraComponent>();
-            if(entity->hidden) continue;
-
-            // If this entity has a mesh renderer component
-            if (auto meshRenderer = entity->getComponent<MeshRendererComponent>(); meshRenderer)
+            // We construct a command from it
+            RenderCommand command;
+            command.localToWorld = meshRenderer->getOwner()->getLocalToWorldMatrix();
+            command.center = glm::vec3(command.localToWorld * glm::vec4(0, 0, 0, 1));
+            command.mesh = meshRenderer->mesh;
+            command.material = meshRenderer->material;
+            // if it is transparent, we add it to the transparent commands list
+            if (command.material->transparent)
             {
-                // We construct a command from it
-                RenderCommand command;
-                command.localToWorld = meshRenderer->getOwner()->getLocalToWorldMatrix();
-                command.center = glm::vec3(command.localToWorld * glm::vec4(0, 0, 0, 1));
-                command.mesh = meshRenderer->mesh;
-                command.material = meshRenderer->material;
-                // if it is transparent, we add it to the transparent commands list
-                if (command.material->transparent)
-                {
-                    transparentCommands.push_back(command);
-                }
-                else
-                {
-                    // Otherwise, we add it to the opaque command list
-                    opaqueCommands.push_back(command);
-                }
+                transparentCommands.push_back(command);
             }
-            // get the light component from all entities
-            if(auto light=entity->getComponent<LightComponent>();light)
+            else
             {
+                // Otherwise, we add it to the opaque command list
+                opaqueCommands.push_back(command);
+            }
+        }
+        // get the light component from all entities
+        if (auto light = entity->getComponent<LightComponent>(); light)
+        {
+            if (light)
                 lights.push_back(light);
-            }
+        }
         }
 
         // If there is no camera, we return (we cannot render without a camera)
@@ -230,6 +234,7 @@ namespace our
 
         // TODO: (Req 9) Draw all the opaque commands
         //  Don't forget to set the "transform" uniform to be equal the model-view-projection matrix for each render command
+        
         for (auto &command : opaqueCommands)
         {
             command.material->setup();
@@ -252,9 +257,10 @@ namespace our
                 material_light->shader->set("camera_position",cameraPosition);
                 material_light->shader->set("M", command.localToWorld);
                 
+                // std::cout<<"lights.size()"<<lights.size()<<std::endl;
                 for(int i=0;i<lights.size();i++)
                 {
-                    material_light->shader->set("lights["+std::to_string(i)+"].position",lights[i]->position);
+                    material_light->shader->set("lights[" + std::to_string(i) + "].position", playerPosition);
                     // std::cout<<"lights[i]->position ( "<<lights[i]->position.r<<" ,"<<lights[i]->position.g<<" ,"<<lights[i]->position.b<<" )"<<std::endl;
                     material_light->shader->set("lights["+std::to_string(i)+"].type",lights[i]->lightType);
                     material_light->shader->set("lights["+std::to_string(i)+"].direction",lights[i]->direction);
@@ -262,6 +268,7 @@ namespace our
                     material_light->shader->set("lights["+std::to_string(i)+"].attenuation",lights[i]->attenuation);
                     // if(lights[i]->lightType==2)
                     material_light->shader->set("lights["+std::to_string(i)+"].cone_angles",lights[i]->cone_angles);
+                    // std::cout << "angles (" << lights[i]->cone_angles.x << " ," << lights[i]->cone_angles.y << " )" << std::endl;
                 }
             }
             command.material->shader->set("transform", VP * command.localToWorld);
@@ -351,5 +358,4 @@ namespace our
             //3-->the number of vertices to render 
         }
     }
-
 }

@@ -5,7 +5,7 @@
 #include "../components/mesh-renderer.hpp"
 #include "../components/light.hpp"
 #include "../asset-loader.hpp"
-
+#include "../ecs/entity.hpp"
 #include <glad/gl.h>
 #include <vector>
 #include <algorithm>
@@ -43,10 +43,11 @@ namespace our
         TexturedMaterial* postprocessMaterial;
         //vector hold the light component from the entities that has light components 
         std::vector<LightComponent*> lights;
+        Entity* player;
     public:
         // Initialize the renderer including the sky and the Postprocessing objects.
         // windowSize is the width & height of the window (in pixels).
-        void initialize(glm::ivec2 windowSize, const nlohmann::json& config);
+        void initialize(glm::ivec2 windowSize, const nlohmann::json &config, Entity *player = nullptr);
         // Clean up the renderer
         void destroy();
         // This function should be called every frame to draw the given world

@@ -79,7 +79,7 @@ namespace our
     }
     void LightingMaterial::setup() const
     {
-        Material::setup();
+        TintedMaterial::setup();
         //albedo
         if(albedo!=nullptr)
         {
@@ -120,11 +120,10 @@ namespace our
         sampler->bind(4);
         shader->set("material.ambient_occlusion", 4);
         }
-
     }
     void LightingMaterial::deserialize(const nlohmann::json &data)
     { 
-        Material::deserialize(data);
+        TintedMaterial::deserialize(data);
         if (!data.is_object())
             return;
         albedo = AssetLoader<Texture2D>::get(data.value("albedo", ""));

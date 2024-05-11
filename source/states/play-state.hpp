@@ -56,8 +56,7 @@ class Playstate: public our::State {
         // Then we initialize the renderer
         collisionController.setPlayer(world.getEntityByName("magdy"));
         auto size = getApp()->getFrameBufferSize();
-        renderer.initialize(size, config["renderer"]);
-
+        renderer.initialize(size, config["renderer"], world.getEntityByName("magdy"));
     }
 
     void onImmediateGui() override

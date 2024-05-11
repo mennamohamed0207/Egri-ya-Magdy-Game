@@ -4,7 +4,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <asset-loader.hpp>
 #include "../deserialize-utils.hpp"
-
+#include <iostream>
 namespace our
 {
     void LightComponent::deserialize(const nlohmann::json &data)
@@ -29,6 +29,6 @@ namespace our
 
         // Read the "cone_angles" value from the JSON object or use the default value from the member variable
         cone_angles = data.value("cone_angles", glm::vec2(0.0f, 0.0f));
-        
+    
     }
 }

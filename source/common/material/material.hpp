@@ -53,7 +53,7 @@ namespace our {
         void deserialize(const nlohmann::json& data) override;
     };
      // light material will inherit from the  material and define all texture types for the light material.
-    class LightingMaterial : public Material {
+    class LightingMaterial : public TintedMaterial {
     public:
         Texture2D  *albedo;
         Texture2D *specular;
