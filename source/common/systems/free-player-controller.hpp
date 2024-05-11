@@ -160,32 +160,6 @@ namespace our
             {
                 isLeftKeyPressed = false;
             }
-////////////////////////////////////////////////////////
-            glm::mat4 cammatrix = cameraEntity->localTransform.toMat4();
-
-            glm::vec3 camfront = glm::vec3(cammatrix * glm::vec4(0, 0, -1, 0)),
-                      camup = glm::vec3(cammatrix * glm::vec4(0, 1, 0, 0)),
-                      camright = glm::vec3(cammatrix * glm::vec4(1, 0, 0, 0));
-
-
-   
-
-            // We change the camera position based on the keys WASD/QE
-            // S & W moves the player back and forth
-            if(app->getKeyboard().isPressed(GLFW_KEY_W)) cam_position += camfront * (deltaTime * current_sensitivity.z);
-            if(app->getKeyboard().isPressed(GLFW_KEY_S)) cam_position -= camfront * (deltaTime * current_sensitivity.z);
-            // Q & E moves the player up and down
-            if(app->getKeyboard().isPressed(GLFW_KEY_Q)) cam_position += camup * (deltaTime * current_sensitivity.y);
-            if(app->getKeyboard().isPressed(GLFW_KEY_E)) cam_position -= camup * (deltaTime * current_sensitivity.y);
-            // A & D moves the player left or right
-            if(app->getKeyboard().isPressed(GLFW_KEY_D)) cam_position += camright * (deltaTime * current_sensitivity.x);
-            if(app->getKeyboard().isPressed(GLFW_KEY_A)) cam_position -= camright * (deltaTime * current_sensitivity.x);
-        
-        // Update position of inspector
-        glm::vec3 &ins_position = inspectorEntity->localTransform.position;
-        ins_position = position;
-        ins_position.z += 0.5; 
-        
         }
         // When the state exits, it should call this function to ensure the mouse is unlocked
         void

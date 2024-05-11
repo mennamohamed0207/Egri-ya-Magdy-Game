@@ -176,11 +176,6 @@
           "tint": [1, 1, 1, 1],
           "texture": "magdy",
           "sampler": "default"
-          // "albedo": "magdy",
-          // "specular": "white",
-          // "roughness": "roughness",
-          // "emissive": "white",
-          // "ambient_occlusion": "magdy"
         },
         "dog": {
           "type": "textured",
@@ -2390,33 +2385,6 @@
             "repeatedObject": "floor",
             "initialpos": -3
           }
-          // {
-          //   "type": "Lighting",
-          //   "lightType": 0,
-          //   "color": [0.0, 0.0, 1.0],
-          //   "attenuation": [0.00095, 0.00095, 0.000095],
-          //   "position": [0.0, 50.0, 0.0],
-          //   "direction": [0, -1, 0.0],
-          //   "cone_angles": [10, 30]
-          // }
-        ]
-      }
-      // {
-      //   "position": [0, 10, 0],
-      //   "rotation": [45, 45, 0],
-      //   "scale": [5, 5, 5],
-      //   "components": [
-      //     {
-      //       "type": "Lighting",
-      //       "lightType": 2,
-      //       "color":[1.0,0.0,0.0],
-      //       "attenuation": [0.0, 1.0, 0.0],
-      //       "cone_angles": [10.0, 40.0],
-      //       "position": [0.0, 10.0, 0.0],
-      //       "direction": [0.0, 1.0, 0.0]
-      //     }
-      //   ]
-      // }
     ]
   }
 }
