@@ -243,8 +243,8 @@
           "sampler": "default"
         },
         "trainRail": {
-          "type": "textured",
-          "shader": "floor",
+          "type": "light",
+          "shader": "light",
           "pipelineState": {
             "faceCulling": {
               "enabled": false
@@ -255,7 +255,12 @@
           },
           "tint": [1, 1, 1, 1],
           "texture": "trainRail",
-          "sampler": "default"
+          "sampler": "default",
+          "albedo": "trainRail",
+          "specular": "white",
+          "roughness": "trainRail",
+          "emissive": "trainRail",
+          "ambient_occlusion": "trainRail"
         },
         "walls": {
           "type": "textured",
@@ -339,6 +344,24 @@
     "world": [
       {
         "position": [0, 1.5, -0.5],
+        // "rotation": [0, 180, 0],
+        "scale": [0.05, 0.05, 0.05],
+        // "name": "magdy",
+        "components": [
+          {
+            "type": "Lighting",
+            "lightType": 1,
+            "color": [1.0, 0.0, 0.0],
+            "attenuation": [0.1, 0.1, 0.1],
+            "position": [2, 2, 0.0],
+            "displacement":0.0,
+            "direction": [-0.5, 0.5, 0.0],
+            "cone_angles": [0.4, 0.9]
+          }
+        ]
+      },
+      {
+        "position": [0, 1.5, -0.5],
         "rotation": [0, 180, 0],
         "scale": [0.05, 0.05, 0.05],
         "name": "magdy",
@@ -364,7 +387,7 @@
           }
         ]
       },
-  {
+      {
         "position": [0, 1.5, 0],
         "rotation": [0, 180, 0],
         "scale": [0.05, 0.05, 0.05],
@@ -382,7 +405,7 @@
           }
         ]
       },
-  
+
       ////////////////////////// coin component col 1 on train////////////////////////
       {
         "position": [0, 1.7, 0],

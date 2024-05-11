@@ -18,10 +18,10 @@ namespace our
         glm::vec3 attenuation; // Attenuation factors for the light (controls falloff)
         glm::vec2 cone_angles; // Cone angles for spot lighting (inner and outer angles)
 
-        /*
+        
         #define DIRECTIONAL 0
         #define POINT       1
-        #define SPOT        2*/
+        #define SPOT        2
 
         // The ID of this component type is "Lighting"
         static std::string getID() { return "Lighting"; }

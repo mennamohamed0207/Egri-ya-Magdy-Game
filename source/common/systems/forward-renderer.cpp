@@ -180,8 +180,16 @@ namespace our
         // get the light component from all entities
         if (auto light = entity->getComponent<LightComponent>(); light)
         {
-            if (light)
+            if (light)  
+            {
+                if (light->lightType == SPOT)
+                light->position = playerPosition;
+                else if (light->lightType == POINT)
+                    light->position.z = playerPosition.z;
+
+                // std::cout << light->position.x << " " << light->position.y << " " << light->position.z << std::endl;
                 lights.push_back(light);
+            }   
         }
         }
 
@@ -261,7 +269,7 @@ namespace our
                 // std::cout<<"lights.size()"<<lights.size()<<std::endl;
                 for(int i=0;i<lights.size();i++)
                 {
-                    material_light->shader->set("lights[" + std::to_string(i) + "].position", playerPosition);
+                    material_light->shader->set("lights[" + std::to_string(i) + "].position", lights[i]->position);
                     // std::cout<<"lights[i]->position ( "<<lights[i]->position.r<<" ,"<<lights[i]->position.g<<" ,"<<lights[i]->position.b<<" )"<<std::endl;
                     material_light->shader->set("lights["+std::to_string(i)+"].type",lights[i]->lightType);
                     material_light->shader->set("lights["+std::to_string(i)+"].direction",lights[i]->direction);
@@ -358,7 +366,7 @@ namespace our
             //0-->the starting index of the vertex array
             //3-->the number of vertices to render 
 
-            
+
         }
     }
 }
