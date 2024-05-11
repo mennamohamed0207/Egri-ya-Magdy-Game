@@ -29,6 +29,10 @@ namespace our
 
         // Read the "cone_angles" value from the JSON object or use the default value from the member variable
         cone_angles = data.value("cone_angles", glm::vec2(0.0f, 0.0f));
+
+        // Read the "displacement" value from the JSON object or use the default value from the member variable
+        displacement = data.value("displacement", 0.0f);
+        
     
     }
 }

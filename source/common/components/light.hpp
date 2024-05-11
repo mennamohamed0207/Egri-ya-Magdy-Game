@@ -17,7 +17,7 @@ namespace our
         glm::vec3 color;       // Ambient and specular color of the light
         glm::vec3 attenuation; // Attenuation factors for the light (controls falloff)
         glm::vec2 cone_angles; // Cone angles for spot lighting (inner and outer angles)
-
+        float displacement;    // Displacement of the light (for point light)
         
         #define DIRECTIONAL 0
         #define POINT       1

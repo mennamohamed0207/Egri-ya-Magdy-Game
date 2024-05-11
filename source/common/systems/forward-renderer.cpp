@@ -185,7 +185,7 @@ namespace our
                 if (light->lightType == SPOT)
                 light->position = playerPosition;
                 else if (light->lightType == POINT)
-                    light->position.z = playerPosition.z;
+                    light->position.z = playerPosition.z + light->displacement;
 
                 // std::cout << light->position.x << " " << light->position.y << " " << light->position.z << std::endl;
                 lights.push_back(light);

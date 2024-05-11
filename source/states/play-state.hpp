@@ -172,7 +172,7 @@ class Playstate: public our::State {
             repeatController.setSpeedupFactor(0.1);
         }
 
-        if (collisionEffect && glfwGetTime() - time > 0.1)
+        if (collisionEffect && glfwGetTime() - time > 0.7)
         {
             collisionEffect = false;
             increaseSpeedEffect = false;
