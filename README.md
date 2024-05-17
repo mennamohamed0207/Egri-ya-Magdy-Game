@@ -5,7 +5,7 @@
 
 </div>
 <div align="center">
-   <img align="center" width =70% height=260px src="https://github.com/mennamohamed0207/Egri-ya-Magdy-Game/assets/113303945/6ab5382b-f4a8-447b-8993-6974b158a814" alt="logo">
+   <img align="center" width =80% height=400px src="https://img.freepik.com/free-photo/retro-digital-art-illustration-person-using-radio-technology_23-2151355979.jpg?t=st=1715954079~exp=1715957679~hmac=2e9f9b5b21fe434999306c553b38bb732e1cd3f0de304495072785f5e04e4926&w=740" alt="logo">
 </div>
 
 <p align="center"> 
