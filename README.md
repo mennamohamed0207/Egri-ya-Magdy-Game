@@ -1,10 +1,12 @@
 <div align= center >
 
-# <img align=center width=75px height=75px src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExc2pxejRtZTg5M2hveXpjcXl0bnQ3dTRmZ285ZjdpY2NoM2VzZTFrMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/iDCsriNfHICAlthV2q/giphy.gif"> Egri Ya Magdy
-
-
+# <img align=center width=75px height=75px src="https://github.com/mennamohamed0207/Egri-ya-Magdy-Game/assets/113303945/efce5a9f-211a-402f-8094-b51fb4673552"> Egri Ya Magdy
 </div>
 
+</div>
+<div align="center">
+   <img align="center" width =70% height=260px src="https://github.com/mennamohamed0207/Egri-ya-Magdy-Game/assets/113303945/6ab5382b-f4a8-447b-8993-6974b158a814" alt="logo">
+</div>
 
 <p align="center"> 
     <br> 
@@ -23,7 +25,7 @@
 
  <a id = "about"></a>
 
-## <img align="center"  width =70px  height =70px src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExeDh5ZGd2YTZjZmJhdjE5dzZnejF6amtvdHl5Y2x3amNta2NvMmR0aCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/QTfbmaD7JZqHpmVtvT/giphy.gif"> Overview
+## <img align="center"  width =70px  height =70px src="https://github.com/mennamohamed0207/Egri-ya-Magdy-Game/assets/113303945/9fb3c464-ccbc-4df6-995e-dc8c1d9070f7"> Overview
 <br>
 <ul> 
 <li>
@@ -56,7 +58,7 @@ Magdy tries to escape from the dog, but if he collides with the metro, the dog c
 <hr style="background-color: #4b4c60"></hr>
 <a id = "started"></a>
 
-## <img  align= center width=60px height=50px src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdjBxaHFnbGVjejZoNHRvMjRrM3pjNjhreDh4dGYzMGo4eWkxZzB4cCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/SYpGN9y644i496xRcG/giphy.gif"> Get Started 
+## <img  align= center width=60px height=50px src="https://github.com/mennamohamed0207/Egri-ya-Magdy-Game/assets/113303945/fe0ec377-5271-4ab3-8bd3-2a6632a51ef3"> Get Started 
 
 <ol>
 <li>Clone the repository.
@@ -82,7 +84,7 @@ git clone https://github.com/mennamohamed0207/Egri-ya-Magdy-Game.git
 <hr style="background-color: #4b4c60"></hr>
 
 
-## <img align= "center" width=80px height=80px src="https://media4.giphy.com/media/Xf8OdIAxtZqlk0PYRN/giphy.webp?cid=790b76111bs3h0dkluv3wnom89w6qcpd5o75xt8ixtxi97ap&ep=v1_gifs_search&rid=giphy.webp&ct=g"> Let's Play <a id ="Path"></a>
+## <img align= "center" width=80px height=80px src="https://github.com/mennamohamed0207/Egri-ya-Magdy-Game/assets/113303945/a6467271-598f-4f5c-bbdb-3fea7c1b320f"> Let's Play <a id ="Path"></a>
 
 <ol>
 <li>When run the Project</li>
@@ -150,7 +152,7 @@ git clone https://github.com/mennamohamed0207/Egri-ya-Magdy-Game.git
 ## <img align= center width=60px height=60px src="https://media1.giphy.com/media/igsIZv3VwIIlRIpq5G/giphy.gif?cid=ecf05e47faatmwdhcst7c2d4eontr459hjd35zf3an324elo&rid=giphy.gif&ct=s"> File Structure 
 <br>
 <div align= center>
-<img  height="450px" src="https://github.com/BasmaElhoseny01/frog-frenzy/assets/71986226/97bd1f07-1cae-4d27-9366-4e4624015c96">
+<img  height="450px" src="https://github.com/mennamohamed0207/Egri-ya-Magdy-Game/assets/113303945/884ba54d-0ade-4ac1-9b23-8297424d551c">
 </div>
 <hr style="background-color: #4b4c60"></hr>
 <a id ="video"></a>
@@ -158,7 +160,9 @@ git clone https://github.com/mennamohamed0207/Egri-ya-Magdy-Game.git
 ## <img  align= center width= 70px height =70px src="https://img.genial.ly/5f91608064ad990c6ee12237/bd7195a3-a8bb-494b-8a6d-af48dd4deb4b.gif?genial&1643587200063"> Demo
 
 <div  align="center">
-  <video align="center" height=300px  src="https://github.com/mennamohamed0207/Egri-ya-Magdy-Game/raw/main/assets/vedio/vedio.mp4">
+  <video align="center" height=300px  src="https://github.com/mennamohamed0207/Egri-ya-Magdy-Game/assets/113303945/a4e9faf7-6ff4-4e38-81cb-11bf45c2179d">
+<!-- <video src="https://drive.google.com/file/d/1r4ryzMyvDyhJ4t_JsiHdY7-RjwIbxa0G/preview" width="640" height="480" allow="autoplay"> -->
+
 </div>
 
 > **Note**: Play the sound
