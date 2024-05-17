@@ -135,6 +135,22 @@ class Playstate: public our::State {
         movementSystem.update(&world, (float)deltaTime);
         cameraController.update(&world, (float)deltaTime);
         playerController.update(&world, (float)deltaTime);
+
+        // collisionController.update(&world, (float)deltaTime) function check the world entities and 
+        // check if there is a collision between them and between the player so it take the 
+        // appropiate action
+
+        // Value                  Meaning                         Actions
+        
+        // 1                      take a coin                     - increase score by 10
+        // -1                     collide with train              - apply collision effect for 0.7
+        //                                                        - decrease hearts by one (check end of game)
+        //                                                        - make inspector follow him for 4.0
+        // 2                      take a star                     - apply speedup effect for 2.0
+        //                                                        - increase speed to 1.0
+        // 3                      taek a heart                    - increase hearts by one 
+
+
         int collider = collisionController.update(&world, (float)deltaTime);
         if(collider==1){
             score= score+10;
@@ -182,7 +198,7 @@ class Playstate: public our::State {
             repeatController.setSpeedupFactor(0.1);
         }
 
-        if(inspectorActive && glfwGetTime() - ins_time > 2.0){
+        if(inspectorActive && glfwGetTime() - ins_time > 4.0){
             inspector->hidden = true;
             inspectorActive = false;
         }

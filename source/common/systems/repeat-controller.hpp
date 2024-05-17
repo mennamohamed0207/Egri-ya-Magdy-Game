@@ -88,9 +88,11 @@ namespace our
                         // std::cout << position.z << " " << controller->currentTime << std::endl;
                         if (position.z > (4.0f + cam_position.z))
                         {
-                            controller->currentTime += 0.001f;
+                            // controller->currentTime += 0.001f;
                             position.z = -60.0f + cam_position.z;
                             controller->currentTime = 0.0f;
+                            // this condition is done because if the train is hit it is disappeared so
+                            // i want show it again as if it is a new coming train
                             entity->hidden = false;
                             // std::cout << front.z << std::endl;
                         }
@@ -105,6 +107,9 @@ namespace our
                         {
                             position.z = -10.0f + cam_position.z;
                             controller->currentTime = 0.0f;
+                            // this condition is done because if the coin/star/heart is taken it is disappeared so
+                            // i want show it again as if it is a new coming train
+
                             entity->hidden = false;
                             // std::cout << front.z << std::endl;
                         }

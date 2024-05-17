@@ -57,11 +57,8 @@ namespace our
         // This should be called every frame to update all entities containing a FreeCameraControllerComponent
         void update(World *world, float deltaTime)
         {
-            // First of all, we search for an entity containing both a CameraComponent and a FreeCameraControllerComponent
-            // As soon as we find one, we break
-                    
     
-            // Get the entity that we found via getOwner of camera (we could use controller->getOwner())
+            
             controller = playerEntity->getComponent<FreePlayerControllerComponent>();
         
             // We get a reference to the entity's position and rotation
@@ -119,9 +116,6 @@ namespace our
             if(position.y>=1.5) controller->level='t';
             else controller->level='f';
 
-            // If the LEFT SHIFT key is pressed, we multiply the position sensitivity by the speed up factor
-            if (app->getKeyboard().isPressed(GLFW_KEY_LEFT_SHIFT))
-                current_sensitivity *= controller->speedupFactor;
 
             // this is for checking for the key press of left and right, but making the key press registered only once
             if (app->getKeyboard().isPressed(GLFW_KEY_RIGHT))
